@@ -18,6 +18,7 @@ const CardContact = props => {
 
   return (
     <React.Fragment>
+      
       <Col xl="3" sm="6">
         <Card className="text-center  ">
           <CardBody>
