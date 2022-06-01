@@ -1,6 +1,6 @@
 const layoutTypes = {
-  HORIZONTAL: "horizontal",
   VERTICAL: "vertical",
+  HORIZONTAL: "horizontal",
 }
 
 const layoutWidthTypes = {

@@ -97,7 +97,7 @@ const Login = props => {
     signIn(response, "google")
   }
 
-  //handleTwitterLoginResponse
+  // handleTwitterLoginResponse
   // const twitterResponse = e => {}
 
   //handleFacebookLoginResponse
@@ -108,15 +108,12 @@ const Login = props => {
   return (
     <React.Fragment>
       <MetaTags>
-        <title>Login | Skote - React Admin & Dashboard Template</title>
+        <title>Login | Raincomputing</title>
       </MetaTags>
-      {/* <Header />
-      <div className="d-flex justify-content-center">
-        <Navbar />
+
+      {/* <div className="d-none d-lg-block s">
+        <img src={rainlogo} height="50" />
       </div> */}
-      <div>
-        <img src={rainlogo} height="36" />
-      </div>
       <div className="home-btn d-none d-sm-block">
         <Link to="/" className="text-dark">
           <i className="fas fa-home h2" />
@@ -133,7 +130,7 @@ const Login = props => {
             </p>
           </div>
         </div>
-        <div className="account-pages my-5 pt-sm-5 ms-lg-5">
+        <div className="account-pages my-5 pt-sm-5  ms-lg-5">
           <Container>
             <Row className="justify-content-fill">
               <Col md={8} lg={7} xl={10}>
@@ -142,8 +139,8 @@ const Login = props => {
                     <Row>
                       <Col xs={7}>
                         <div className="text-primary p-4">
-                          <h5 className="text-primary">Welcome Back !</h5>
-                          <p>Sign in to continue to Skote.</p>
+                          <h5 className="text-primary">Welcome to Rain</h5>
+                          <p>Sign in to continue to rain.</p>
                         </div>
                       </Col>
                       <Col className="col-5 align-self-end">
@@ -269,6 +266,7 @@ const Login = props => {
                                 )}
                               />
                             </li>
+
                             {/*<li className="list-inline-item">*/}
                             {/*  <TwitterLogin*/}
                             {/*    loginUrl={*/}
@@ -305,6 +303,22 @@ const Login = props => {
                                 onSuccess={googleResponse}
                                 onFailure={() => {}}
                               />
+                            </li>
+                            <li className="list-inline-item">
+                              <Link
+                                to="#"
+                                className="social-list-item bg-primary text-white border-primary"
+                              >
+                                <i className="mdi mdi-twitter"></i>
+                              </Link>
+                            </li>
+                            <li className="list-inline-item">
+                              <Link
+                                to="#"
+                                className="social-list-item bg-danger text-white border-danger"
+                              >
+                                <i className="mdi mdi-linkedin"></i>
+                              </Link>
                             </li>
                           </ul>
                         </div>
