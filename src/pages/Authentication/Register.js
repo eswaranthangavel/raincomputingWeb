@@ -30,6 +30,7 @@ import profileImg from "../../assets/images/profile-img.png"
 import logoImg from "../../assets/images/logo.svg"
 import computer from "assets/images/computer.png"
 import rainlogo from "assets/images/RainCom_Logo.webp"
+import logo from "assets/images/rain-drop.png"
 const Register = props => {
   const dispatch = useDispatch()
 
@@ -101,7 +102,7 @@ const Register = props => {
                       <Col className="col-7">
                         <div className="text-primary p-4">
                           <h5 className="text-primary"> Register</h5>
-                          <p>Get your free rain account now.</p>
+                          <p>Get your rain account now.</p>
                         </div>
                       </Col>
                       <Col className="col-5 align-self-end">
@@ -115,7 +116,7 @@ const Register = props => {
                         <div className="avatar-md profile-user-wid mb-4">
                           <span className="avatar-title rounded-circle bg-light">
                             <img
-                              src={logoImg}
+                              src={logo}
                               alt=""
                               className="rounded-circle"
                               height="34"
