@@ -101,10 +101,10 @@ const CardContact = props => {
               </div>
               <div className="flex-fill">
                 {/* <Link to="#" id={"profile" + user.id}> */}
-                <Link to ="/projects-overview">
+                <Link to="/projects-overview">
                   <i className="bx bx-user-circle" />
-                  </Link>
-                  {/* <UncontrolledTooltip
+                </Link>
+                {/* <UncontrolledTooltip
                     placement="top"
                     target={"profile" + user.id}
                   >
