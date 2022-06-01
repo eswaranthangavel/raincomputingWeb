@@ -12,7 +12,7 @@ import Breadcrumbs from "components/Common/Breadcrumb"
 import CardContact from "./card-contact"
 
 //redux
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux"
 
 import { getUsers as onGetUsers } from "../../store/contacts/actions"
 
@@ -33,7 +33,7 @@ const ContactsGrid = props => {
     <React.Fragment>
       <div className="page-content">
         <MetaTags>
-          <title>User Grid | Skote - React Admin & Dashboard Template</title>
+          <title>Raincomputing | Homepage</title>
         </MetaTags>
         <Container fluid>
           {/* Render Breadcrumbs */}
