@@ -123,7 +123,7 @@ const Layout = props => {
         <Footer />
       </div>
 
-      {showRightSidebar ? <RightSidebar /> : null}
+      {/* {showRightSidebar ? <RightSidebar /> : null} */}
     </React.Fragment>
   )
 }

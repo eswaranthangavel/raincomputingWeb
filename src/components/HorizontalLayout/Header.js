@@ -17,9 +17,9 @@ import ProfileMenu from "../CommonForBoth/TopbarDropdown/ProfileMenu"
 
 import megamenuImg from "../../assets/images/megamenu-img.png"
 import logo from "../../assets/images/logo.svg"
-import logoLight from "../../assets/images/logo-light.png"
+import logoLight from "../../assets/images/RainCom_Logo.webp"
 import logoLightSvg from "../../assets/images/logo-light.svg"
-import logoDark from "../../assets/images/logo-dark.png"
+import logoDark from "../../assets/images/RainCom_Logo.webp"
 
 // import images
 import github from "../../assets/images/brands/github.png"
@@ -74,7 +74,7 @@ const Header = props => {
                   <img src={logo} alt="" height="22" />
                 </span>
                 <span className="logo-lg">
-                  <img src={logoDark} alt="" height="17" />
+                  <img src={logoDark} alt="" height="50" />
                 </span>
               </Link>
 
@@ -83,12 +83,12 @@ const Header = props => {
                   <img src={logoLightSvg} alt="" height="22" />
                 </span>
                 <span className="logo-lg">
-                  <img src={logoLight} alt="" height="19" />
+                  <img src={logoLight} alt="" height="50" />
                 </span>
               </Link>
             </div>
 
-            <button
+            {/* <button
               type="button"
               className="btn btn-sm px-3 font-size-16 d-lg-none header-item"
               data-toggle="collapse"
@@ -98,9 +98,9 @@ const Header = props => {
               data-target="#topnav-menu-content"
             >
               <i className="fa fa-fw fa-bars" />
-            </button>
+            </button> */}
 
-            <form className="app-search d-none d-lg-block">
+            {/* <form className="app-search d-none d-lg-block">
               <div className="position-relative">
                 <input
                   type="text"
@@ -109,13 +109,13 @@ const Header = props => {
                 />
                 <span className="bx bx-search-alt" />
               </div>
-            </form>
+            </form> */}
 
-            <Dropdown
+            {/* <Dropdown
               className="dropdown-mega d-none d-lg-block ms-2"
               isOpen={menu}
               toggle={() => setMenu(!menu)}
-            >
+            > */}
               {/* <DropdownToggle
                 className="btn header-item "
                 caret
@@ -123,7 +123,7 @@ const Header = props => {
               >
                 {props.t("Mega Menu")} <i className="mdi mdi-chevron-down" />
               </DropdownToggle> */}
-              <DropdownMenu className="dropdown-megamenu">
+              {/* <DropdownMenu className="dropdown-megamenu">
                 <Row>
                   <Col sm={8}>
                     <Row>
@@ -256,11 +256,11 @@ const Header = props => {
                   </Col>
                 </Row>
               </DropdownMenu>
-            </Dropdown>
+            </Dropdown> */}
           </div>
 
           <div className="d-flex">
-            <div className="dropdown d-inline-block d-lg-none ms-2">
+            {/* <div className="dropdown d-inline-block d-lg-none ms-2">
               <button
                 type="button"
                 className="btn header-item noti-icon "
@@ -295,7 +295,7 @@ const Header = props => {
                   </div>
                 </form>
               </div>
-            </div>
+            </div> */}
 
             <LanguageDropdown />
 
@@ -359,7 +359,7 @@ const Header = props => {
               </DropdownMenu>
             </Dropdown> */}
 
-            <div className="dropdown d-none d-lg-inline-block ms-1">
+            {/* <div className="dropdown d-none d-lg-inline-block ms-1">
               <button
                 type="button"
                 className="btn header-item noti-icon "
@@ -370,13 +370,13 @@ const Header = props => {
               >
                 <i className="bx bx-fullscreen" />
               </button>
-            </div>
+            </div> */}
 
-            <NotificationDropdown />
+            {/* <NotificationDropdown /> */}
 
             <ProfileMenu />
 
-            <div className="dropdown d-inline-block">
+            {/* <div className="dropdown d-inline-block">
               <button
                 onClick={() => {
                   props.showRightSidebarAction(!props.showRightSidebar)
@@ -386,7 +386,7 @@ const Header = props => {
               >
                 <i className="bx bx-cog bx-spin" />
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </header>

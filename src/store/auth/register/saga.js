@@ -31,6 +31,7 @@ function* registerUser({ payload: { user } }) {
       const response = yield call(postFakeRegister, user)
       yield put(registerUserSuccessful(response))
     }
+    history.push("/login");
   } catch (error) {
     yield put(registerUserFailed(error))
   }

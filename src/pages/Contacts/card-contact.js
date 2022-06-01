@@ -10,6 +10,8 @@ import {
 } from "reactstrap"
 import images from "assets/images"
 import { isEmpty, size, map } from "lodash"
+import img1 from "../../assets/images/img1m.png";
+
 
 const CardContact = props => {
   const { user } = props
@@ -21,7 +23,8 @@ const CardContact = props => {
           <CardBody>
             {!user.img ? (
               <div className="avatar-xl mx-auto mb-4 ">
-                <span
+                <img src={img1} height="125"/>
+                {/* <span
                   className={
                     "avatar-title rounded-circle bg-soft bg-" +
                     user.color +
@@ -31,7 +34,7 @@ const CardContact = props => {
                   }
                 >
                   {user.name.charAt(0)}
-                </span>
+                </span> */}
               </div>
             ) : (
               <div className="mb-4">
