@@ -20,19 +20,19 @@ import {
   leftBarThemeImageTypes,
   leftSidebarTypes,
   leftSideBarThemeTypes,
-} from "../../constants/layout";
+} from "../../constants/layout"
 
 const INIT_STATE = {
-  layoutType: layoutTypes.HORIZONTAL,//changes
+  layoutType: layoutTypes.HORIZONTAL, //changes
   layoutWidth: layoutWidthTypes.FLUID,
-  leftSideBarTheme: leftSideBarThemeTypes.LIGHT,//changes
+  leftSideBarTheme: leftSideBarThemeTypes.LIGHT, //changes
   leftSideBarThemeImage: leftBarThemeImageTypes.NONE,
   leftSideBarType: leftSidebarTypes.DEFAULT,
   topbarTheme: topBarThemeTypes.LIGHT,
   isPreloader: false,
   showRightSidebar: false,
   isMobile: false,
-  showSidebar: true,
+  showSidebar: false,
   leftMenu: false,
 }
 
