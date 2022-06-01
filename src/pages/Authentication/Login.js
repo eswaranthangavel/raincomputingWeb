@@ -115,7 +115,7 @@ const Login = props => {
         <Navbar />
       </div> */}
       <div>
-        <img src={rainlogo} height="36" />
+        <img src={rainlogo} height="50" />
       </div>
       <div className="home-btn d-none d-sm-block">
         <Link to="/" className="text-dark">
