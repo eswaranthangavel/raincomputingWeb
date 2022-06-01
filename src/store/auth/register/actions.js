@@ -7,7 +7,7 @@ import {
 export const registerUser = user => {
   return {
     type: REGISTER_USER,
-    payload: { user, history },
+    payload: { user },
   }
 }
 
@@ -15,7 +15,6 @@ export const registerUserSuccessful = user => {
   return {
     type: REGISTER_USER_SUCCESSFUL,
     payload: user,
-    history,
   }
 }
 
@@ -23,6 +22,5 @@ export const registerUserFailed = user => {
   return {
     type: REGISTER_USER_FAILED,
     payload: user,
-    history,
   }
 }

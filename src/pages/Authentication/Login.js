@@ -34,7 +34,7 @@ import { loginUser, socialLogin } from "../../store/actions"
 
 // import images
 import profile from "assets/images/profile-img.png"
-import logo from "assets/images/Rain-Drop.png"
+import logo from "assets/images/rain-drop.png"
 import computer from "assets/images/computer.png"
 import rainlogo from "assets/images/RainCom_Logo.webp"
 
