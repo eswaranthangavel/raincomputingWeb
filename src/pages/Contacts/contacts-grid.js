@@ -37,7 +37,7 @@ const ContactsGrid = props => {
         </MetaTags>
         <Container fluid>
           {/* Render Breadcrumbs */}
-          <Breadcrumbs title="Contacts" breadcrumbItem="User Grid" />
+          {/* <Breadcrumbs title="Contacts" breadcrumbItem="User Grid" /> */}
 
           <Row>
             {map(users, (user, key) => (
