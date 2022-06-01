@@ -38,6 +38,18 @@ const ContactsGrid = props => {
         <Container fluid>
           {/* Render Breadcrumbs */}
           {/* <Breadcrumbs title="Contacts" breadcrumbItem="User Grid" /> */}
+          <div className="mb-2">
+          <form className="app-search  ">
+              <div className="position-relative">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Search for Attorney..."
+                />
+                <span className="bx bx-search-alt" />
+              </div>
+            </form> 
+            </div>
 
           <Row>
             {map(users, (user, key) => (
