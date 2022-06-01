@@ -111,7 +111,7 @@ const Login = props => {
         <title>Login | Raincomputing</title>
       </MetaTags>
 
-      <div className="d-none d-lg-block s">
+      <div className="d-none d-lg-block ps-lg-5 ms-lg-5">
         <img src={rainlogo} height="50" />
       </div>
       <div className="home-btn d-none d-sm-block">
