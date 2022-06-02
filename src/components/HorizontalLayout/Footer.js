@@ -6,14 +6,36 @@ const Footer = () => {
   return (
     <React.Fragment>
       <footer className="footer">
-        <box>
         <Container fluid={true}>
 
           <Row>
+            <div className="col-md-3 col-sm-6">
+              <ul className="list-unstyled">
             <h3>About</h3>
-            <h6>About Us</h6>
-            <h6>How it works</h6>
-            <h6>Security</h6>
+            <li>About Us</li>
+            <li>How it works</li>
+            <li>Security</li>
+            </ul>
+            </div>
+
+            <div className="col-md-3 col-sm-6">
+              <ul className="list-unstyled">
+            <h3>Solution</h3>
+            <li>Enterprise</li>
+            <li>Private Label</li>
+            <li>Management</li>
+            </ul>
+            </div>
+
+            <div className="col-md-3 col-sm-6">
+              <ul className="list-unstyled">
+            <h3>Contact</h3>
+            <li>Contact Us </li>
+            <li>Careers</li>
+            <li>Security</li>
+            </ul>
+            </div>
+
 
             <Col md={6}>{new Date().getFullYear()} © Rain.</Col>
             <Col md={6}>
@@ -23,7 +45,6 @@ const Footer = () => {
             </Col>
           </Row>
         </Container>
-        </box>
       </footer>
     </React.Fragment>
   )
