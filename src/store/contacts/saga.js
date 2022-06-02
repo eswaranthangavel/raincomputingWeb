@@ -33,7 +33,11 @@ import {
   deleteUser,
 } from "../../helpers/fakebackend_helper"
 
-import { getAttorneysData } from "../../helpers/backend_helper"
+import {
+  getAttorneysData,
+  postRegister,
+  postLogin,
+} from "../../helpers/backend_helper"
 
 function* fetchUsers() {
   try {

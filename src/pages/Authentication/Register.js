@@ -41,15 +41,17 @@ const Register = props => {
     initialValues: {
       email: "",
       firstname: "",
+      lastname: "",
       password: "",
     },
     validationSchema: Yup.object({
       email: Yup.string().required("Please Enter Your Email"),
       firstname: Yup.string().required("Please Enter Your firstname"),
+      lastname: Yup.string().required("Please Enter Your lastname"),
       password: Yup.string().required("Please Enter Your Password"),
     }),
     onSubmit: values => {
-      dispatch(registerUser(values))
+      dispatch(registerUser({ ...values, aflag: true }))
     },
   })
 
@@ -193,6 +195,30 @@ const Register = props => {
                             </FormFeedback>
                           ) : null}
                         </div>
+                        <div className="mb-3">
+                          <Label className="form-label">Lastname</Label>
+                          <Input
+                            name="lastname"
+                            type="text"
+                            placeholder="Enter last name"
+                            onChange={validation.handleChange}
+                            onBlur={validation.handleBlur}
+                            value={validation.values.lastname || ""}
+                            invalid={
+                              validation.touched.username &&
+                              validation.errors.username
+                                ? true
+                                : false
+                            }
+                          />
+                          {validation.touched.username &&
+                          validation.errors.username ? (
+                            <FormFeedback type="invalid">
+                              {validation.errors.username}
+                            </FormFeedback>
+                          ) : null}
+                        </div>
+
                         <div className="mb-3">
                           <Label className="form-label">Password</Label>
                           <Input

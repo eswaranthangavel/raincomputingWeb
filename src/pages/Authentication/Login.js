@@ -51,14 +51,20 @@ const Login = props => {
     enableReinitialize: true,
 
     initialValues: {
+<<<<<<< Updated upstream
       email:  "admin@raincomputing.com" || "",
       password: "123456" || "",
+=======
+      email: "",
+      password: "",
+>>>>>>> Stashed changes
     },
     validationSchema: Yup.object({
       email: Yup.string().required("Please Enter Your Email"),
       password: Yup.string().required("Please Enter Your Password"),
     }),
     onSubmit: values => {
+      console.log(values, "values")
       dispatch(loginUser(values, props.history))
     },
   })
@@ -69,6 +75,7 @@ const Login = props => {
 
   // handleValidSubmit
   const handleValidSubmit = (event, values) => {
+    console.log(values, "values")
     dispatch(loginUser(values, props.history))
   }
 

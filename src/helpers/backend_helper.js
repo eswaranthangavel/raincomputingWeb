@@ -4,4 +4,9 @@ import * as url from "./url_helper"
 
 const getAttorneysData = () => get(url.GET_ATTORNEYS_DATA)
 
-export { getAttorneysData }
+// Login Method
+const postLogin = data => post(url.POST_USER_LOGIN, data)
+
+const postRegister = data => post(url.POST_USER_REGISTER, data)
+
+export { getAttorneysData, postRegister, postLogin }
