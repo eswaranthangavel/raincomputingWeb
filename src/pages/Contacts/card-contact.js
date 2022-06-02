@@ -19,7 +19,8 @@ const CardContact = props => {
       <Col xl="3" sm="6">
         <Card className="text-center">
           <CardBody>
-            {!user.img ? (
+            {user.firstname}
+            {/* {!user.img ? (
               <div className="avatar-xl mx-auto mb-4">
                 <span
                   className={
@@ -41,10 +42,10 @@ const CardContact = props => {
 
             <h5 className="font-size-15 mb-1">
               <Link to="#" className="text-dark">
-                {user.name}
+                {user.firstname}
               </Link>
             </h5>
-            <p className="text-muted">{user.designation}</p>
+            <p className="text-muted">{user.type}</p> */}
 
             {/* <div>
               {map(
@@ -72,43 +73,43 @@ const CardContact = props => {
             </div> */}
           </CardBody>
           <CardFooter className="bg-transparent border-top">
-            <div className="contact-links d-flex font-size-20">
+            {/* <div className="contact-links d-flex font-size-20">
               <div className="flex-fill">
-                <Link to="#" id={"message" + user.id}>
+                <Link to="#" id={"message" + user._id}>
                   <i className="bx bx-message-square-dots" />
                   <UncontrolledTooltip
                     placement="top"
-                    target={"message" + user.id}
+                    target={"message" + user._id}
                   >
                     Message
                   </UncontrolledTooltip>
                 </Link>
               </div>
               <div className="flex-fill">
-                <Link to="#" id={"project" + user.id}>
+                <Link to="#" id={"project" + user._id}>
                   <i className="bx bx-pie-chart-alt" />
                   <UncontrolledTooltip
                     placement="top"
-                    target={"project" + user.id}
+                    target={"project" + user._id}
                   >
                     Projects
                   </UncontrolledTooltip>
                 </Link>
               </div>
               <div className="flex-fill">
-                <Link to="#" id={"profile" + user.id}>
+                <Link to="#" id={"profile" + user._id}>
                   <Link to="/projects-overview">
                     <i className="bx bx-user-circle" />
                   </Link>
                   <UncontrolledTooltip
                     placement="top"
-                    target={"profile" + user.id}
+                    target={"profile" + user._id}
                   >
                     Profile
                   </UncontrolledTooltip>
                 </Link>
               </div>
-            </div>
+            </div> */}
           </CardFooter>
         </Card>
       </Col>

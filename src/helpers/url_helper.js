@@ -112,3 +112,5 @@ export const ON_ADD_COMMENT = "/comments-product-add-comment"
 
 //Demo
 export const GET_DEMO_DATA = "https://jsonplaceholder.typicode.com/posts"
+
+export const GET_ATTORNEYS_DATA = "http://localhost:5100/api/user/attorneys"

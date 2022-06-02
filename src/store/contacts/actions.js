@@ -14,10 +14,15 @@ import {
   DELETE_USER,
   DELETE_USER_SUCCESS,
   DELETE_USER_FAIL,
+  GET_ATTORNEYS,
 } from "./actionTypes"
 
 export const getUsers = () => ({
   type: GET_USERS,
+})
+
+export const getAttorneys = () => ({
+  type: GET_ATTORNEYS,
 })
 
 export const getUsersSuccess = users => ({

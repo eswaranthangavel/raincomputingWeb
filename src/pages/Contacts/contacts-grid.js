@@ -14,7 +14,10 @@ import CardContact from "./card-contact"
 //redux
 import { useSelector, useDispatch } from "react-redux"
 
-import { getUsers as onGetUsers } from "../../store/contacts/actions"
+import {
+  getUsers as onGetUsers,
+  getAttorneys,
+} from "../../store/contacts/actions"
 
 const ContactsGrid = props => {
   const dispatch = useDispatch()
@@ -24,11 +27,11 @@ const ContactsGrid = props => {
   }))
 
   useEffect(() => {
-    if (users && !users.length) {
-      dispatch(onGetUsers())
+    if (!users?.success) {
+      dispatch(getAttorneys())
     }
   }, [dispatch, users])
-
+  console.log(users, "users")
   return (
     <React.Fragment>
       <div className="page-content">
@@ -39,7 +42,7 @@ const ContactsGrid = props => {
           {/* Render Breadcrumbs */}
           {/* <Breadcrumbs title="Contacts" breadcrumbItem="User Grid" /> */}
           <div className="mb-2">
-          <form className="app-search  ">
+            <form className="app-search  ">
               <div className="position-relative">
                 <input
                   type="text"
@@ -48,11 +51,11 @@ const ContactsGrid = props => {
                 />
                 <span className="bx bx-search-alt" />
               </div>
-            </form> 
-            </div>
+            </form>
+          </div>
 
           <Row>
-            {map(users, (user, key) => (
+            {map(users.attorneys, (user, key) => (
               <CardContact user={user} key={"_user_" + key} />
             ))}
           </Row>
