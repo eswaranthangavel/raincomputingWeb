@@ -1,38 +1,51 @@
 import React from "react"
 import { Container, Row, Col } from "reactstrap"
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props"
+// import TwitterLogin from "react-twitter-auth"
+import { GoogleLogin } from "react-google-login"
+
 
 
 const Footer = () => {
   return (
     <React.Fragment>
       <footer className="footer">
-        <Container fluid={true}>
+        <Container >
 
           <Row>
-            <div className="col-md-3 col-sm-6">
-              <ul className="list-unstyled">
+            <div className="col-md-3 col-sm-10">
+              <ul className="list-unstyled mt-2 ">
             <h3>About</h3>
-            <li>About Us</li>
-            <li>How it works</li>
-            <li>Security</li>
+            <li className="mt-3 ">About Us</li>
+            <li className="mt-3 ">How it works</li>
+            <li className="mt-3 ">Security</li>
             </ul>
             </div>
 
             <div className="col-md-3 col-sm-6">
-              <ul className="list-unstyled">
+              <ul className="list-unstyled mt-2">
             <h3>Solution</h3>
-            <li>Enterprise</li>
-            <li>Private Label</li>
-            <li>Management</li>
+            <li className="mt-3 ">Enterprise</li>
+            <li className="mt-3 ">Private Label</li>
+            <li className="mt-3 ">Management</li>
             </ul>
             </div>
 
             <div className="col-md-3 col-sm-6">
-              <ul className="list-unstyled">
-            <h3>Contact</h3>
-            <li>Contact Us </li>
-            <li>Careers</li>
-            <li>Security</li>
+              <ul className="list-unstyled mt-2 ">
+            <h3 >Contact</h3>
+            <li className="mt-3 ">Contact Us </li>
+            <li className="mt-3">Careers</li>
+            <li className="mt-3 " >Security</li>
+            </ul>
+            </div>
+
+            <div className="col-md-3 col-sm-6 ">
+              <ul className="list-unstyled mt-2 ">
+            <h3>Follow Us</h3>
+            <li className="mt-3 "><i className="mdi mdi-facebook" />--Facebook </li>
+            {/* <li><i className="mdi mdi-twitter"/>Twitter</li> */}
+            <li className="mt-3 "> <i className="mdi mdi-google" />--Google</li>
             </ul>
             </div>
 
