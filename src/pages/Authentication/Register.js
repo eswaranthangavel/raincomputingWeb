@@ -60,7 +60,8 @@ const Register = props => {
     registrationError: state.Account.registrationError,
     loading: state.Account.loading,
   }))
-
+  console.log("u", user)
+  console.log("re", registrationError)
   // handleValidSubmit
   const handleValidSubmit = values => {
     dispatch(registerUser(values))
@@ -136,11 +137,11 @@ const Register = props => {
                           return false
                         }}
                       >
-                        {user && user ? (
-                          <Alert color="success">
-                            Register User Successfully
+                        {user && (
+                          <Alert color={user.success ? "success" : "danger"}>
+                            {user.msg}
                           </Alert>
-                        ) : null}
+                        )}
 
                         {registrationError && registrationError ? (
                           <Alert color="danger">{registrationError}</Alert>
