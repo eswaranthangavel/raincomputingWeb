@@ -14,7 +14,7 @@ const Footer = () => {
 
           <Row>
             <div className="col-md-3 col-sm-10">
-              <ul className="list-unstyled mt-2 ">
+              <ul className="list-unstyled ">
             <h3>About</h3>
             <li className="mt-3 ">About Us</li>
             <li className="mt-3 ">How it works</li>
@@ -23,7 +23,7 @@ const Footer = () => {
             </div>
 
             <div className="col-md-3 col-sm-6">
-              <ul className="list-unstyled mt-2">
+              <ul className="list-unstyled ">
             <h3>Solution</h3>
             <li className="mt-3 ">Enterprise</li>
             <li className="mt-3 ">Private Label</li>
@@ -32,7 +32,7 @@ const Footer = () => {
             </div>
 
             <div className="col-md-3 col-sm-6">
-              <ul className="list-unstyled mt-2 ">
+              <ul className="list-unstyled  ">
             <h3 >Contact</h3>
             <li className="mt-3 ">Contact Us </li>
             <li className="mt-3">Careers</li>
@@ -41,16 +41,16 @@ const Footer = () => {
             </div>
 
             <div className="col-md-3 col-sm-6 ">
-              <ul className="list-unstyled mt-2 ">
+              <ul className="list-unstyled  ">
             <h3>Follow Us</h3>
-            <li className="mt-3 "><i className="mdi mdi-facebook" />--Facebook </li>
+            <li className="mt-3 "><i className="mdi mdi-facebook" />Facebook </li>
             {/* <li><i className="mdi mdi-twitter"/>Twitter</li> */}
-            <li className="mt-3 "> <i className="mdi mdi-google" />--Google</li>
+            <li className="mt-3 "> <i className="mdi mdi-google" />Google</li>
             </ul>
             </div>
 
 
-            <Col md={6}>{new Date().getFullYear()} © Rain.</Col>
+            <Col md={6}>{new Date().getFullYear()} © RainComputing.</Col>
             <Col md={6}>
               <div className="text-sm-end d-none d-sm-block">
                 Design & Develop by RainComputing
