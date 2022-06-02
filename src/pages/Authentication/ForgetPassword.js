@@ -46,7 +46,7 @@ const ForgetPasswordPage = props => {
     <React.Fragment>
       <MetaTags>
         <title>
-          Forget Password | Skote - React Admin & Dashboard Template
+          Forget Password | Rain - Admin & Dashboard Template
         </title>
       </MetaTags>
       <div className="home-btn d-none d-sm-block">
@@ -147,8 +147,8 @@ const ForgetPasswordPage = props => {
                   </Link>{" "}
                 </p>
                 <p>
-                  © {new Date().getFullYear()} Skote. Crafted with{" "}
-                  <i className="mdi mdi-heart text-danger" /> by Themesbrand
+                  © {new Date().getFullYear()} Rain. Crafted with{" "}
+                  <i className="mdi mdi-heart text-danger" /> by RainComputing
                 </p>
               </div>
             </Col>

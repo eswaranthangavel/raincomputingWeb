@@ -45,7 +45,7 @@ const ProjectsGrid = props => {
       <div className="page-content">
         <MetaTags>
           <title>
-            Raincomputing | Skote - React Admin & Dashboard Template
+            Raincomputing | Rain -  Admin & Dashboard Template
           </title>
         </MetaTags>
         <Container fluid>

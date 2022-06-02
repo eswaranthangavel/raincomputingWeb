@@ -73,7 +73,7 @@ const Register = props => {
   return (
     <React.Fragment>
       <MetaTags>
-        <title>Register | Skote - React Admin & Dashboard Template</title>
+        <title>Register | Rain -  Admin & Dashboard Template</title>
       </MetaTags>
       <div className="d-none d-lg-block ">
         <img src={rainlogo} height="50" />
