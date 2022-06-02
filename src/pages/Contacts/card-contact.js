@@ -10,24 +10,20 @@ import {
 } from "reactstrap"
 import images from "assets/images"
 import { isEmpty, size, map } from "lodash"
-import img1 from "../../assets/images/img1m.png";
-
 
 const CardContact = props => {
   const { user } = props
 
   return (
     <React.Fragment>
-      
       <Col xl="3" sm="6">
-        <Card className="text-center  ">
+        <Card className="text-center">
           <CardBody>
             {!user.img ? (
-              <div className="avatar-xl mx-auto mb-4 ">
-                <img src={img1} height="125"/>
-                {/* <span
+              <div className="avatar-xl mx-auto mb-4">
+                <span
                   className={
-                    "avatar-title rounded-circle bg-soft bg-" +
+                    "avatar-title bg-soft bg-" +
                     user.color +
                     " text-" +
                     user.color +
@@ -35,15 +31,11 @@ const CardContact = props => {
                   }
                 >
                   {user.name.charAt(0)}
-                </span> */}
+                </span>
               </div>
             ) : (
               <div className="mb-4">
-                <img
-                  className="rounded-circle  avatar-xl "
-                  src={images[user.img]}
-                  alt=""
-                />
+                <img className="avatar-xl" src={images[user.img]} alt="" />
               </div>
             )}
 
@@ -54,7 +46,7 @@ const CardContact = props => {
             </h5>
             <p className="text-muted">{user.designation}</p>
 
-            <div>
+            {/* <div>
               {map(
                 user.tags,
                 (tag, index) =>
@@ -77,7 +69,7 @@ const CardContact = props => {
                   {size(user.tags) - 1} + more
                 </Link>
               )}
-            </div>
+            </div> */}
           </CardBody>
           <CardFooter className="bg-transparent border-top">
             <div className="contact-links d-flex font-size-20">
@@ -104,17 +96,17 @@ const CardContact = props => {
                 </Link>
               </div>
               <div className="flex-fill">
-                {/* <Link to="#" id={"profile" + user.id}> */}
-                <Link to="/projects-overview">
-                  <i className="bx bx-user-circle" />
-                </Link>
-                {/* <UncontrolledTooltip
+                <Link to="#" id={"profile" + user.id}>
+                  <Link to="/projects-overview">
+                    <i className="bx bx-user-circle" />
+                  </Link>
+                  <UncontrolledTooltip
                     placement="top"
                     target={"profile" + user.id}
                   >
                     Profile
-                  </UncontrolledTooltip> */}
-                {/* </Link> */}
+                  </UncontrolledTooltip>
+                </Link>
               </div>
             </div>
           </CardFooter>
