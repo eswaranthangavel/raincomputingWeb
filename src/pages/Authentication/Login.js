@@ -51,13 +51,8 @@ const Login = props => {
     enableReinitialize: true,
 
     initialValues: {
-<<<<<<< Updated upstream
-      email:  "admin@raincomputing.com" || "",
-      password: "123456" || "",
-=======
       email: "",
       password: "",
->>>>>>> Stashed changes
     },
     validationSchema: Yup.object({
       email: Yup.string().required("Please Enter Your Email"),
