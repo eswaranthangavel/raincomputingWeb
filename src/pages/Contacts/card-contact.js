@@ -6,12 +6,15 @@ import {
   CardBody,
   CardFooter,
   Col,
+  Pagination,
   UncontrolledTooltip,
 } from "reactstrap"
 import images from "assets/images"
 import { isEmpty, size, map } from "lodash"
+import { attImages } from "../../helpers/mockData"
 
 const CardContact = props => {
+  const imgIndex = Math.floor(Math.random() * 6)
   const { user } = props
 
   return (
@@ -19,7 +22,22 @@ const CardContact = props => {
       <Col xl="3" sm="6">
         <Card className="text-center">
           <CardBody>
-            {user.firstname}
+            <div>
+              <div>
+                <img
+                  className="avatar-xl"
+                  src={attImages[imgIndex].url}
+                  alt=""
+                />
+              </div>
+              <div className="mt-3">
+                <h5 className="font-size-16 mb-1 text-dark">
+                  {user.firstname} {user.lastname} {user.initial}
+                </h5>
+              </div>
+              <p className="font-size-10">{user.firm}</p>
+              <p className="text-muted">{user.type}</p>
+            </div>
             {/* {!user.img ? (
               <div className="avatar-xl mx-auto mb-4">
                 <span
@@ -46,7 +64,6 @@ const CardContact = props => {
               </Link>
             </h5>
             <p className="text-muted">{user.type}</p> */}
-
             {/* <div>
               {map(
                 user.tags,
@@ -73,7 +90,7 @@ const CardContact = props => {
             </div> */}
           </CardBody>
           <CardFooter className="bg-transparent border-top">
-            {/* <div className="contact-links d-flex font-size-20">
+            <div className="contact-links d-flex font-size-20">
               <div className="flex-fill">
                 <Link to="#" id={"message" + user._id}>
                   <i className="bx bx-message-square-dots" />
@@ -109,7 +126,7 @@ const CardContact = props => {
                   </UncontrolledTooltip>
                 </Link>
               </div>
-            </div> */}
+            </div>
           </CardFooter>
         </Card>
       </Col>
