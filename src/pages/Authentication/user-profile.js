@@ -7,6 +7,7 @@ import {
   Card,
   Alert,
   CardBody,
+  FormGroup,
   Button,
   Label,
   Input,
@@ -26,7 +27,7 @@ import { withRouter } from "react-router-dom";
 //Import Breadcrumb
 import Breadcrumb from "../../components/Common/Breadcrumb";
 
-import avatar from "../../assets/images/users/avatar-1.jpg";
+import avatar from "../../assets/images/users/avatar-2.jpg";
 // actions
 import { editProfile, resetProfileFlag } from "../../store/actions";
 
@@ -63,23 +64,32 @@ const UserProfile = props => {
     }
   }, [dispatch, success]);
 
-  const validation = useFormik({
+
+   // Form validation 
+   const validation = useFormik({
     // enableReinitialize : use this flag when initial values needs to be changed
     enableReinitialize: true,
 
     initialValues: {
-      username: name || '',
-      idx : idx || '',
-    },
+                    firstname: '',
+                    lastname: '',
+                    city: '',
+                    state: '',
+                    zip: '',
+                    },
     validationSchema: Yup.object({
-      username: Yup.string().required("Please Enter Your UserName"),
+      firstname: Yup.string().required("Please Enter Your First Name"),
+      lastname: Yup.string().required("Please Enter Your Last Name"),
+      city: Yup.string().required("Please Enter Your City"),
+      state: Yup.string().required("Please Enter Your State"),
+      zip: Yup.string().required("Please Enter Your Zip"),
     }),
     onSubmit: (values) => {
-      dispatch(editProfile(values));
+      console.log("values", values);
     }
   });
 
-
+ 
   return (
     <React.Fragment>
       <div className="page-content">
@@ -118,45 +128,150 @@ const UserProfile = props => {
             </Col>
           </Row>
 
-          <h4 className="card-title mb-4">Change User Name</h4>
+          <h4 className="card-title mb-4">Change User Details</h4>
 
           <Card>
-            <CardBody>
-              <Form
-                className="form-horizontal"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  validation.handleSubmit();
-                  return false;
-                }}
-              >
-                <div className="form-group">
-                  <Label className="form-label">User Name</Label>
-                  <Input
-                    name="username"
-                    // value={name}
-                    className="form-control"
-                    placeholder="Enter User Name"
-                    type="text"
-                    onChange={validation.handleChange}
-                    onBlur={validation.handleBlur}
-                    value={validation.values.username || ""}
-                    invalid={
-                      validation.touched.username && validation.errors.username ? true : false
-                    }
-                  />
-                  {validation.touched.username && validation.errors.username ? (
-                    <FormFeedback type="invalid">{validation.errors.username}</FormFeedback>
-                  ) : null}
-                  <Input name="idx" value={idx} type="hidden" />
-                </div>
-                <div className="text-center mt-4">
-                  <Button type="submit" color="danger">
-                    Update User Name
-                  </Button>
-                </div>
-              </Form>
-            </CardBody>
+             <CardBody>
+                <Form className="needs-validation"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      validation.handleSubmit();
+                      return false;
+                    }}
+                  >
+                    <Row>
+                      <Col md="6">
+                        <FormGroup className="mb-3">
+                          <Label htmlFor="validationCustom01">First name</Label>
+                          <Input
+                            name="firstname"
+                            placeholder="First name"
+                            type="text"
+                            className="form-control"
+                            id="validationCustom01"
+                            onChange={validation.handleChange}
+                            onBlur={validation.handleBlur}
+                            value={validation.values.firstname || ""}
+                            invalid={
+                              validation.touched.firstname && validation.errors.firstname ? true : false
+                            }
+                          />
+                          {validation.touched.firstname && validation.errors.firstname ? (
+                            <FormFeedback type="invalid">{validation.errors.firstname}</FormFeedback>
+                          ) : null}
+                        </FormGroup>
+                      </Col>
+                      <Col md="6">
+                        <FormGroup className="mb-3">
+                          <Label htmlFor="validationCustom02">Last name</Label>
+                          <Input
+                            name="lastname"
+                            placeholder="Last name"
+                            type="text"
+                            className="form-control"
+                            id="validationCustom02"
+                            onChange={validation.handleChange}
+                            onBlur={validation.handleBlur}
+                            value={validation.values.lastname || ""}
+                            invalid={
+                              validation.touched.lastname && validation.errors.lastname ? true : false
+                            }
+                          />
+                          {validation.touched.lastname && validation.errors.lastname ? (
+                            <FormFeedback type="invalid">{validation.errors.lastname}</FormFeedback>
+                          ) : null}
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col md="4">
+                        <FormGroup className="mb-3">
+                          <Label htmlFor="validationCustom03">City</Label>
+                          <Input
+                            name="city"
+                            placeholder="City"
+                            type="text"
+                            className="form-control"
+                            onChange={validation.handleChange}
+                            onBlur={validation.handleBlur}
+                            value={validation.values.city || ""}
+                            invalid={
+                              validation.touched.city && validation.errors.city ? true : false
+                            }
+                          />
+                          {validation.touched.city && validation.errors.city ? (
+                            <FormFeedback type="invalid">{validation.errors.city}</FormFeedback>
+                          ) : null}
+                        </FormGroup>
+                      </Col>
+                      <Col md="4">
+                        <FormGroup className="mb-3">
+                          <Label htmlFor="validationCustom04">State</Label>
+                          <Input
+                            name="state"
+                            placeholder="State"
+                            type="text"
+                            className="form-control"
+                            id="validationCustom04"
+                            onChange={validation.handleChange}
+                            onBlur={validation.handleBlur}
+                            value={validation.values.state || ""}
+                            invalid={
+                              validation.touched.state && validation.errors.state ? true : false
+                            }
+                          />
+                          {validation.touched.state && validation.errors.state ? (
+                            <FormFeedback type="invalid">{validation.errors.state}</FormFeedback>
+                          ) : null}
+                        </FormGroup>
+                      </Col>
+                      <Col md="4">
+                        <FormGroup className="mb-3">
+                          <Label htmlFor="validationCustom05">Zip</Label>
+                          <Input
+                            name="zip"
+                            placeholder="Zip Code"
+                            type="text"
+                            className="form-control"
+                            id="validationCustom05"
+                            onChange={validation.handleChange}
+                            onBlur={validation.handleBlur}
+                            value={validation.values.zip || ""}
+                            invalid={
+                              validation.touched.zip && validation.errors.zip ? true : false
+                            }
+                          />
+                          {validation.touched.zip && validation.errors.zip ? (
+                            <FormFeedback type="invalid">{validation.errors.zip}</FormFeedback>
+                          ) : null}
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col lg="12">
+                        <FormGroup className="mb-3">
+                          <div className="form-check">
+                            <Input
+                              type="checkbox"
+                              className="form-check-input"
+                              id="invalidCheck"
+                            />
+                            <Label
+                              className="form-check-label"
+                              htmlFor="invalidCheck"
+                            >
+                              {" "}
+                              Agree to terms and conditions
+                            </Label>
+                          </div>
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                    <Button color="primary" type="submit">
+                      SUBMIT
+                    </Button>
+                  </Form>
+            </CardBody> 
           </Card>
         </Container>
       </div>

@@ -42,7 +42,7 @@ const ContactsGrid = props => {
           {/* Render Breadcrumbs */}
           {/* <Breadcrumbs title="Contacts" breadcrumbItem="User Grid" /> */}
           <div className="mb-2">
-            <form className="app-search  ">
+            <form className="app-search">
               <div className="position-relative">
                 <input
                   type="text"
