@@ -14,31 +14,32 @@ import { isEmpty, size, map } from "lodash"
 import { attImages } from "../../helpers/mockData"
 
 const CardContact = props => {
-  const imgIndex = Math.floor(Math.random() * 6)
+  const imgIndex = Math.floor(Math.random() * 8)
   const { user } = props
 
   return (
     <React.Fragment>
       <Col xl="3" sm="6">
         <Card className="text-center">
-          <CardBody>
-            <div>
+          <Link to="/projects-overview">
+            <CardBody>
               <div>
-                <img
-                  className="avatar-xl"
-                  src={attImages[imgIndex].url}
-                  alt=""
-                />
+                <div>
+                  <img
+                    className="avatar-xl1"
+                    src={attImages[imgIndex].url}
+                    alt=""
+                  />
+                </div>
+                <div className="mt-3">
+                  <h5 className="font-size-16 mb-1 text-dark">
+                    {user.firstname} {user.lastname} {user.initial}
+                  </h5>
+                </div>
+                <p className="font-size-10">{user.firm}</p>
+                <p className="text-muted">{user.type}</p>
               </div>
-              <div className="mt-3">
-                <h5 className="font-size-16 mb-1 text-dark">
-                  {user.firstname} {user.lastname} {user.initial}
-                </h5>
-              </div>
-              <p className="font-size-10">{user.firm}</p>
-              <p className="text-muted">{user.type}</p>
-            </div>
-            {/* {!user.img ? (
+              {/* {!user.img ? (
               <div className="avatar-xl mx-auto mb-4">
                 <span
                   className={
@@ -64,7 +65,7 @@ const CardContact = props => {
               </Link>
             </h5>
             <p className="text-muted">{user.type}</p> */}
-            {/* <div>
+              {/* <div>
               {map(
                 user.tags,
                 (tag, index) =>
@@ -88,34 +89,33 @@ const CardContact = props => {
                 </Link>
               )}
             </div> */}
-          </CardBody>
-          <CardFooter className="bg-transparent border-top">
-            <div className="contact-links d-flex font-size-20">
-              <div className="flex-fill">
-                <Link to="#" id={"message" + user._id}>
-                  <i className="bx bx-message-square-dots" />
-                  <UncontrolledTooltip
-                    placement="top"
-                    target={"message" + user._id}
-                  >
-                    Message
-                  </UncontrolledTooltip>
-                </Link>
-              </div>
-              <div className="flex-fill">
-                <Link to="#" id={"project" + user._id}>
-                  <i className="bx bx-pie-chart-alt" />
-                  <UncontrolledTooltip
-                    placement="top"
-                    target={"project" + user._id}
-                  >
-                    Projects
-                  </UncontrolledTooltip>
-                </Link>
-              </div>
-              <div className="flex-fill">
-                <Link to="#" id={"profile" + user._id}>
-                  <Link to="/projects-overview">
+            </CardBody>
+            <CardFooter className="bg-transparent border-top">
+              <div className="contact-links d-flex font-size-20">
+                <div className="flex-fill">
+                  <Link to="#" id={"message" + user._id}>
+                    <i className="bx bx-message-square-dots" />
+                    <UncontrolledTooltip
+                      placement="top"
+                      target={"message" + user._id}
+                    >
+                      Message
+                    </UncontrolledTooltip>
+                  </Link>
+                </div>
+                <div className="flex-fill">
+                  <Link to="#" id={"project" + user._id}>
+                    <i className="bx bx-pie-chart-alt" />
+                    <UncontrolledTooltip
+                      placement="top"
+                      target={"project" + user._id}
+                    >
+                      Projects
+                    </UncontrolledTooltip>
+                  </Link>
+                </div>
+                <div className="flex-fill">
+                  <Link to="#" id={"profile" + user._id}>
                     <i className="bx bx-user-circle" />
                   </Link>
                   <UncontrolledTooltip
@@ -124,10 +124,10 @@ const CardContact = props => {
                   >
                     Profile
                   </UncontrolledTooltip>
-                </Link>
+                </div>
               </div>
-            </div>
-          </CardFooter>
+            </CardFooter>
+          </Link>
         </Card>
       </Col>
     </React.Fragment>
