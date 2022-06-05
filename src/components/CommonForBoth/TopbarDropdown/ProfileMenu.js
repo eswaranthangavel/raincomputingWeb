@@ -20,7 +20,7 @@ const ProfileMenu = props => {
   // Declare a new state variable, which we'll call "menu"
   const [menu, setMenu] = useState(false)
 
-  const [username, setusername] = useState("User")
+  const [username, setusername] = useState("Admin")
 
   useEffect(() => {
     if (localStorage.getItem("authUser")) {
