@@ -8,6 +8,7 @@ import {
   DELETE_USER,
   UPDATE_USER,
   GET_ATTORNEYS,
+  GET_ALL_ATTORNEYS,
 } from "./actionTypes"
 
 import {
@@ -22,6 +23,8 @@ import {
   deleteUserSuccess,
   deleteUserFail,
   getAttorneys,
+  getAllAttorneysSuccess,
+  getAllAttorneysFail,
 } from "./actions"
 
 //Include Both Helper File with needed methods
@@ -37,6 +40,7 @@ import {
   getAttorneysData,
   postRegister,
   postLogin,
+  getAllAttorneys,
 } from "../../helpers/backend_helper"
 
 function* fetchUsers() {
@@ -94,6 +98,19 @@ function* onGetAttorneys() {
   }
 }
 
+function* onGetAllAttorneys({ payload: page, limit, searchText }) {
+  try {
+    const response = yield call(getAllAttorneys, { page, limit, searchText })
+    if (response.success) {
+      yield put(getAllAttorneysSuccess(response.attorneys))
+    } else {
+      yield put(getAllAttorneysFail(response))
+    }
+  } catch (error) {
+    yield put(getAllAttorneysFail(error))
+  }
+}
+
 function* contactsSaga() {
   yield takeEvery(GET_USERS, fetchUsers)
   yield takeEvery(GET_USER_PROFILE, fetchUserProfile)
@@ -101,6 +118,7 @@ function* contactsSaga() {
   yield takeEvery(UPDATE_USER, onUpdateUser)
   yield takeEvery(DELETE_USER, onDeleteUser)
   yield takeEvery(GET_ATTORNEYS, onGetAttorneys)
+  yield takeEvery(GET_ALL_ATTORNEYS, onGetAllAttorneys)
 }
 
 export default contactsSaga

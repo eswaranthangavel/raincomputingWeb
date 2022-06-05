@@ -117,3 +117,6 @@ export const GET_ATTORNEYS_DATA = "http://localhost:5100/api/user/attorneys"
 
 export const POST_USER_LOGIN = "http://localhost:5100/api/user/login"
 export const POST_USER_REGISTER = "http://localhost:5100/api/user/register"
+
+export const GET_ALL_ATTORNEYS_DATA =
+  "http://localhost:5100/api/user/allAttorney"

@@ -8,5 +8,6 @@ const getAttorneysData = () => get(url.GET_ATTORNEYS_DATA)
 const postLogin = data => post(url.POST_USER_LOGIN, data)
 
 const postRegister = data => post(url.POST_USER_REGISTER, data)
-
-export { getAttorneysData, postRegister, postLogin }
+const getAllAttorneys = (page, limit, searchText) =>
+  post(url.GET_ALL_ATTORNEYS_DATA, page, limit, searchText)
+export { getAttorneysData, postRegister, postLogin, getAllAttorneys }

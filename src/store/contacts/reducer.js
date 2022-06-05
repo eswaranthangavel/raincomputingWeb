@@ -9,12 +9,16 @@ import {
   DELETE_USER_FAIL,
   GET_USER_PROFILE_SUCCESS,
   GET_USER_PROFILE_FAIL,
+  GET_ALL_ATTORNEYS_SUCCESS,
+  GET_ALL_ATTORNEYS_FAIL,
 } from "./actionTypes"
 
 const INIT_STATE = {
   users: [],
   userProfile: {},
   error: {},
+  attorneys: [],
+  loading: true,
 }
 
 const contacts = (state = INIT_STATE, action) => {
@@ -84,7 +88,18 @@ const contacts = (state = INIT_STATE, action) => {
         ...state,
         error: action.payload,
       }
-
+    case GET_ALL_ATTORNEYS_SUCCESS:
+      return {
+        ...state,
+        attorneys: action.payload,
+        loading: false,
+      }
+    case GET_ALL_ATTORNEYS_FAIL:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      }
     default:
       return state
   }

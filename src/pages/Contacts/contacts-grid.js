@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import MetaTags from "react-meta-tags"
 import { Link, withRouter } from "react-router-dom"
@@ -14,24 +14,20 @@ import CardContact from "./card-contact"
 //redux
 import { useSelector, useDispatch } from "react-redux"
 
-import {
-  getUsers as onGetUsers,
-  getAttorneys,
-} from "../../store/contacts/actions"
+import { getAllAttorneys } from "../../store/contacts/actions"
 
 const ContactsGrid = props => {
   const dispatch = useDispatch()
-
-  const { users } = useSelector(state => ({
-    users: state.contacts.users,
+  const { attorneys, loading } = useSelector(state => ({
+    attorneys: state.contacts.attorneys,
+    loading: state.contacts.loading,
   }))
 
   useEffect(() => {
-    if (!users?.success) {
-      dispatch(getAttorneys())
-    }
-  }, [dispatch, users])
-  console.log(users, "users")
+    dispatch(getAllAttorneys(1, 20, "A"))
+  }, [])
+  console.log("attorneys", attorneys)
+
   return (
     <React.Fragment>
       <div className="page-content">
@@ -41,35 +37,40 @@ const ContactsGrid = props => {
         <Container fluid>
           {/* Render Breadcrumbs */}
           {/* <Breadcrumbs title="Contacts" breadcrumbItem="User Grid" /> */}
-          <div className="mb-2">
-            <form className="app-search  ">
-              <div className="position-relative">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Search for Attorney..."
-                />
-                <span className="bx bx-search-alt" />
-              </div>
-            </form>
-          </div>
 
-          <Row>
-            {map(users.attorneys, (user, key) => (
-              <CardContact user={user} key={"_user_" + key} />
-            ))}
-          </Row>
-
-          <Row>
-            <Col xs="12">
-              <div className="text-center my-3">
-                <Link to="#" className="text-success">
-                  <i className="bx bx-hourglass bx-spin me-2" />
-                  Load more
-                </Link>
+          {loading ? (
+            <Row>
+              <Col xs="12">
+                <div className="text-center my-3">
+                  <Link to="#" className="text-success">
+                    <i className="bx bx-hourglass bx-spin me-2" />
+                    Load more
+                  </Link>
+                </div>
+              </Col>
+            </Row>
+          ) : (
+            <>
+              <div className="mb-2">
+                <form className="app-search  ">
+                  <div className="position-relative">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Search for Attorney..."
+                    />
+                    <span className="bx bx-search-alt" />
+                  </div>
+                </form>
               </div>
-            </Col>
-          </Row>
+
+              <Row>
+                {map(attorneys, (user, key) => (
+                  <CardContact user={user} key={"_user_" + key} />
+                ))}
+              </Row>
+            </>
+          )}
         </Container>
       </div>
     </React.Fragment>

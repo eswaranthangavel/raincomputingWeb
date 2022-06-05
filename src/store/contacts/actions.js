@@ -15,6 +15,9 @@ import {
   DELETE_USER_SUCCESS,
   DELETE_USER_FAIL,
   GET_ATTORNEYS,
+  GET_ALL_ATTORNEYS,
+  GET_ALL_ATTORNEYS_SUCCESS,
+  GET_ALL_ATTORNEYS_FAIL,
 } from "./actionTypes"
 
 export const getUsers = () => ({
@@ -91,5 +94,20 @@ export const deleteUserSuccess = user => ({
 
 export const deleteUserFail = error => ({
   type: DELETE_USER_FAIL,
+  payload: error,
+})
+
+export const getAllAttorneys = (page, limit, searchText) => ({
+  type: GET_ALL_ATTORNEYS,
+  payload: page,
+  limit,
+  searchText,
+})
+export const getAllAttorneysSuccess = attorneys => ({
+  type: GET_ALL_ATTORNEYS_SUCCESS,
+  payload: attorneys,
+})
+export const getAllAttorneysFail = error => ({
+  type: GET_ALL_ATTORNEYS_FAIL,
   payload: error,
 })
