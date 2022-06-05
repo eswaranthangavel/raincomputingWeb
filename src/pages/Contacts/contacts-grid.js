@@ -17,6 +17,8 @@ import { useSelector, useDispatch } from "react-redux"
 import { getAllAttorneys } from "../../store/contacts/actions"
 
 const ContactsGrid = props => {
+  const [searchText, setSearchText] = useState("")
+
   const dispatch = useDispatch()
   const { attorneys, loading } = useSelector(state => ({
     attorneys: state.contacts.attorneys,
@@ -24,8 +26,8 @@ const ContactsGrid = props => {
   }))
 
   useEffect(() => {
-    dispatch(getAllAttorneys(1, 20, "A"))
-  }, [])
+    dispatch(getAllAttorneys(1, 20, searchText))
+  }, [searchText])
   console.log("attorneys", attorneys)
 
   return (
@@ -37,19 +39,6 @@ const ContactsGrid = props => {
         <Container fluid>
           {/* Render Breadcrumbs */}
           {/* <Breadcrumbs title="Contacts" breadcrumbItem="User Grid" /> */}
-
-          <div className="mb-2">
-            <form className="app-search">
-              <div className="position-relative">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Search for Attorney..."
-                />
-                <span className="bx bx-search-alt" />
-              </div>
-            </form>
-          </div>
 
           {loading ? (
             <Row>
@@ -71,6 +60,7 @@ const ContactsGrid = props => {
                       type="text"
                       className="form-control"
                       placeholder="Search for Attorney..."
+                      onChange={e => setSearchText(e.target.value)}
                     />
                     <span className="bx bx-search-alt" />
                   </div>
