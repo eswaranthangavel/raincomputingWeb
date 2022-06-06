@@ -73,16 +73,10 @@ const UserProfile = props => {
     initialValues: {
                     firstname: '',
                     lastname: '',
-                    city: '',
-                    state: '',
-                    zip: '',
                     },
     validationSchema: Yup.object({
       firstname: Yup.string().required("Please Enter Your First Name"),
       lastname: Yup.string().required("Please Enter Your Last Name"),
-      city: Yup.string().required("Please Enter Your City"),
-      state: Yup.string().required("Please Enter Your State"),
-      zip: Yup.string().required("Please Enter Your Zip"),
     }),
     onSubmit: (values) => {
       console.log("values", values);
@@ -128,7 +122,7 @@ const UserProfile = props => {
             </Col>
           </Row>
 
-          <h4 className="card-title mb-4">Change User Details</h4>
+          <h4 className="card-title mb-4">Update User Details</h4>
 
           <Card>
              <CardBody>
@@ -161,6 +155,8 @@ const UserProfile = props => {
                           ) : null}
                         </FormGroup>
                       </Col>
+                      </Row>
+                      <Row>
                       <Col md="6">
                         <FormGroup className="mb-3">
                           <Label htmlFor="validationCustom02">Last name</Label>
@@ -182,71 +178,7 @@ const UserProfile = props => {
                           ) : null}
                         </FormGroup>
                       </Col>
-                    </Row>
-                    <Row>
-                      <Col md="4">
-                        <FormGroup className="mb-3">
-                          <Label htmlFor="validationCustom03">City</Label>
-                          <Input
-                            name="city"
-                            placeholder="City"
-                            type="text"
-                            className="form-control"
-                            onChange={validation.handleChange}
-                            onBlur={validation.handleBlur}
-                            value={validation.values.city || ""}
-                            invalid={
-                              validation.touched.city && validation.errors.city ? true : false
-                            }
-                          />
-                          {validation.touched.city && validation.errors.city ? (
-                            <FormFeedback type="invalid">{validation.errors.city}</FormFeedback>
-                          ) : null}
-                        </FormGroup>
-                      </Col>
-                      <Col md="4">
-                        <FormGroup className="mb-3">
-                          <Label htmlFor="validationCustom04">State</Label>
-                          <Input
-                            name="state"
-                            placeholder="State"
-                            type="text"
-                            className="form-control"
-                            id="validationCustom04"
-                            onChange={validation.handleChange}
-                            onBlur={validation.handleBlur}
-                            value={validation.values.state || ""}
-                            invalid={
-                              validation.touched.state && validation.errors.state ? true : false
-                            }
-                          />
-                          {validation.touched.state && validation.errors.state ? (
-                            <FormFeedback type="invalid">{validation.errors.state}</FormFeedback>
-                          ) : null}
-                        </FormGroup>
-                      </Col>
-                      <Col md="4">
-                        <FormGroup className="mb-3">
-                          <Label htmlFor="validationCustom05">Zip</Label>
-                          <Input
-                            name="zip"
-                            placeholder="Zip Code"
-                            type="text"
-                            className="form-control"
-                            id="validationCustom05"
-                            onChange={validation.handleChange}
-                            onBlur={validation.handleBlur}
-                            value={validation.values.zip || ""}
-                            invalid={
-                              validation.touched.zip && validation.errors.zip ? true : false
-                            }
-                          />
-                          {validation.touched.zip && validation.errors.zip ? (
-                            <FormFeedback type="invalid">{validation.errors.zip}</FormFeedback>
-                          ) : null}
-                        </FormGroup>
-                      </Col>
-                    </Row>
+                      </Row>
                     <Row>
                       <Col lg="12">
                         <FormGroup className="mb-3">
@@ -261,12 +193,12 @@ const UserProfile = props => {
                               htmlFor="invalidCheck"
                             >
                               {" "}
-                              Agree to terms and conditions
+                              Remember Me
                             </Label>
                           </div>
                         </FormGroup>
                       </Col>
-                    </Row>
+                    </Row> 
                     <Button color="primary" type="submit">
                       SUBMIT
                     </Button>
