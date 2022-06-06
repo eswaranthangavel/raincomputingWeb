@@ -4,6 +4,7 @@ import MetaTags from "react-meta-tags"
 import { Link, withRouter } from "react-router-dom"
 import { Col, Container, Row } from "reactstrap"
 import { map } from "lodash"
+import Pagination from "../../components/pageination/Pagination"
 
 //Import Breadcrumb
 import Breadcrumbs from "components/Common/Breadcrumb"
@@ -14,21 +15,41 @@ import CardContact from "./card-contact"
 //redux
 import { useSelector, useDispatch } from "react-redux"
 
-import { getAllAttorneys } from "../../store/contacts/actions"
+import {
+  getAllAttorneys,
+  getAttorneysCount,
+} from "../../store/contacts/actions"
 
 const ContactsGrid = props => {
   const [searchText, setSearchText] = useState("")
 
+  const [page, setPage] = useState(1)
+  const [limit, setLimit] = useState(20)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [postsPerPage] = useState(10)
+
+  const indexOfLastPost = currentPage * postsPerPage
+  const indexOfFirstPost = indexOfLastPost - postsPerPage
+  // const currentPosts = page.slice(indexOfFirstPost, indexOfLastPost)
+
+  //pagination//
+  const paginate = pageNumber => setCurrentPage(pageNumber)
+
   const dispatch = useDispatch()
+
   const { attorneys, loading } = useSelector(state => ({
     attorneys: state.contacts.attorneys,
     loading: state.contacts.loading,
   }))
 
   useEffect(() => {
-    dispatch(getAllAttorneys(1, 20, searchText))
+    dispatch(getAllAttorneys(page, limit, searchText))
   }, [searchText])
   console.log("attorneys", attorneys)
+
+  useEffect(() => {
+    dispatch(getAttorneysCount(limit, paginate))
+  }, [])
 
   return (
     <React.Fragment>
@@ -57,8 +78,8 @@ const ContactsGrid = props => {
                 <form className="app-search  ">
                   <div className="position-relative">
                     <input
-                      type="text"
-                      className="form-control"
+                      type="text-success"
+                      className="form-control "
                       placeholder="Search for Attorney..."
                       onChange={e => setSearchText(e.target.value)}
                     />
@@ -72,6 +93,14 @@ const ContactsGrid = props => {
                   <CardContact user={user} key={"_user_" + key} />
                 ))}
               </Row>
+              <div>
+                <Pagination
+                  limit={limit}
+                  totalPosts={page.length}
+                  paginate={paginate}
+                  pageNumbers={[1, 2, 3, 4, 5, 6, 7, 8]}
+                ></Pagination>
+              </div>
             </>
           )}
         </Container>

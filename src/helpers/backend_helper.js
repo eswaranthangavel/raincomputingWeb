@@ -10,4 +10,13 @@ const postLogin = data => post(url.POST_USER_LOGIN, data)
 const postRegister = data => post(url.POST_USER_REGISTER, data)
 const getAllAttorneys = (page, limit, searchText) =>
   post(url.GET_ALL_ATTORNEYS_DATA, page, limit, searchText)
-export { getAttorneysData, postRegister, postLogin, getAllAttorneys }
+
+const getAttorneysCount = searchText =>
+  post(url.GET_ATTORNEYSCOUNT_DATA, searchText)
+export {
+  getAttorneysData,
+  postRegister,
+  postLogin,
+  getAllAttorneys,
+  getAttorneysCount,
+}

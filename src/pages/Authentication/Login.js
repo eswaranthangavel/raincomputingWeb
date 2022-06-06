@@ -231,12 +231,12 @@ const Login = props => {
                             className="form-check-input"
                             id="customControlInline"
                           />
-                          <label
+                          {/* <label
                             className="form-check-label"
                             htmlFor="customControlInline"
                           >
                             Remember me
-                          </label>
+                          </label> */}
                         </div>
 
                         <div className="mt-3 d-grid">

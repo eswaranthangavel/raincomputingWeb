@@ -36,7 +36,7 @@ const CardContact = props => {
                     {user.firstname} {user.lastname} {user.initial}
                   </h5>
                 </div>
-                <p className="font-size-10">{user.firm}</p>
+                <p className="font-size-10 text-muted">{user.firm}</p>
                 <p className="text-muted">{user.type}</p>
               </div>
               {/* {!user.img ? (
