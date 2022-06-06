@@ -24,32 +24,41 @@ const ContactsGrid = props => {
   const [searchText, setSearchText] = useState("")
 
   const [page, setPage] = useState(1)
-  const [limit, setLimit] = useState(20)
-  const [currentPage, setCurrentPage] = useState(1)
-  const [postsPerPage] = useState(10)
-
-  const indexOfLastPost = currentPage * postsPerPage
-  const indexOfFirstPost = indexOfLastPost - postsPerPage
-  // const currentPosts = page.slice(indexOfFirstPost, indexOfLastPost)
+  const [limit, setLimit] = useState(32)
+  const [totalPage, setTotalPage] = useState([])
 
   //pagination//
-  const paginate = pageNumber => setCurrentPage(pageNumber)
+  const paginate = pageNumber => setPage(pageNumber)
 
   const dispatch = useDispatch()
 
-  const { attorneys, loading } = useSelector(state => ({
+  const { attorneys, loading, attorneysCount } = useSelector(state => ({
     attorneys: state.contacts.attorneys,
     loading: state.contacts.loading,
+    attorneysCount: state.contacts.attorneysCount,
   }))
 
   useEffect(() => {
     dispatch(getAllAttorneys(page, limit, searchText))
-  }, [searchText])
-  console.log("attorneys", attorneys)
+  }, [page, limit, searchText])
+  // console.log("attorneys", attorneys)
 
   useEffect(() => {
-    dispatch(getAttorneysCount(limit, paginate))
-  }, [])
+    setPage(1)
+    dispatch(getAttorneysCount(searchText))
+  }, [searchText])
+  // console.log("attorneys", attorneysCount)
+  useEffect(() => {
+    if (attorneysCount > 0) {
+      const totalPages = Math.floor(attorneysCount / limit) + 1
+      let a = new Array(totalPages)
+      for (let i = 0; i < totalPages; ++i) a[i] = i + 1
+      setTotalPage(a)
+    } else {
+      setTotalPage([])
+    }
+  }, [attorneysCount])
+  console.log("Total", totalPage)
 
   return (
     <React.Fragment>
@@ -98,7 +107,7 @@ const ContactsGrid = props => {
                   limit={limit}
                   totalPosts={page.length}
                   paginate={paginate}
-                  pageNumbers={[1, 2, 3, 4, 5, 6, 7, 8]}
+                  pageNumbers={totalPage}
                 ></Pagination>
               </div>
             </>

@@ -20,7 +20,7 @@ const INIT_STATE = {
   userProfile: {},
   error: {},
   attorneys: [],
-  attorneysCount: [],
+  attorneysCount: 0,
   loading: true,
 }
 

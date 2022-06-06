@@ -119,7 +119,7 @@ function* onGetAttorneysCount({ payload: searchText }) {
   try {
     const response = yield call(getAttorneysCount, { searchText })
     if (response.success) {
-      yield put(getAttorneysCountSuccess(response.attorneysCount))
+      yield put(getAttorneysCountSuccess(response.count))
     } else {
       yield put(getAttorneysCountFail(response))
     }

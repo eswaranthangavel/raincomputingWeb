@@ -9,10 +9,10 @@ const Pagination = ({ limit, totalPosts, paginate, pageNumbers }) => {
   return (
     <nav>
       <ul className="pagination">
-        {pageNumbers.map(number => (
-          <li key={number} className="page-item">
-            <a onClick={() => paginate(number)} className="page-link">
-              {number}
+        {pageNumbers.map(j => (
+          <li key={j} className="page-item">
+            <a onClick={() => paginate(j)} className="page-link">
+              {j}
             </a>
           </li>
         ))}
