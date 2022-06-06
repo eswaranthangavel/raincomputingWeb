@@ -74,7 +74,7 @@ const Register = props => {
   return (
     <React.Fragment>
       <MetaTags>
-        <title>Register | Rain -  Admin & Dashboard Template</title>
+        <title>Register | Rain - Admin & Dashboard Template</title>
       </MetaTags>
       <div className="d-none d-lg-block ">
         <img src={rainlogo} height="50" />
@@ -148,32 +148,6 @@ const Register = props => {
                         ) : null}
 
                         <div className="mb-3">
-                          <Label className="form-label">Email</Label>
-                          <Input
-                            id="email"
-                            name="email"
-                            className="form-control"
-                            placeholder="Enter email"
-                            type="email"
-                            onChange={validation.handleChange}
-                            onBlur={validation.handleBlur}
-                            value={validation.values.email || ""}
-                            invalid={
-                              validation.touched.email &&
-                              validation.errors.email
-                                ? true
-                                : false
-                            }
-                          />
-                          {validation.touched.email &&
-                          validation.errors.email ? (
-                            <FormFeedback type="invalid">
-                              {validation.errors.email}
-                            </FormFeedback>
-                          ) : null}
-                        </div>
-
-                        <div className="mb-3">
                           <Label className="form-label">Firstname</Label>
                           <Input
                             name="firstname"
@@ -216,6 +190,31 @@ const Register = props => {
                           validation.errors.username ? (
                             <FormFeedback type="invalid">
                               {validation.errors.username}
+                            </FormFeedback>
+                          ) : null}
+                        </div>
+                        <div className="mb-3">
+                          <Label className="form-label">Email</Label>
+                          <Input
+                            id="email"
+                            name="email"
+                            className="form-control"
+                            placeholder="Enter email"
+                            type="email"
+                            onChange={validation.handleChange}
+                            onBlur={validation.handleBlur}
+                            value={validation.values.email || ""}
+                            invalid={
+                              validation.touched.email &&
+                              validation.errors.email
+                                ? true
+                                : false
+                            }
+                          />
+                          {validation.touched.email &&
+                          validation.errors.email ? (
+                            <FormFeedback type="invalid">
+                              {validation.errors.email}
                             </FormFeedback>
                           ) : null}
                         </div>
