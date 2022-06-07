@@ -24,7 +24,7 @@ const ContactsGrid = props => {
   const [searchText, setSearchText] = useState("")
 
   const [page, setPage] = useState(1)
-  const [limit, setLimit] = useState(32)
+  const [limit, setLimit] = useState(28)
   const [totalPage, setTotalPage] = useState([])
 
   //pagination//
