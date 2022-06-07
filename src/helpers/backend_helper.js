@@ -11,11 +11,8 @@ const postRegister = data => post(url.POST_USER_REGISTER, data)
 const getAllAttorneys = (page, limit, searchText) =>
   post(url.GET_ALL_ATTORNEYS_DATA, page, limit, searchText)
 
-
-  //Profileupdate
-  const postUpdate = data => put(url.PUT_USER_UPDATE, data)
-
-export { getAttorneysData, postRegister, postLogin, getAllAttorneys,postUpdate }
+//Profileupdate
+const postUpdate = data => put(url.PUT_USER_UPDATE, data)
 
 const getAttorneysCount = searchText =>
   post(url.GET_ATTORNEYSCOUNT_DATA, searchText)
@@ -25,5 +22,5 @@ export {
   postLogin,
   getAllAttorneys,
   getAttorneysCount,
+  postUpdate,
 }
-
