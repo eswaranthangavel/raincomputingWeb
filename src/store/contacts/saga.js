@@ -41,6 +41,7 @@ import {
   postRegister,
   postLogin,
   getAllAttorneys,
+  postUpdate
 } from "../../helpers/backend_helper"
 
 function* fetchUsers() {

@@ -49,14 +49,14 @@ const UserProfile = props => {
       if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
         setname(obj.displayName);
         setemail(obj.email);
-        setidx(obj.uid);
+        setidx(obj.userID);
       } else if (
         process.env.REACT_APP_DEFAULTAUTH === "fake" ||
         process.env.REACT_APP_DEFAULTAUTH === "jwt"
       ) {
         setname(obj.username);
         setemail(obj.email);
-        setidx(obj.uid);
+        setidx(obj.userID);
       }
       setTimeout(() => {
         dispatch(resetProfileFlag());
@@ -85,7 +85,11 @@ const UserProfile = props => {
       zip: Yup.string().required("Please Enter Your Zip"),
     }),
     onSubmit: (values) => {
-      console.log("values", values);
+      // console.log( JSON.parse(localStorage.getItem("authUser"))
+      // )
+      // console.log({...values,id:idx});
+      dispatch(editProfile({ ...values,email:email }))
+
     }
   });
 
@@ -119,7 +123,7 @@ const UserProfile = props => {
                       <div className="text-muted">
                         <h5>{name}</h5>
                         <p className="mb-1">{email}</p>
-                        <p className="mb-0">Id no: #{idx}</p>
+                        {/* <p className="mb-0">Id no: #{idx}</p> */}
                       </div>
                     </div>
                   </div>
@@ -161,6 +165,9 @@ const UserProfile = props => {
                           ) : null}
                         </FormGroup>
                       </Col>
+                      </Row>
+
+                      <Row>
                       <Col md="6">
                         <FormGroup className="mb-3">
                           <Label htmlFor="validationCustom02">Last name</Label>
@@ -182,8 +189,8 @@ const UserProfile = props => {
                           ) : null}
                         </FormGroup>
                       </Col>
-                    </Row>
-                    <Row>
+                      </Row>
+                    {/* <Row>
                       <Col md="4">
                         <FormGroup className="mb-3">
                           <Label htmlFor="validationCustom03">City</Label>
@@ -246,7 +253,7 @@ const UserProfile = props => {
                           ) : null}
                         </FormGroup>
                       </Col>
-                    </Row>
+                    </Row> */}
                     <Row>
                       <Col lg="12">
                         <FormGroup className="mb-3">
