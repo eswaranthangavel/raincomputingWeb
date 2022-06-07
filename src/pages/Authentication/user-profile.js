@@ -73,16 +73,10 @@ const UserProfile = props => {
     initialValues: {
                     firstname: '',
                     lastname: '',
-                    city: '',
-                    state: '',
-                    zip: '',
                     },
     validationSchema: Yup.object({
       firstname: Yup.string().required("Please Enter Your First Name"),
       lastname: Yup.string().required("Please Enter Your Last Name"),
-      city: Yup.string().required("Please Enter Your City"),
-      state: Yup.string().required("Please Enter Your State"),
-      zip: Yup.string().required("Please Enter Your Zip"),
     }),
     onSubmit: (values) => {
       // console.log( JSON.parse(localStorage.getItem("authUser"))
@@ -132,7 +126,7 @@ const UserProfile = props => {
             </Col>
           </Row>
 
-          <h4 className="card-title mb-4">Change User Details</h4>
+          <h4 className="card-title mb-4">Update User Details</h4>
 
           <Card>
              <CardBody>
@@ -167,6 +161,9 @@ const UserProfile = props => {
                       </Col>
                       </Row>
 
+
+
+
                       <Row>
                       <Col md="6">
                         <FormGroup className="mb-3">
@@ -190,6 +187,7 @@ const UserProfile = props => {
                         </FormGroup>
                       </Col>
                       </Row>
+
                     {/* <Row>
                       <Col md="4">
                         <FormGroup className="mb-3">
@@ -254,6 +252,8 @@ const UserProfile = props => {
                         </FormGroup>
                       </Col>
                     </Row> */}
+
+
                     <Row>
                       <Col lg="12">
                         <FormGroup className="mb-3">
@@ -268,12 +268,12 @@ const UserProfile = props => {
                               htmlFor="invalidCheck"
                             >
                               {" "}
-                              Agree to terms and conditions
+                              Remember Me
                             </Label>
                           </div>
                         </FormGroup>
                       </Col>
-                    </Row>
+                    </Row> 
                     <Button color="primary" type="submit">
                       SUBMIT
                     </Button>

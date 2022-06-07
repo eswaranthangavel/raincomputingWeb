@@ -11,6 +11,8 @@ import {
   GET_USER_PROFILE_FAIL,
   GET_ALL_ATTORNEYS_SUCCESS,
   GET_ALL_ATTORNEYS_FAIL,
+  GET_ATTORNEYSCOUNT_SUCCESS,
+  GET_ATTORNEYSCOUNT_FAIL,
 } from "./actionTypes"
 
 const INIT_STATE = {
@@ -18,6 +20,7 @@ const INIT_STATE = {
   userProfile: {},
   error: {},
   attorneys: [],
+  attorneysCount: 0,
   loading: true,
 }
 
@@ -100,6 +103,19 @@ const contacts = (state = INIT_STATE, action) => {
         error: action.payload,
         loading: false,
       }
+
+    case GET_ATTORNEYSCOUNT_SUCCESS:
+      return {
+        ...state,
+        attorneysCount: action.payload,
+      }
+
+    case GET_ATTORNEYSCOUNT_FAIL:
+      return {
+        ...state,
+        error: action.payload,
+      }
+
     default:
       return state
   }

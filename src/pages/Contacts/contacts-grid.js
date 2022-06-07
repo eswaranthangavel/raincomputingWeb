@@ -4,6 +4,7 @@ import MetaTags from "react-meta-tags"
 import { Link, withRouter } from "react-router-dom"
 import { Col, Container, Row } from "reactstrap"
 import { map } from "lodash"
+import Pagination from "../../components/pageination/Pagination"
 
 //Import Breadcrumb
 import Breadcrumbs from "components/Common/Breadcrumb"
@@ -14,21 +15,50 @@ import CardContact from "./card-contact"
 //redux
 import { useSelector, useDispatch } from "react-redux"
 
-import { getAllAttorneys } from "../../store/contacts/actions"
+import {
+  getAllAttorneys,
+  getAttorneysCount,
+} from "../../store/contacts/actions"
 
 const ContactsGrid = props => {
   const [searchText, setSearchText] = useState("")
 
+  const [page, setPage] = useState(1)
+  const [limit, setLimit] = useState(32)
+  const [totalPage, setTotalPage] = useState([])
+
+  //pagination//
+  const paginate = pageNumber => setPage(pageNumber)
+
   const dispatch = useDispatch()
-  const { attorneys, loading } = useSelector(state => ({
+
+  const { attorneys, loading, attorneysCount } = useSelector(state => ({
     attorneys: state.contacts.attorneys,
     loading: state.contacts.loading,
+    attorneysCount: state.contacts.attorneysCount,
   }))
 
   useEffect(() => {
-    dispatch(getAllAttorneys(1, 20, searchText))
+    dispatch(getAllAttorneys(page, limit, searchText))
+  }, [page, limit, searchText])
+  // console.log("attorneys", attorneys)
+
+  useEffect(() => {
+    setPage(1)
+    dispatch(getAttorneysCount(searchText))
   }, [searchText])
-  console.log("attorneys", attorneys)
+  // console.log("attorneys", attorneysCount)
+  useEffect(() => {
+    if (attorneysCount > 0) {
+      const totalPages = Math.floor(attorneysCount / limit) + 1
+      let a = new Array(totalPages)
+      for (let i = 0; i < totalPages; ++i) a[i] = i + 1
+      setTotalPage(a)
+    } else {
+      setTotalPage([])
+    }
+  }, [attorneysCount])
+  console.log("Total", totalPage)
 
   return (
     <React.Fragment>
@@ -57,8 +87,8 @@ const ContactsGrid = props => {
                 <form className="app-search  ">
                   <div className="position-relative">
                     <input
-                      type="text"
-                      className="form-control"
+                      type="text-success"
+                      className="form-control "
                       placeholder="Search for Attorney..."
                       onChange={e => setSearchText(e.target.value)}
                     />
@@ -72,6 +102,14 @@ const ContactsGrid = props => {
                   <CardContact user={user} key={"_user_" + key} />
                 ))}
               </Row>
+              <div>
+                <Pagination
+                  limit={limit}
+                  totalPosts={page.length}
+                  paginate={paginate}
+                  pageNumbers={totalPage}
+                ></Pagination>
+              </div>
             </>
           )}
         </Container>

@@ -18,6 +18,9 @@ import {
   GET_ALL_ATTORNEYS,
   GET_ALL_ATTORNEYS_SUCCESS,
   GET_ALL_ATTORNEYS_FAIL,
+  GET_ATTORNEYSCOUNT,
+  GET_ATTORNEYSCOUNT_SUCCESS,
+  GET_ATTORNEYSCOUNT_FAIL,
 } from "./actionTypes"
 
 export const getUsers = () => ({
@@ -109,5 +112,18 @@ export const getAllAttorneysSuccess = attorneys => ({
 })
 export const getAllAttorneysFail = error => ({
   type: GET_ALL_ATTORNEYS_FAIL,
+  payload: error,
+})
+
+export const getAttorneysCount = searchText => ({
+  type: GET_ATTORNEYSCOUNT,
+  payload: searchText,
+})
+export const getAttorneysCountSuccess = attorneys => ({
+  type: GET_ATTORNEYSCOUNT_SUCCESS,
+  payload: attorneys,
+})
+export const getAttorneysCountFail = error => ({
+  type: GET_ATTORNEYSCOUNT_FAIL,
   payload: error,
 })

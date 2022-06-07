@@ -225,7 +225,7 @@ const Login = props => {
                           ) : null}
                         </div>
 
-                        <div className="form-check">
+                        {/* <div className="form-check">
                           <input
                             type="checkbox"
                             className="form-check-input"
@@ -237,7 +237,7 @@ const Login = props => {
                           >
                             Remember me
                           </label>
-                        </div>
+                        </div> */}
 
                         <div className="mt-3 d-grid">
                           <button
