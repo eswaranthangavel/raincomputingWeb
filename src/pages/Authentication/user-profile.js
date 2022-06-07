@@ -49,14 +49,14 @@ const UserProfile = props => {
       if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
         setname(obj.displayName);
         setemail(obj.email);
-        setidx(obj.uid);
+        setidx(obj.userID);
       } else if (
         process.env.REACT_APP_DEFAULTAUTH === "fake" ||
         process.env.REACT_APP_DEFAULTAUTH === "jwt"
       ) {
         setname(obj.username);
         setemail(obj.email);
-        setidx(obj.uid);
+        setidx(obj.userID);
       }
       setTimeout(() => {
         dispatch(resetProfileFlag());
@@ -79,7 +79,11 @@ const UserProfile = props => {
       lastname: Yup.string().required("Please Enter Your Last Name"),
     }),
     onSubmit: (values) => {
-      console.log("values", values);
+      // console.log( JSON.parse(localStorage.getItem("authUser"))
+      // )
+      // console.log({...values,id:idx});
+      dispatch(editProfile({ ...values,email:email }))
+
     }
   });
 
@@ -113,7 +117,7 @@ const UserProfile = props => {
                       <div className="text-muted">
                         <h5>{name}</h5>
                         <p className="mb-1">{email}</p>
-                        <p className="mb-0">Id no: #{idx}</p>
+                        {/* <p className="mb-0">Id no: #{idx}</p> */}
                       </div>
                     </div>
                   </div>
@@ -156,6 +160,10 @@ const UserProfile = props => {
                         </FormGroup>
                       </Col>
                       </Row>
+
+
+
+
                       <Row>
                       <Col md="6">
                         <FormGroup className="mb-3">
@@ -179,6 +187,73 @@ const UserProfile = props => {
                         </FormGroup>
                       </Col>
                       </Row>
+
+                    {/* <Row>
+                      <Col md="4">
+                        <FormGroup className="mb-3">
+                          <Label htmlFor="validationCustom03">City</Label>
+                          <Input
+                            name="city"
+                            placeholder="City"
+                            type="text"
+                            className="form-control"
+                            onChange={validation.handleChange}
+                            onBlur={validation.handleBlur}
+                            value={validation.values.city || ""}
+                            invalid={
+                              validation.touched.city && validation.errors.city ? true : false
+                            }
+                          />
+                          {validation.touched.city && validation.errors.city ? (
+                            <FormFeedback type="invalid">{validation.errors.city}</FormFeedback>
+                          ) : null}
+                        </FormGroup>
+                      </Col>
+                      <Col md="4">
+                        <FormGroup className="mb-3">
+                          <Label htmlFor="validationCustom04">State</Label>
+                          <Input
+                            name="state"
+                            placeholder="State"
+                            type="text"
+                            className="form-control"
+                            id="validationCustom04"
+                            onChange={validation.handleChange}
+                            onBlur={validation.handleBlur}
+                            value={validation.values.state || ""}
+                            invalid={
+                              validation.touched.state && validation.errors.state ? true : false
+                            }
+                          />
+                          {validation.touched.state && validation.errors.state ? (
+                            <FormFeedback type="invalid">{validation.errors.state}</FormFeedback>
+                          ) : null}
+                        </FormGroup>
+                      </Col>
+                      <Col md="4">
+                        <FormGroup className="mb-3">
+                          <Label htmlFor="validationCustom05">Zip</Label>
+                          <Input
+                            name="zip"
+                            placeholder="Zip Code"
+                            type="text"
+                            className="form-control"
+                            id="validationCustom05"
+                            onChange={validation.handleChange}
+                            onBlur={validation.handleBlur}
+                            value={validation.values.zip || ""}
+                            invalid={
+                              validation.touched.zip && validation.errors.zip ? true : false
+                            }
+                          />
+                          {validation.touched.zip && validation.errors.zip ? (
+                            <FormFeedback type="invalid">{validation.errors.zip}</FormFeedback>
+                          ) : null}
+                        </FormGroup>
+                      </Col>
+                    </Row> */}
+
+
                     <Row>
                       <Col lg="12">
                         <FormGroup className="mb-3">
