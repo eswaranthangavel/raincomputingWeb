@@ -44,7 +44,7 @@ import {
   postRegister,
   postLogin,
   getAllAttorneys,
-  postUpdate
+  postUpdate,
   getAttorneysCount,
 
 } from "../../helpers/backend_helper"
