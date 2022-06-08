@@ -21,7 +21,7 @@ import logoLight from "../../assets/images/RainCom_Logo.webp"
 import logoLightSvg from "../../assets/images/logo-light.svg"
 import logoDark from "../../assets/images/RainCom_Logo.webp"
 import rainlogo from "assets/images/rain-drop.png"
-import rainlglogo from "assets/images/RainCom_Logo.webp"
+import rainlglogo from "assets/images/raincom_Logo1.png"
 // import images
 import github from "../../assets/images/brands/github.png"
 import bitbucket from "../../assets/images/brands/bitbucket.png"
