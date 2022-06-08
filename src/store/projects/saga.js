@@ -23,6 +23,8 @@ import {
 import { getProjects, getProjectsDetails, addNewProject, updateProject, deleteProject } from "helpers/fakebackend_helper"
 import { get } from "lodash"
 import {getAttorneyByID} from "helpers/backend_helper"
+
+
 //UPDATE ATTORNEY DETAILS
 // function* onGetAttorneyDetail(id) {
 //   try {
@@ -84,9 +86,8 @@ function* onGetAttorneyByID({ payload: user }) {
     console.log(user,"before call")
     const response = yield call(getAttorneyByID,{objectId:user.user.objectId});
     console.log(response,'dinesh res');
-    //yield put(addProjectSuccess(response))
+    yield put(getProjectDetailSuccess(response))
   } catch (error) {
-
     //yield put(addProjectFail(error))
   }
 }

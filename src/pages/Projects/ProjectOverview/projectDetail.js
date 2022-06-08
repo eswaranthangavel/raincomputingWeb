@@ -2,7 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { map, get } from "lodash";
 import { Card, CardBody, Col, Row } from "reactstrap";
-import img1 from "../../../assets/images/img1m.png";
+ import img1 from "../../../assets/images/img1m.png";
+// import { attImages } from "../../../helpers/mockData";
 
 const ProjectDetail = ({ project }) => {
   return (
@@ -12,16 +13,25 @@ const ProjectDetail = ({ project }) => {
           <img src={img1} alt="" className="avatar-sm me-4" />
 
           <div className="flex-grow-1 overflow-hidden">
-            <h5 className="text-truncate font-size-15">{project.name}</h5>
-            <p className="text-muted">{project.description}</p>
+            <h5 className="text-truncate font-size-18">{project.firstname}  {project.lastname}</h5>
+            <p className="text-muted">{project.firm}</p>
           </div>
         </div>
 
-        <h5 className="font-size-15 mt-4">Attorney Details :</h5>
+        {/* <h5 className="font-size-18 mt-4">Attorney Details :</h5> */}
 
-        <p className="text-muted">
-          {get(project, "projectDetails.description")}
-        </p>
+        <p className="text-bold font-size-16">REGISTERNUMBER : {project.registernumber}</p>
+        <p className="text-bold font-size-16">ADDRESS1       :{project.address1}</p>
+        <p className="text-bold font-size-16">ADDRESS2       :{project.address2}</p>
+        <p className="text-bold font-size-16">CITY           :{project.city}</p>
+        <p className="text-bold font-size-16">COUNTRY        :{project.country}</p>
+        <p className="text-bold font-size-16">PHONE          :{project.phone}</p>
+
+
+
+
+          {/* {get(project, "projectDetails.description")} */}
+       
 
         <div className="text-muted mt-4">
           {project.projectDetails &&

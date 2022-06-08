@@ -9,12 +9,19 @@ import {
   UPDATE_PROJECT_FAIL,
   DELETE_PROJECT_SUCCESS,
   DELETE_PROJECT_FAIL,
+  GET_ATTORNEY_DETAIL,
+  GET_ATTORNEYDETAIL_SUCCESS,
+  GET_ATTORNEYDETAIL_FAIL,
 } from "./actionTypes"
 
 const INIT_STATE = {
   projects: [],
   projectDetail: {},
   error: {},
+  attorney: {},
+  error: {},
+
+
 }
 
 const projects = (state = INIT_STATE, action) => {
@@ -45,7 +52,7 @@ const projects = (state = INIT_STATE, action) => {
     case GET_PROJECT_DETAIL_SUCCESS:
       return {
         ...state,
-        projectDetail: action.payload,
+        attorney: action.payload,
       }
 
     case UPDATE_PROJECT_SUCCESS:
@@ -84,6 +91,29 @@ const projects = (state = INIT_STATE, action) => {
         ...state,
         error: action.payload,
       }
+
+
+
+      //Attorney Detail
+      case   GET_ATTORNEY_DETAIL :
+        return {
+          ...state,
+          attorney: action.payload,
+        }
+
+        case   GET_ATTORNEYDETAIL_SUCCESS:
+          return {
+            ...state,
+            attorney: [...state.attorney, action.payload],
+          }
+  
+      case   GET_ATTORNEYDETAIL_FAIL:
+        return {
+          ...state,
+          error: action.payload,
+        }
+     
+  
 
     default:
       return state

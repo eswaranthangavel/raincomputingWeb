@@ -33,10 +33,11 @@ const ProjectsOverview = props => {
   const dispatch = useDispatch();
   let query = useQuery();
 
-  const { projectDetail } = useSelector(state => ({
-    projectDetail: state.projects.projectDetail,
+  const { projectDetail } = useSelector(state => (
+    {
+    projectDetail: state.projects.attorney.msg,
   }));
-
+console.log(projectDetail,"projectDetail ")
   const {
     match: { params },
   } = props;
