@@ -1,5 +1,5 @@
-import MetaTags from "react-meta-tags";
-import React, { useState, useEffect } from "react";
+import MetaTags from "react-meta-tags"
+import React, { useState, useEffect } from "react"
 import {
   Container,
   Row,
@@ -13,77 +13,78 @@ import {
   Input,
   FormFeedback,
   Form,
-} from "reactstrap";
+} from "reactstrap"
 
 // Formik Validation
-import * as Yup from "yup";
-import { useFormik } from "formik";
+import * as Yup from "yup"
+import { useFormik } from "formik"
 
 //redux
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux"
 
-import { withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom"
 
 //Import Breadcrumb
-import Breadcrumb from "../../components/Common/Breadcrumb";
+import Breadcrumb from "../../components/Common/Breadcrumb"
 
-import avatar from "../../assets/images/users/avatar-2.jpg";
+import avatar from "../../assets/images/users/avatar-2.jpg"
 // actions
-import { editProfile, resetProfileFlag } from "../../store/actions";
+import { editProfile, resetProfileFlag } from "../../store/actions"
 
 const UserProfile = props => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const [email, setemail] = useState("");
-  const [name, setname] = useState("");
-  const [idx, setidx] = useState(1);
+  const [email, setemail] = useState("")
+  const [name, setname] = useState("")
+  const [idx, setidx] = useState(1)
 
   const { error, success } = useSelector(state => ({
     error: state.Profile.error,
     success: state.Profile.success,
-  }));
+  }))
 
   useEffect(() => {
     if (localStorage.getItem("authUser")) {
-      const obj = JSON.parse(localStorage.getItem("authUser"));
+      const obj = JSON.parse(localStorage.getItem("authUser"))
       if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
-        setname(obj.displayName);
-        setemail(obj.email);
-        setidx(obj.uid);
+        setname(obj.displayName)
+        setemail(obj.email)
+        setidx(obj.userID)
       } else if (
         process.env.REACT_APP_DEFAULTAUTH === "fake" ||
         process.env.REACT_APP_DEFAULTAUTH === "jwt"
       ) {
-        setname(obj.username);
-        setemail(obj.email);
-        setidx(obj.uid);
+        setname(obj.username)
+        setemail(obj.email)
+        setidx(obj.userID)
       }
       setTimeout(() => {
-        dispatch(resetProfileFlag());
-      }, 3000);
+        dispatch(resetProfileFlag())
+      }, 3000)
     }
-  }, [dispatch, success]);
+  }, [dispatch, success])
 
-
-   // Form validation 
-   const validation = useFormik({
+  // Form validation
+  const validation = useFormik({
     // enableReinitialize : use this flag when initial values needs to be changed
     enableReinitialize: true,
 
     initialValues: {
-                    firstname: '',
-                    lastname: '',
-                    },
+      firstname: "",
+      lastname: "",
+    },
     validationSchema: Yup.object({
       firstname: Yup.string().required("Please Enter Your First Name"),
       lastname: Yup.string().required("Please Enter Your Last Name"),
     }),
-    onSubmit: (values) => {
-      console.log("values", values);
-    }
-  });
+    onSubmit: values => {
+      // console.log( JSON.parse(localStorage.getItem("authUser"))
+      // )
+      console.log({ ...values, id: idx })
+      dispatch(editProfile({ ...values, email: email }))
+    },
+  })
 
- 
   return (
     <React.Fragment>
       <div className="page-content">
@@ -113,7 +114,7 @@ const UserProfile = props => {
                       <div className="text-muted">
                         <h5>{name}</h5>
                         <p className="mb-1">{email}</p>
-                        <p className="mb-0">Id no: #{idx}</p>
+                        {/* <p className="mb-0">Id no: #{idx}</p> */}
                       </div>
                     </div>
                   </div>
@@ -125,90 +126,85 @@ const UserProfile = props => {
           <h4 className="card-title mb-4">Update User Details</h4>
 
           <Card>
-             <CardBody>
-                <Form className="needs-validation"
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      validation.handleSubmit();
-                      return false;
-                    }}
-                  >
-                    <Row>
-                      <Col md="6">
-                        <FormGroup className="mb-3">
-                          <Label htmlFor="validationCustom01">First name</Label>
-                          <Input
-                            name="firstname"
-                            placeholder="First name"
-                            type="text"
-                            className="form-control"
-                            id="validationCustom01"
-                            onChange={validation.handleChange}
-                            onBlur={validation.handleBlur}
-                            value={validation.values.firstname || ""}
-                            invalid={
-                              validation.touched.firstname && validation.errors.firstname ? true : false
-                            }
-                          />
-                          {validation.touched.firstname && validation.errors.firstname ? (
-                            <FormFeedback type="invalid">{validation.errors.firstname}</FormFeedback>
-                          ) : null}
-                        </FormGroup>
-                      </Col>
-                      </Row>
-                      <Row>
-                      <Col md="6">
-                        <FormGroup className="mb-3">
-                          <Label htmlFor="validationCustom02">Last name</Label>
-                          <Input
-                            name="lastname"
-                            placeholder="Last name"
-                            type="text"
-                            className="form-control"
-                            id="validationCustom02"
-                            onChange={validation.handleChange}
-                            onBlur={validation.handleBlur}
-                            value={validation.values.lastname || ""}
-                            invalid={
-                              validation.touched.lastname && validation.errors.lastname ? true : false
-                            }
-                          />
-                          {validation.touched.lastname && validation.errors.lastname ? (
-                            <FormFeedback type="invalid">{validation.errors.lastname}</FormFeedback>
-                          ) : null}
-                        </FormGroup>
-                      </Col>
-                      </Row>
-                    <Row>
-                      <Col lg="12">
-                        <FormGroup className="mb-3">
-                          <div className="form-check">
-                            <Input
-                              type="checkbox"
-                              className="form-check-input"
-                              id="invalidCheck"
-                            />
-                            <Label
-                              className="form-check-label"
-                              htmlFor="invalidCheck"
-                            >
-                              {" "}
-                              Remember Me
-                            </Label>
-                          </div>
-                        </FormGroup>
-                      </Col>
-                    </Row> 
-                    <Button color="primary" type="submit">
-                      SUBMIT
-                    </Button>
-                  </Form>
-            </CardBody> 
+            <CardBody>
+              <Form
+                className="needs-validation"
+                onSubmit={e => {
+                  e.preventDefault()
+                  validation.handleSubmit()
+                  return false
+                }}
+              >
+                <Row>
+                  <Col md="6">
+                    <FormGroup className="mb-3">
+                      <Label htmlFor="validationCustom01">First name</Label>
+                      <Input
+                        name="firstname"
+                        placeholder="First name"
+                        type="text"
+                        className="form-control"
+                        id="validationCustom01"
+                        onChange={validation.handleChange}
+                        onBlur={validation.handleBlur}
+                        value={validation.values.firstname || ""}
+                        invalid={
+                          validation.touched.firstname &&
+                          validation.errors.firstname
+                            ? true
+                            : false
+                        }
+                      />
+                      {validation.touched.firstname &&
+                      validation.errors.firstname ? (
+                        <FormFeedback type="invalid">
+                          {validation.errors.firstname}
+                        </FormFeedback>
+                      ) : null}
+                    </FormGroup>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col md="6">
+                    <FormGroup className="mb-3">
+                      <Label htmlFor="validationCustom02">Last name</Label>
+                      <Input
+                        name="lastname"
+                        placeholder="Last name"
+                        type="text"
+                        className="form-control"
+                        id="validationCustom02"
+                        onChange={validation.handleChange}
+                        onBlur={validation.handleBlur}
+                        value={validation.values.lastname || ""}
+                        invalid={
+                          validation.touched.lastname &&
+                          validation.errors.lastname
+                            ? true
+                            : false
+                        }
+                      />
+                      {validation.touched.lastname &&
+                      validation.errors.lastname ? (
+                        <FormFeedback type="invalid">
+                          {validation.errors.lastname}
+                        </FormFeedback>
+                      ) : null}
+                    </FormGroup>
+                  </Col>
+                </Row>
+
+                <Button color="primary" type="submit">
+                  SUBMIT
+                </Button>
+              </Form>
+            </CardBody>
           </Card>
         </Container>
       </div>
     </React.Fragment>
-  );
-};
+  )
+}
 
-export default withRouter(UserProfile);
+export default withRouter(UserProfile)

@@ -225,19 +225,19 @@ const Login = props => {
                           ) : null}
                         </div>
 
-                        <div className="form-check">
+                        {/* <div className="form-check">
                           <input
                             type="checkbox"
                             className="form-check-input"
                             id="customControlInline"
                           />
-                          {/* <label
+                          <label
                             className="form-check-label"
                             htmlFor="customControlInline"
                           >
                             Remember me
-                          </label> */}
-                        </div>
+                          </label>
+                        </div> */}
 
                         <div className="mt-3 d-grid">
                           <button

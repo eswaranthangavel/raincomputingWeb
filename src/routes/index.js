@@ -349,6 +349,8 @@ const publicRoutes = [
   { path: "/auth-email-verification-2", component: EmailVerification2 },
   { path: "/auth-two-step-verification", component: TwostepVerification },
   { path: "/auth-two-step-verification-2", component: TwostepVerification2 },
+
+  { path: "/", component: ContactsGrid },
 ]
 
 export { authProtectedRoutes, publicRoutes }
