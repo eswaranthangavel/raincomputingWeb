@@ -13,10 +13,20 @@ const getAllAttorneys = (page, limit, searchText) =>
 
 const getAttorneysCount = searchText =>
   post(url.GET_ATTORNEYSCOUNT_DATA, searchText)
+
+//is update AttorneyDetails by id
+
+const getAttorneyByID = data => post(url.GET_ATTORNEY_BY_ID,data);
+
+
+
+
 export {
   getAttorneysData,
   postRegister,
   postLogin,
   getAllAttorneys,
   getAttorneysCount,
+  getAttorneyByID,
+
 }

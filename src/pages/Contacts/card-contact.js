@@ -21,7 +21,7 @@ const CardContact = props => {
     <React.Fragment>
       <Col xl="3" sm="6">
         <Card className="text-center">
-          <Link to="/projects-overview">
+          <Link to={`/projects-overview?uid=${user._id}`}>
             <CardBody>
               <div>
                 <div>

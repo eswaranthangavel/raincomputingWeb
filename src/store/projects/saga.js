@@ -1,7 +1,7 @@
 import { call, put, takeEvery } from "redux-saga/effects"
 
 // Crypto Redux States
-import { GET_PROJECTS, GET_PROJECT_DETAIL, ADD_NEW_PROJECT, DELETE_PROJECT, UPDATE_PROJECT } from "./actionTypes"
+import { GET_PROJECTS, GET_PROJECT_DETAIL, ADD_NEW_PROJECT, DELETE_PROJECT, UPDATE_PROJECT ,GET_ATTORNEY_DETAIL } from "./actionTypes"
 import {
   getProjectsSuccess,
   getProjectsFail,
@@ -13,10 +13,26 @@ import {
   updateProjectFail,
   deleteProjectSuccess,
   deleteProjectFail,
+  getAttorneyDetail,
+  getAttorneyDetailSuccess,
+  getAttorneyDetailFail,
+
 } from "./actions"
 
 //Include Both Helper File with needed methods
 import { getProjects, getProjectsDetails, addNewProject, updateProject, deleteProject } from "helpers/fakebackend_helper"
+import { get } from "lodash"
+import {getAttorneyByID} from "helpers/backend_helper"
+//UPDATE ATTORNEY DETAILS
+// function* onGetAttorneyDetail(id) {
+//   try {
+//     const response = yield call(getAttorneyByID({objectId:id}))
+//     yield put(getAttorneyDetailSuccess(response))
+//   } catch (error) {
+//     yield put(getAttorneyDetailFail(error))
+//   }
+// }
+
 
 function* fetchProjects() {
   try {
@@ -63,13 +79,27 @@ function* onAddNewProject({ payload: project }) {
     yield put(addProjectFail(error))
   }
 }
+function* onGetAttorneyByID({ payload: user }) {
+  try {
+    console.log(user,"before call")
+    const response = yield call(getAttorneyByID,{objectId:user.user.objectId});
+    console.log(response,'dinesh res');
+    //yield put(addProjectSuccess(response))
+  } catch (error) {
+
+    //yield put(addProjectFail(error))
+  }
+}
 
 function* projectsSaga() {
+
   yield takeEvery(GET_PROJECTS, fetchProjects)
   yield takeEvery(GET_PROJECT_DETAIL, fetchProjectDetail)
   yield takeEvery(ADD_NEW_PROJECT, onAddNewProject)
   yield takeEvery(UPDATE_PROJECT, onUpdateProject)
   yield takeEvery(DELETE_PROJECT, onDeleteProject)
+  yield takeEvery(GET_ATTORNEY_DETAIL, onGetAttorneyByID)
+
 }
 
 export default projectsSaga

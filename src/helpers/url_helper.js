@@ -123,3 +123,6 @@ export const GET_ALL_ATTORNEYS_DATA =
 
 export const GET_ATTORNEYSCOUNT_DATA =
   "http://localhost:5100/api/user/attorneyCount"
+
+
+export const GET_ATTORNEY_BY_ID ="http://localhost:5100/api/user/attorneydetails"

@@ -14,7 +14,32 @@ import {
   DELETE_PROJECT_FAIL,
   GET_PROJECT_DETAIL_FAIL,
   GET_PROJECT_DETAIL_SUCCESS,
+  GET_ATTORNEY_DETAIL,
+  GET_ATTORNEYDETAIL_SUCCESS,
+  GET_ATTORNEYDETAIL_FAIL,
 } from "./actionTypes"
+
+export const getAttorneyByid = user => {
+  console.log(user, "actions")
+  return {
+    type: GET_ATTORNEY_DETAIL,
+    payload: { user },
+  }
+}
+//update Attorney Details
+export const getAttorneyDetail =  () => {
+  return {
+    type:GET_ATTORNEY_DETAIL,
+  }
+}
+export const getAttorneyDetailSuccess = AttorneyDetail => ({
+  type: GET_ATTORNEYDETAIL_SUCCESS,
+  payload: AttorneyDetail,
+})
+export const getAttorneyDetailFail = error => ({
+  type: GET_ATTORNEYDETAIL_FAIL,
+  payload: error,
+})
 
 export const getProjects = () => ({
   type: GET_PROJECTS,
