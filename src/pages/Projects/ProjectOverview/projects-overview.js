@@ -32,7 +32,7 @@ function useQuery() {
 const ProjectsOverview = props => {
   const dispatch = useDispatch();
   let query = useQuery();
-
+//Attorney Detail Update
   const { projectDetail } = useSelector(state => (
     {
     projectDetail: state.projects.attorney.msg,
