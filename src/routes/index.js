@@ -174,6 +174,13 @@ import ContactsProfile from "../pages/Contacts/ContactsProfile/contacts-profile"
 //Demo
 import Demo from "../pages/Demo"
 
+//popup
+import Popup from "../pages/popup/index"
+
+//Landingpage
+import LandingPage from "pages/Contacts/landingPage"
+
+
 const authProtectedRoutes = [
   { path: "/dashboard", component: Dashboard },
   { path: "/dashboard-saas", component: DashboardSaas },
@@ -190,6 +197,10 @@ const authProtectedRoutes = [
 
   //chat
   { path: "/chat", component: Chat },
+
+  //popup
+
+
 
   //File Manager
   { path: "/apps-filemanager", component: FileManager },
@@ -325,6 +336,7 @@ const publicRoutes = [
   { path: "/login", component: Login },
   { path: "/forgot-password", component: ForgetPwd },
   { path: "/register", component: Register },
+  { path: "/popup", component: Popup },
 
   { path: "/pages-maintenance", component: PagesMaintenance },
   { path: "/pages-comingsoon", component: PagesComingsoon },
@@ -350,7 +362,8 @@ const publicRoutes = [
   { path: "/auth-two-step-verification", component: TwostepVerification },
   { path: "/auth-two-step-verification-2", component: TwostepVerification2 },
 
-  { path: "/", component: ContactsGrid },
+  { path: "/", component: LandingPage },
+
 ]
 
 export { authProtectedRoutes, publicRoutes }

@@ -6,6 +6,10 @@ import { Col, Container, Row } from "reactstrap"
 import { map } from "lodash"
 import Pagination from "../../components/pagination/Pagination"
 
+//images
+import rainlogo from "assets/images/RainCom_Logo.webp"
+
+
 //Import Breadcrumb
 import Breadcrumbs from "components/Common/Breadcrumb"
 
@@ -63,6 +67,7 @@ const ContactsGrid = props => {
         <MetaTags>
           <title>Raincomputing | Homepage</title>
         </MetaTags>
+        {/*  */}
         <Container fluid>
           {/* Render Breadcrumbs */}
           {/* <Breadcrumbs title="Contacts" breadcrumbItem="User Grid" /> */}
