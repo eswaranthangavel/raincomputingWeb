@@ -11,7 +11,7 @@ import {
   postJwtProfile,
 } from "../../../helpers/fakebackend_helper"
 
-import { postUpdate } from "../../../helpers/backend_helper"
+// import { postUpdate } from "../../../helpers/backend_helper"
 
 
 const fireBaseBackend = getFirebaseBackend()

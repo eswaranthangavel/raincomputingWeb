@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import MetaTags from "react-meta-tags";
 import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
+import { useLocation, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { isEmpty } from "lodash";
 import { Col, Container, Row } from "reactstrap";
@@ -16,20 +16,40 @@ import OverviewChart from "./overviewChart";
 import { options, series } from "common/data/projects";
 import AttachedFiles from "./attachedFiles";
 import Comments from "./comments";
+//IMPORT ATTORNEY DETAILS
+import { getAttorneyByid as onGetAttorneyDetails } from "store/projects/actions"
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
 
+function useQuery() {
+  const { search } = useLocation();
+
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+}
+
+
 const ProjectsOverview = props => {
   const dispatch = useDispatch();
-
-  const { projectDetail } = useSelector(state => ({
-    projectDetail: state.projects.projectDetail,
+  let query = useQuery();
+//Attorney Detail Update
+  const { projectDetail } = useSelector(state => (
+    {
+    projectDetail: state.projects.attorney.msg,
   }));
-
+console.log(projectDetail,"projectDetail ")
   const {
     match: { params },
   } = props;
+
+  //Attorney Details
+ 
+  useEffect(() => {
+      dispatch(onGetAttorneyDetails({objectId:query.get("uid")}));
+   
+  }, []);
+
+
 
   useEffect(() => {
     if (params && params.id) {
@@ -38,6 +58,7 @@ const ProjectsOverview = props => {
       dispatch(onGetProjectDetail(0)); //remove this after full integration
     }
   }, [params, onGetProjectDetail]);
+
 
   return (
     <React.Fragment>

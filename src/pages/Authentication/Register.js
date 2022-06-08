@@ -60,12 +60,12 @@ const Register = props => {
     registrationError: state.Account.registrationError,
     loading: state.Account.loading,
   }))
-  console.log("u", user)
-  console.log("re", registrationError)
+  // console.log("u", user)
+  // console.log("re", registrationError)
   // handleValidSubmit
-  const handleValidSubmit = values => {
-    dispatch(registerUser(values))
-  }
+  // const handleValidSubmit = values => {
+  //   dispatch(registerUser(values))
+  // }
 
   useEffect(() => {
     dispatch(apiError(""))
@@ -138,7 +138,10 @@ const Register = props => {
                         }}
                       >
                         {user && (
-                          <Alert color={user.success ? "success" : "danger"}>
+                          <Alert
+                            className="fw-bolder text-center"
+                            color={user.success ? "success" : "danger"}
+                          >
                             {user.msg}
                           </Alert>
                         )}
@@ -157,16 +160,16 @@ const Register = props => {
                             onBlur={validation.handleBlur}
                             value={validation.values.firstname || ""}
                             invalid={
-                              validation.touched.username &&
-                              validation.errors.username
+                              validation.touched.firstname &&
+                              validation.errors.firstname
                                 ? true
                                 : false
                             }
                           />
-                          {validation.touched.username &&
-                          validation.errors.username ? (
+                          {validation.touched.firstname &&
+                          validation.errors.firstname ? (
                             <FormFeedback type="invalid">
-                              {validation.errors.username}
+                              {validation.errors.firstname}
                             </FormFeedback>
                           ) : null}
                         </div>
@@ -180,16 +183,16 @@ const Register = props => {
                             onBlur={validation.handleBlur}
                             value={validation.values.lastname || ""}
                             invalid={
-                              validation.touched.username &&
-                              validation.errors.username
+                              validation.touched.lastname &&
+                              validation.errors.lastname
                                 ? true
                                 : false
                             }
                           />
-                          {validation.touched.username &&
-                          validation.errors.username ? (
+                          {validation.touched.lastname &&
+                          validation.errors.lastname ? (
                             <FormFeedback type="invalid">
-                              {validation.errors.username}
+                              {validation.errors.lastname}
                             </FormFeedback>
                           ) : null}
                         </div>
