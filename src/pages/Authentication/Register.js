@@ -48,7 +48,12 @@ const Register = props => {
       email: Yup.string().required("Please Enter Your Email"),
       firstname: Yup.string().required("Please Enter Your firstname"),
       lastname: Yup.string().required("Please Enter Your lastname"),
-      password: Yup.string().required("Please Enter Your Password"),
+      password: Yup.string()
+        .required("Please Enter Your Password")
+        .matches(
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+          "Must Contain 8 Characters, One Uppercase,Lowercase,Number,Special Character"
+        ),
     }),
     onSubmit: values => {
       dispatch(registerUser({ ...values, aflag: true }))
