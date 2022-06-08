@@ -49,17 +49,6 @@ console.log(projectDetail,"projectDetail ")
    
   }, []);
 
-
-
-  useEffect(() => {
-    if (params && params.id) {
-      dispatch(onGetProjectDetail(params.id));
-    } else {
-      dispatch(onGetProjectDetail(0)); //remove this after full integration
-    }
-  }, [params, onGetProjectDetail]);
-
-
   return (
     <React.Fragment>
       <div className="page-content">
