@@ -23,7 +23,7 @@ const LandingPage = () => {
           <a href="/login">Login</a> | <a href="/register">Signup</a>
         </div>
       </div>
-      <div className="grid">
+      <div className="landing">
         <ContactsGrid />
       </div>
     </React.Fragment>
