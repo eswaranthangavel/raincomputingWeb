@@ -125,3 +125,6 @@ export const PUT_USER_UPDATE = "http://localhost:5100/api/user/edit"
 
 export const GET_ATTORNEYSCOUNT_DATA =
   "http://localhost:5100/api/user/attorneyCount"
+
+
+export const GET_ATTORNEY_BY_ID ="http://localhost:5100/api/user/attorneydetails"

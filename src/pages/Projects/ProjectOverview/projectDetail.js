@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { map, get } from "lodash";
-import { Card, CardBody, Col, Row } from "reactstrap";
-import img1 from "../../../assets/images/img1m.png";
+import { Card, CardBody, Col, Row ,Label} from "reactstrap";
+ import img1 from "../../../assets/images/img1m.png";
+// import { attImages } from "../../../helpers/mockData";
 
 const ProjectDetail = ({ project }) => {
   return (
@@ -12,16 +13,24 @@ const ProjectDetail = ({ project }) => {
           <img src={img1} alt="" className="avatar-sm me-4" />
 
           <div className="flex-grow-1 overflow-hidden">
-            <h5 className="text-truncate font-size-15">{project.name}</h5>
-            <p className="text-muted">{project.description}</p>
+            <h5 className="text-truncate font-size-16">{project.firstname}  {project.lastname}</h5>
+            <p className="text-muted font-size-14">{project.firm}</p>
+            <p className="text-muted font-size-14">{project.type}</p>
+
           </div>
         </div>
 
-        <h5 className="font-size-15 mt-4">Attorney Details :</h5>
+        <h5 className="font-size-16 mt-4">Attorney Address :</h5>
+   
+        <p className="text-muted ">{project.address1}, {project.address2} </p>
+        <p className="text-muted ">{project.city}</p>
+        <p className="text-muted ">{project.country}</p>
+        <p className="text-muted ">{project.phone}</p>
 
-        <p className="text-muted">
-          {get(project, "projectDetails.description")}
-        </p>
+
+
+          {/* {get(project, "projectDetails.description")} */}
+       
 
         <div className="text-muted mt-4">
           {project.projectDetails &&
