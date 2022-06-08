@@ -21,7 +21,7 @@ const ProjectDetail = ({ project }) => {
         </div>
 
         <h5 className="font-size-16 mt-4">Attorney Address :</h5>
-   
+         <p>      </p>
         <p className="text-muted ">{project.address1}, {project.address2} </p>
         <p className="text-muted ">{project.city}</p>
         <p className="text-muted ">{project.country}</p>
