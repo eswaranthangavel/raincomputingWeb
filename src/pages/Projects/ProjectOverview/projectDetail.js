@@ -15,7 +15,7 @@ const ProjectDetail = ({ project }) => {
           <img
             src={project.img ? project.img : attImages[imgIndex].url}
             alt=""
-            className="avatar-sm me-4"
+            className="avatar-md rounded-circle me-4"
           />
           {/* src={user.img ? user.img : attImages[imgIndex].url} */}
           <div className="flex-grow-1 overflow-hidden">
@@ -45,16 +45,16 @@ const ProjectDetail = ({ project }) => {
             <i className="mdi mdi-chevron-right text-primary me-1" />
             {project.l2}
           </p>
-          <p className="text-muted">
+          {/* <p className="text-muted">
             {" "}
             <i className="mdi mdi-chevron-right text-primary me-1" />
             {project.l3}
-          </p>
-          <p className="text-muted">
+          </p> */}
+          {/* <p className="text-muted">
             {" "}
             <i className="mdi mdi-chevron-right text-primary me-1" />
             {project.l4}
-          </p>
+          </p> */}
         </div>
 
         <h5 className="font-size-16 mt-4">Attorney Address :</h5>

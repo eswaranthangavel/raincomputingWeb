@@ -29,7 +29,6 @@ import { Link } from "react-router-dom"
 
 import "../../pages/Contacts/landing.scss"
 
-
 // import images
 import profileImg from "../../assets/images/profile-img.png"
 import logoImg from "../../assets/images/logo.svg"
@@ -53,12 +52,11 @@ const Register = props => {
       email: Yup.string().required("Please Enter Your Email"),
       firstname: Yup.string().required("Please Enter Your firstname"),
       lastname: Yup.string().required("Please Enter Your lastname"),
-      password: Yup.string()
-        .required("Please Enter Your Password")
-        .matches(
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-          "Must Contain 8 Characters, One Uppercase,Lowercase,Number,Special Character"
-        ),
+      password: Yup.string().required("Please Enter Your Password"),
+      // .matches(
+      //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+      //   "Must Contain 8 Characters, One Uppercase,Lowercase,Number,Special Character"
+      // ),
     }),
     onSubmit: values => {
       dispatch(registerUser({ ...values, aflag: true }))
@@ -84,7 +82,7 @@ const Register = props => {
   return (
     <React.Fragment>
       <MetaTags>
-        <title>Register | Rain - Admin & Dashboard Template</title>
+        <title>Register | Raincomputing</title>
       </MetaTags>
       <div className="d-none d-lg-block ">
         <img src={rainlogo} height="50" />

@@ -23,17 +23,17 @@ const LandingPage = () => {
             </span>
           </Link>
         </div>
-          <div className="auth">
-            <Link to ="/login">
-              Login /
-            </Link>
-            <Link to ="/register">
-              Signup
-            </Link>
-          </div>
+        <div className="auth">
+          <Link to="/login" className="text-truncate">
+            Login |{" "}
+          </Link>
+          <Link to="/register" className="text-truncate">
+            Signup
+          </Link>
+        </div>
       </div>
       <div className="landing">
-          <ContactsGrid />
+        <ContactsGrid />
       </div>
     </React.Fragment>
   )

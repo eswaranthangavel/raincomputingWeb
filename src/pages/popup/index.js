@@ -31,17 +31,17 @@ const Popup = () => {
         </div>
       </div>
       <div className="pop">
-      <div className="mt-4  p-5 ml-50 bg-primary bg-soft text-primary rounded text-center">
-        <p className="font-size-16 lg-5 ">
-          Welcome to the Raincomputing , featuring detailed profiles of
-          attorneys across the United States who exhibit excellence in their
-          practice. To get started
-        </p>
-        <Link to ="/register">
-        <div className="text-center font-size-24 font-weight-600 text-black">
-            <u>Register Here </u>
-        </div>
-        </Link>
+        <div className="mt-4  p-5 ml-50 bg-primary bg-soft text-primary rounded text-center">
+          <p className="font-size-17 lg-5 fw-bold">
+            Welcome to the Raincomputing , featuring detailed profiles of
+            attorneys across the United States who exhibit excellence in their
+            practice. To get started
+          </p>
+          <Link to="/register">
+            <div className="text-center font-size-24 font-weight-600 text-black">
+              <u>Register Here </u>
+            </div>
+          </Link>
         </div>
       </div>
     </React.Fragment>
