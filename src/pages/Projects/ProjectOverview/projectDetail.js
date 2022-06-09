@@ -35,10 +35,26 @@ const ProjectDetail = ({ project }) => {
         <div>
           {" "}
           <h5 className="font-size-16 mt-4">Education :</h5>
-          <p className="text-muted">{project.l1}</p>
-          <p className="text-muted">{project.l2}</p>
-          <p className="text-muted">{project.l3}</p>
-          <p className="text-muted">{project.l4}</p>
+          <p className="text-muted">
+            {" "}
+            <i className="mdi mdi-chevron-right text-primary me-1" />
+            {project.l1}
+          </p>
+          <p className="text-muted">
+            {" "}
+            <i className="mdi mdi-chevron-right text-primary me-1" />
+            {project.l2}
+          </p>
+          <p className="text-muted">
+            {" "}
+            <i className="mdi mdi-chevron-right text-primary me-1" />
+            {project.l3}
+          </p>
+          <p className="text-muted">
+            {" "}
+            <i className="mdi mdi-chevron-right text-primary me-1" />
+            {project.l4}
+          </p>
         </div>
 
         <h5 className="font-size-16 mt-4">Attorney Address :</h5>

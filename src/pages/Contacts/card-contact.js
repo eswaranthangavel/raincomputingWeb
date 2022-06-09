@@ -41,7 +41,9 @@ const CardContact = props => {
                 <p className="font-size-10 text-muted">{user.firm}</p>
                 <p className="text-muted">{user.type}</p>
               </div>
-
+              {/* <div>
+                <p className="text-muted">{user.type}</p>
+              </div> */}
               {/* {!user.img ? (
               <div className="avatar-xl mx-auto mb-4">
                 <span
