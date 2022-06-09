@@ -25,6 +25,11 @@ import { useSelector, useDispatch } from "react-redux"
 
 import { Link } from "react-router-dom"
 
+//scss
+
+import "../../pages/Contacts/landing.scss"
+
+
 // import images
 import profileImg from "../../assets/images/profile-img.png"
 import logoImg from "../../assets/images/logo.svg"
@@ -101,7 +106,7 @@ const Register = props => {
           </div>
         </div>
         <div className="account-pages my-5 pt-sm-5 me-lg-5 ">
-          <Container>
+          <Container className="cont1">
             <Row className="justify-content-center">
               <Col md={8} lg={7} xl={10}>
                 <Card className="overflow-hidden">

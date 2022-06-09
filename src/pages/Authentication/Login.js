@@ -43,6 +43,9 @@ import { facebook, google } from "../../config"
 import Header from "components/VerticalLayout/Header"
 import Navbar from "components/HorizontalLayout/Navbar"
 
+//scss
+import "../../pages/Contacts/landing.scss"
+
 const Login = props => {
   const dispatch = useDispatch()
 
@@ -133,7 +136,7 @@ const Login = props => {
           </div>
         </div>
         <div className="account-pages my-5 pt-sm-5  ms-lg-5">
-          <Container>
+          <Container className="cont">
             <Row className="justify-content-fill">
               <Col md={8} lg={7} xl={10}>
                 <Card className="overflow-hidden">
