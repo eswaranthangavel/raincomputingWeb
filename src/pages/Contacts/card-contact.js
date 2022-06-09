@@ -27,9 +27,11 @@ const CardContact = props => {
                 <div>
                   <img
                     className="avatar-xl1"
-                    src={attImages[imgIndex].url}
+                    src={user.img ? user.img : attImages[imgIndex].url}
                     alt=""
                   />
+
+                  {/* <img className="avatar-xl1"  src={attImages[imgIndex].url}alt="" /> */}
                 </div>
                 <div className="mt-3">
                   <h5 className="font-size-16 mb-1 text-dark">
@@ -39,6 +41,7 @@ const CardContact = props => {
                 <p className="font-size-10 text-muted">{user.firm}</p>
                 <p className="text-muted">{user.type}</p>
               </div>
+
               {/* {!user.img ? (
               <div className="avatar-xl mx-auto mb-4">
                 <span
