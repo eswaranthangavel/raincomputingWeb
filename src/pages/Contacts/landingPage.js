@@ -9,22 +9,31 @@ const LandingPage = () => {
   return (
     <React.Fragment>
       <div className="d-flex justify-content-between mt-3 mb-3">
-        <div className="p-2">
+        <div className="p-2 ">
           <Link to="/" className="logo logo-dark">
             <span className="logo-sm">
-              <img src={rainlglogo} alt="" height="22" />
+              <div className="image">
+                <img src={rainlglogo} alt="" height="22" />
+              </div>
             </span>
             <span className="logo-lg">
-              <img src={rainlglogo} alt="" height="50" />
+              <div className="image1">
+                <img src={rainlglogo} alt="" height="50" />
+              </div>
             </span>
           </Link>
         </div>
-        <div className="p-2 mt-3 font-size-18">
-          <a href="/login">Login</a> | <a href="/register">Signup</a>
-        </div>
+          <div className="auth">
+            <Link to ="/login">
+              Login /
+            </Link>
+            <Link to ="/register">
+              Signup
+            </Link>
+          </div>
       </div>
       <div className="landing">
-        <ContactsGrid />
+          <ContactsGrid />
       </div>
     </React.Fragment>
   )

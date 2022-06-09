@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 import rainlogo from "assets/images/RainCom_Logo.webp"
 import Footer from "components/HorizontalLayout/Footer"
+import "../../pages/Contacts/landing.scss"
 
 const Popup = () => {
   return (
@@ -29,18 +30,19 @@ const Popup = () => {
           </div>
         </div>
       </div>
-      <div className="mt-4 p-5 ml-50 bg-primary bg-soft text-primary rounded text-center">
+      <div className="pop">
+      <div className="mt-4  p-5 ml-50 bg-primary bg-soft text-primary rounded text-center">
         <p className="font-size-16 lg-5 ">
           Welcome to the Raincomputing , featuring detailed profiles of
           attorneys across the United States who exhibit excellence in their
           practice. To get started
         </p>
-        <Link to ="/login">
+        <Link to ="/register">
         <div className="text-center font-size-24 font-weight-600 text-black">
-            <u>Login </u>
+            <u>Register Here </u>
         </div>
         </Link>
-        
+        </div>
       </div>
     </React.Fragment>
   )
