@@ -180,7 +180,6 @@ import Popup from "../pages/popup/index"
 //Landingpage
 import LandingPage from "pages/Contacts/landingPage"
 
-
 const authProtectedRoutes = [
   { path: "/dashboard", component: Dashboard },
   { path: "/dashboard-saas", component: DashboardSaas },
@@ -199,8 +198,6 @@ const authProtectedRoutes = [
   { path: "/chat", component: Chat },
 
   //popup
-
-
 
   //File Manager
   { path: "/apps-filemanager", component: FileManager },
@@ -363,7 +360,6 @@ const publicRoutes = [
   { path: "/auth-two-step-verification-2", component: TwostepVerification2 },
 
   { path: "/", component: LandingPage },
-
 ]
 
 export { authProtectedRoutes, publicRoutes }
