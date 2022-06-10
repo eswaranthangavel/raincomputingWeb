@@ -101,10 +101,10 @@ const CardContact = props => {
                   <Link to="#" id={"message" + user._id}>
                     <i className="bx bx-message-square-dots" />
                     <UncontrolledTooltip
-                      placement="top"
+                      placement="bottom"
                       target={"message" + user._id}
                     >
-                      Message
+                      Chat
                     </UncontrolledTooltip>
                   </Link>
                 </div>
@@ -112,10 +112,10 @@ const CardContact = props => {
                   <Link to="#" id={"project" + user._id}>
                     <i className="bx bx-pie-chart-alt" />
                     <UncontrolledTooltip
-                      placement="top"
+                      placement="bottom"
                       target={"project" + user._id}
                     >
-                      Projects
+                      Schedule
                     </UncontrolledTooltip>
                   </Link>
                 </div>
@@ -124,7 +124,7 @@ const CardContact = props => {
                     <i className="bx bx-user-circle" />
                   </Link>
                   <UncontrolledTooltip
-                    placement="top"
+                    placement="bottom"
                     target={"profile" + user._id}
                   >
                     Profile
