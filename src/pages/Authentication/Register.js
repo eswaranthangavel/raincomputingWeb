@@ -84,7 +84,7 @@ const Register = props => {
       <MetaTags>
         <title>Register | Raincomputing</title>
       </MetaTags>
-      <div className="d-none d-lg-block ">
+      <div className="d-none d-lg-block ps-lg-5 ms-lg-5">
         <img src={rainlogo} height="50" />
       </div>
       <div className="home-btn d-none d-sm-block">
@@ -103,7 +103,7 @@ const Register = props => {
             </p>
           </div>
         </div>
-        <div className="account-pages my-5 pt-sm-5 me-lg-5 ">
+        <div className="account-pages my-5 pt-sm-5 me-lg-5 mt-1 ">
           <Container className="cont1">
             <Row className="justify-content-center">
               <Col md={8} lg={7} xl={10}>
@@ -263,6 +263,19 @@ const Register = props => {
                           </button>
                         </div>
 
+                        <div className=" mt-3 text-center">
+                  <p>
+                    Already have an account ?{" "}
+                    <Link
+                      to="/login"
+                      className="font-weight-medium text-primary"
+                    >
+                      {" "}
+                      Login
+                    </Link>{" "}
+                  </p>
+                </div>
+
                         <div className="mt-4 text-center">
                           <p className="mb-0">
                             By registering you agree to the raincomputing{" "}
@@ -275,18 +288,6 @@ const Register = props => {
                     </div>
                   </CardBody>
                 </Card>
-                <div className="mt-5 text-center">
-                  <p>
-                    Already have an account ?{" "}
-                    <Link
-                      to="/login"
-                      className="font-weight-medium text-primary"
-                    >
-                      {" "}
-                      Login
-                    </Link>{" "}
-                  </p>
-                </div>
               </Col>
             </Row>
           </Container>
