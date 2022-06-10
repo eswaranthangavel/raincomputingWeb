@@ -98,13 +98,13 @@ const CardContact = props => {
             <CardFooter className="bg-transparent border-top">
               <div className="contact-links d-flex font-size-20">
                 <div className="flex-fill">
-                  <Link to="#" id={"message" + user._id}>
+                  <Link to={`/chat?uid=${user._id}`} id={"message" + user._id}>
                     <i className="bx bx-message-square-dots" />
                     <UncontrolledTooltip
                       placement="top"
                       target={"message" + user._id}
                     >
-                      Message
+                      Chat
                     </UncontrolledTooltip>
                   </Link>
                 </div>
@@ -120,7 +120,10 @@ const CardContact = props => {
                   </Link>
                 </div>
                 <div className="flex-fill">
-                  <Link to="#" id={"profile" + user._id}>
+                  <Link
+                    to={`/projects-overview?uid=${user._id}`}
+                    id={"profile" + user._id}
+                  >
                     <i className="bx bx-user-circle" />
                   </Link>
                   <UncontrolledTooltip
