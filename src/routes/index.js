@@ -174,6 +174,12 @@ import ContactsProfile from "../pages/Contacts/ContactsProfile/contacts-profile"
 //Demo
 import Demo from "../pages/Demo"
 
+//popup
+import Popup from "../pages/popup/index"
+
+//Landingpage
+import LandingPage from "pages/Contacts/landingPage"
+
 const authProtectedRoutes = [
   { path: "/dashboard", component: Dashboard },
   { path: "/dashboard-saas", component: DashboardSaas },
@@ -190,6 +196,8 @@ const authProtectedRoutes = [
 
   //chat
   { path: "/chat", component: Chat },
+
+  //popup
 
   //File Manager
   { path: "/apps-filemanager", component: FileManager },
@@ -317,7 +325,7 @@ const authProtectedRoutes = [
 
   // this route should be at the end of all other routes
   // eslint-disable-next-line react/display-name
-  { path: "/", exact: true, component: () => <Redirect to="/dashboard" /> },
+  { path: "/", exact: true, component: () => <Redirect to="/contacts-grid" /> },
 ]
 
 const publicRoutes = [
@@ -325,6 +333,7 @@ const publicRoutes = [
   { path: "/login", component: Login },
   { path: "/forgot-password", component: ForgetPwd },
   { path: "/register", component: Register },
+  { path: "/popup", component: Popup },
 
   { path: "/pages-maintenance", component: PagesMaintenance },
   { path: "/pages-comingsoon", component: PagesComingsoon },
@@ -349,6 +358,8 @@ const publicRoutes = [
   { path: "/auth-email-verification-2", component: EmailVerification2 },
   { path: "/auth-two-step-verification", component: TwostepVerification },
   { path: "/auth-two-step-verification-2", component: TwostepVerification2 },
+
+  { path: "/", component: LandingPage },
 ]
 
 export { authProtectedRoutes, publicRoutes }

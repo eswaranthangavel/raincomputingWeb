@@ -1,27 +1,72 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { map, get } from "lodash";
-import { Card, CardBody, Col, Row } from "reactstrap";
-import img1 from "../../../assets/images/companies/img-1.png";
+import React from "react"
+import PropTypes from "prop-types"
+import { map, get, attempt } from "lodash"
+import { Card, CardBody, Col, Row, Label } from "reactstrap"
+import img1 from "../../../assets/images/img1m.png"
+
+import { attImages } from "../../../helpers/mockData"
 
 const ProjectDetail = ({ project }) => {
+  const imgIndex = Math.floor(Math.random() * 8)
   return (
     <Card>
       <CardBody>
         <div className="d-flex">
-          <img src={img1} alt="" className="avatar-sm me-4" />
-
+          <img
+            src={project.img ? project.img : attImages[imgIndex].url}
+            alt=""
+            className="avatar-md rounded-circle me-4"
+          />
+          {/* src={user.img ? user.img : attImages[imgIndex].url} */}
           <div className="flex-grow-1 overflow-hidden">
-            <h5 className="text-truncate font-size-15">{project.name}</h5>
-            <p className="text-muted">{project.description}</p>
+            <h5 className="text-truncate font-size-16">
+              {project.firstname} {project.lastname}
+            </h5>
+            <p className="text-muted font-size-14">{project.firm}</p>
+            <p className="text-muted font-size-14">{project.type}</p>
           </div>
         </div>
 
-        <h5 className="font-size-15 mt-4">Project Details :</h5>
+        <div>
+          {" "}
+          <h5 className="font-size-16 mt-4">Biography :</h5>
+          <p className="text-muted">{project.bio}</p>
+        </div>
+        <div>
+          {" "}
+          <h5 className="font-size-16 mt-4">Education :</h5>
+          <p className="text-muted">
+            {" "}
+            <i className="mdi mdi-chevron-right text-primary me-1" />
+            {project.l1}
+          </p>
+          <p className="text-muted">
+            {" "}
+            <i className="mdi mdi-chevron-right text-primary me-1" />
+            {project.l2}
+          </p>
+          {/* <p className="text-muted">
+            {" "}
+            <i className="mdi mdi-chevron-right text-primary me-1" />
+            {project.l3}
+          </p> */}
+          {/* <p className="text-muted">
+            {" "}
+            <i className="mdi mdi-chevron-right text-primary me-1" />
+            {project.l4}
+          </p> */}
+        </div>
 
-        <p className="text-muted">
-          {get(project, "projectDetails.description")}
+        <h5 className="font-size-16 mt-4">Attorney Address :</h5>
+        <p> </p>
+        <p className="text-muted ">
+          {project.address1}, {project.address2}{" "}
         </p>
+        <p className="text-muted ">{project.city}</p>
+        <p className="text-muted ">{project.country}</p>
+        <p className="text-muted ">{project.phone}</p>
+
+        {/* {get(project, "projectDetails.description")} */}
 
         <div className="text-muted mt-4">
           {project.projectDetails &&
@@ -55,11 +100,11 @@ const ProjectDetail = ({ project }) => {
         </Row>
       </CardBody>
     </Card>
-  );
-};
+  )
+}
 
 ProjectDetail.propTypes = {
   project: PropTypes.object,
-};
+}
 
-export default ProjectDetail;
+export default ProjectDetail

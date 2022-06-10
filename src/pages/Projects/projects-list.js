@@ -191,7 +191,7 @@ const ProjectsList = () => {
       <div className="page-content">
         <MetaTags>
           <title>
-            Projects List | Skote - React Admin & Dashboard Template
+            Projects List | Rain- Admin & Dashboard Template
           </title>
         </MetaTags>
         <Container fluid>

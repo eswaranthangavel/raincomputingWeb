@@ -112,3 +112,19 @@ export const ON_ADD_COMMENT = "/comments-product-add-comment"
 
 //Demo
 export const GET_DEMO_DATA = "https://jsonplaceholder.typicode.com/posts"
+
+export const GET_ATTORNEYS_DATA = "http://localhost:5100/api/user/attorneys"
+
+export const POST_USER_LOGIN = "http://localhost:5100/api/user/login"
+export const POST_USER_REGISTER = "http://localhost:5100/api/user/register"
+
+export const GET_ALL_ATTORNEYS_DATA =
+  "http://localhost:5100/api/user/allAttorney"
+
+export const PUT_USER_UPDATE = "http://localhost:5100/api/user/edit"
+
+export const GET_ATTORNEYSCOUNT_DATA =
+  "http://localhost:5100/api/user/attorneyCount"
+
+
+export const GET_ATTORNEY_BY_ID ="http://localhost:5100/api/user/attorneydetails"

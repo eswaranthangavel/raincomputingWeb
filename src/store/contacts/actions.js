@@ -14,10 +14,21 @@ import {
   DELETE_USER,
   DELETE_USER_SUCCESS,
   DELETE_USER_FAIL,
+  GET_ATTORNEYS,
+  GET_ALL_ATTORNEYS,
+  GET_ALL_ATTORNEYS_SUCCESS,
+  GET_ALL_ATTORNEYS_FAIL,
+  GET_ATTORNEYSCOUNT,
+  GET_ATTORNEYSCOUNT_SUCCESS,
+  GET_ATTORNEYSCOUNT_FAIL,
 } from "./actionTypes"
 
 export const getUsers = () => ({
   type: GET_USERS,
+})
+
+export const getAttorneys = () => ({
+  type: GET_ATTORNEYS,
 })
 
 export const getUsersSuccess = users => ({
@@ -86,5 +97,33 @@ export const deleteUserSuccess = user => ({
 
 export const deleteUserFail = error => ({
   type: DELETE_USER_FAIL,
+  payload: error,
+})
+
+export const getAllAttorneys = (page, limit, searchText) => ({
+  type: GET_ALL_ATTORNEYS,
+  payload: page,
+  limit,
+  searchText,
+})
+export const getAllAttorneysSuccess = attorneys => ({
+  type: GET_ALL_ATTORNEYS_SUCCESS,
+  payload: attorneys,
+})
+export const getAllAttorneysFail = error => ({
+  type: GET_ALL_ATTORNEYS_FAIL,
+  payload: error,
+})
+
+export const getAttorneysCount = searchText => ({
+  type: GET_ATTORNEYSCOUNT,
+  payload: searchText,
+})
+export const getAttorneysCountSuccess = attorneys => ({
+  type: GET_ATTORNEYSCOUNT_SUCCESS,
+  payload: attorneys,
+})
+export const getAttorneysCountFail = error => ({
+  type: GET_ATTORNEYSCOUNT_FAIL,
   payload: error,
 })

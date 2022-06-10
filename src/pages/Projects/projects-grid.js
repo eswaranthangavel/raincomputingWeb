@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import MetaTags from "react-meta-tags";
+import React, { useEffect, useState } from "react"
+import MetaTags from "react-meta-tags"
 import {
   Col,
   Container,
@@ -7,45 +7,45 @@ import {
   PaginationItem,
   PaginationLink,
   Row,
-} from "reactstrap";
-import { withRouter } from "react-router-dom";
-import { map } from "lodash";
+} from "reactstrap"
+import { withRouter } from "react-router-dom"
+import { map } from "lodash"
 
 //Import Breadcrumb
-import Breadcrumbs from "components/Common/Breadcrumb";
+import Breadcrumbs from "components/Common/Breadcrumb"
 
 //Import Cards
-import CardProject from "./card-project";
+import CardProject from "./card-project"
 
-import { getProjects as onGetProjects } from "store/actions";
+import { getProjects as onGetProjects } from "store/actions"
 
 //redux
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux"
 
 const ProjectsGrid = props => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const { projects } = useSelector(state => ({
     projects: state.projects.projects,
-  }));
+  }))
 
-  const [page, setPage] = useState(1);
-  const [totalPage] = useState(5);
+  const [page, setPage] = useState(1)
+  const [totalPage] = useState(5)
 
   useEffect(() => {
-    dispatch(onGetProjects());
-  }, [dispatch]);
+    dispatch(onGetProjects())
+  }, [dispatch])
 
   const handlePageClick = page => {
-    setPage(page);
-  };
+    setPage(page)
+  }
 
   return (
     <React.Fragment>
       <div className="page-content">
         <MetaTags>
           <title>
-            Projects Grid | Skote - React Admin & Dashboard Template
+            Raincomputing | Rain -  Admin & Dashboard Template
           </title>
         </MetaTags>
         <Container fluid>
@@ -90,7 +90,7 @@ const ProjectsGrid = props => {
         </Container>
       </div>
     </React.Fragment>
-  );
-};
+  )
+}
 
-export default withRouter(ProjectsGrid);
+export default withRouter(ProjectsGrid)

@@ -66,7 +66,7 @@
     padding-right: 20px;
     background-color: $topbar-search-bg;
     box-shadow: none;
-    border-radius: 30px;
+    // border-radius: 30px;
   }
   span {
     position: absolute;
@@ -239,6 +239,7 @@ body[data-topbar="dark"] {
     .form-control {
       background-color: rgba($topbar-search-bg, 0.07);
       color: $white;
+      
     }
     span,
     input.form-control::-webkit-input-placeholder {

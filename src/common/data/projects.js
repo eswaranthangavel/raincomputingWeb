@@ -2,7 +2,7 @@ const projects = [
   {
     id: 0,
     img: "img1",
-    name: "New admin Design",
+    name: "Mark Zaltan",
     description: "It will be as simple as Occidental",
     status: "Completed",
     color: "success",
@@ -11,29 +11,29 @@ const projects = [
     team: [
       {
         id: 1, img: "avatar4", fullname: "Janice Cole", skills: [
-          { id: 1, name: "Frontend" },
-          { id: 2, name: "UI" },
+          { id: 1, name: "Assitant" },
+          { id: 2, name: "Attorney" },
         ],
       },
       {
         id: 2, img: "avatar5", fullname: "Steve Foster",
-        skills: [{ id: 1, name: "UI/UX" }],
+        skills: [{ id: 1, name: "Assitant Attorney" }],
       },
       {
         id: 3, img: "Null", name: "A", color: "success", fullname: "Aeffrey Walker",
-        skills: [{ id: 1, name: "Backend" }],
+        skills: [{ id: 1, name: "Assistan Attorney" }],
       },
       {
         id: 4, img: "avatar2", fullname: "Daniel Candles",
         skills: [
-          { id: 1, name: "Frontend" },
-          { id: 2, name: "UI" },
+          { id: 1, name: "Assistant" },
+          { id: 2, name: "Attorney" },
         ],
       },
       {
         id: 5, img: "avatar6", fullname: "Steve Foster",
         skills: [
-          { id: 1, name: "UI/UX" },
+          { id: 1, name: "Assitant Attorney" },
         ],
       },
     ],
@@ -48,10 +48,10 @@ const projects = [
       ],
     },
     files: [
-      { name: "Skote Landing.Zip", size: "3.25 MB", link: "#" },
-      { name: "Skote Admin.Zip", size: "3.15 MB", link: "#" },
-      { name: "Skote Logo.Zip", size: "2.02 MB", link: "#" },
-      { name: "Veltrix admin.Zip", size: "2.25 MB", link: "#" },
+      { name: " Landing.Zip", size: "3.25 MB", link: "#" },
+      { name: "Admin.Zip", size: "3.15 MB", link: "#" },
+      { name: " Case.Zip", size: "2.02 MB", link: "#" },
+      { name: "admin.Zip", size: "2.25 MB", link: "#" },
     ],
     comments: [
       {
@@ -238,7 +238,7 @@ const projects = [
   {
     id: 4,
     img: "img5",
-    name: "Skote Dashboard UI",
+    name: "Edward Stoinos",
     description: "Separate existence is a myth",
     status: "Completed",
     color: "success",
@@ -292,7 +292,7 @@ const projects = [
   {
     id: 5,
     img: "img6",
-    name: "Blog Template UI",
+    name: "David Billa",
     description: "For science, music, sport, etc",
     status: "Pending",
     color: "warning",
@@ -345,7 +345,7 @@ const projects = [
   {
     id: 6,
     img: "img3",
-    name: "Multipurpose Landing",
+    name: "Mugammad Sultan",
     description: "It will be as simple as Occidental",
     status: "Delay",
     color: "danger",
@@ -359,7 +359,7 @@ const projects = [
   {
     id: 7,
     img: "img4",
-    name: "App Landing UI",
+    name: "Arnold Inzumam",
     description: "It will be as simple as Occidental",
     status: "Completed",
     color: "success",
@@ -412,7 +412,7 @@ const projects = [
   {
     id: 8,
     img: "img2",
-    name: "New admin Design",
+    name: "Newton Ferold",
     description: "Their most common words.",
     status: "Completed",
     color: "success",
