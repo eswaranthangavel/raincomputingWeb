@@ -35,6 +35,7 @@ import logoImg from "../../assets/images/logo.svg"
 import computer from "assets/images/computer.png"
 import rainlogo from "assets/images/RainCom_Logo.webp"
 import logo from "assets/images/rain-drop.png"
+import { reset } from "redux-form"
 const Register = props => {
   const dispatch = useDispatch()
 
@@ -59,7 +60,9 @@ const Register = props => {
       // ),
     }),
     onSubmit: values => {
+      //dispatch(registerUser({ ...values, aflag: true }))
       dispatch(registerUser({ ...values, aflag: true }))
+     //Vidhya
     },
   })
 
@@ -143,6 +146,8 @@ const Register = props => {
                           e.preventDefault()
                           validation.handleSubmit()
                           return false
+                          onSubmit.reset()
+                         //e. reset()
                         }}
                       >
                         {user && (
@@ -263,6 +268,7 @@ const Register = props => {
                           </button>
                         </div>
 
+                        
                         <div className=" mt-3 text-center">
                   <p>
                     Already have an account ?{" "}
@@ -295,6 +301,7 @@ const Register = props => {
       </div>
     </React.Fragment>
   )
+  reset();
 }
 
 export default Register
