@@ -29,7 +29,7 @@ const ProjectsOverview = props => {
   const { projectDetail } = useSelector(state => ({
     projectDetail: state.projects.attorney.msg,
   }))
-  console.log(projectDetail, "projectDetail ")
+  console.log("projectDetail ", projectDetail)
   const {
     match: { params },
   } = props

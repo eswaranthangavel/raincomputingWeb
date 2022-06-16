@@ -16,10 +16,9 @@ const getAttorneysCount = searchText =>
 
 //is update AttorneyDetails by id
 
-const getAttorneyByID = data => post(url.GET_ATTORNEY_BY_ID,data);
+const getAttorneyByID = data => post(url.GET_ATTORNEY_BY_ID, data)
 
-
-
+const getChats = () => get(url.GET_CHATS)
 
 export {
   getAttorneysData,
@@ -28,4 +27,5 @@ export {
   getAllAttorneys,
   getAttorneysCount,
   getAttorneyByID,
+  getChats,
 }
