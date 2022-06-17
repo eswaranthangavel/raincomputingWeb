@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react"
 import MetaTags from "react-meta-tags"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
+import io from "socket.io-client"
+
 import { isEmpty, map } from "lodash"
 import moment from "moment"
 import {
@@ -50,6 +52,29 @@ import { useSelector, useDispatch } from "react-redux"
 import { getAttorneyByid as onGetAttorneyDetails } from "store/projects/actions"
 import { useLocation, withRouter } from "react-router-dom"
 
+const socket = io("https://localhost:5100")
+
+//socket io//
+// let connected = false;
+// // Sends a chat message
+// const sendMessage = message => {
+//   // Prevent markup from being injected into the message
+//   message = cleanInput(message)
+//   // if there is a non-empty message and a socket connection
+//   if (message && connected) {
+//     // $inputMessage.val("")
+//     addChatMessage({ username, message })
+//     // tell server to execute 'new message' and send along one parameter
+//     socket.emit("new message", message)
+//   }
+// }
+
+const cleanInput = input => {
+  return $("<div/>").text(input).html()
+}
+
+//siocket io//
+
 function useQuery() {
   const { search } = useLocation()
   return React.useMemo(() => new URLSearchParams(search), [search])
@@ -59,12 +84,30 @@ const Chat = props => {
   const dispatch = useDispatch()
   let query = useQuery()
 
-  const { chats, groups, contacts, messages } = useSelector(state => ({
+  const [messageList, setMessageList] = useState([])
+  const [currentMessage, setCurrentMessage] = useState("")
+
+  const { chats, groups, contacts, messages, project } = useSelector(state => ({
+    project: state.projects.attorney.msg,
     chats: state.chat.chats,
     groups: state.chat.groups,
     contacts: state.chat.contacts,
     messages: state.chat.messages,
   }))
+
+  console.log("project", project)
+
+  // const sendMessage = async () => {
+  //   if (currentMessage !== "") {
+  //     const messageData = {
+  //       author: username,
+  //       message: currentMessage,
+  //       createdAt: new Date(),
+  //     }
+  //     await socket.emit("send_message", { messageData })
+  //     setMessageList([...messageList, messageData])
+  //   }
+  // }
 
   const [messageBox, setMessageBox] = useState(null)
   // const Chat_Box_Username2 = "Henry Wells"
@@ -74,6 +117,7 @@ const Chat = props => {
   //   name: "Henry Wells",
   //   isActive: true,
   // })
+
   const [menu1, setMenu1] = useState(false)
   const [search_Menu, setsearch_Menu] = useState(false)
   const [settings_Menu, setsettings_Menu] = useState(false)
@@ -83,7 +127,7 @@ const Chat = props => {
   // eslint-disable-next-line no-unused-vars
   const [Chat_Box_User_Status, setChat_Box_User_Status] = useState("online")
   const [curMessage, setcurMessage] = useState("")
-  const [username, setusername] = useState("Admin")
+  const [username, setusername] = useState("")
 
   useEffect(() => {
     dispatch(onGetChats())
@@ -97,13 +141,27 @@ const Chat = props => {
   }, [messages])
 
   useEffect(() => {
+    console.log(username, "username")
+    const socket = io.connect("http://localhost:5100")
+    dispatch(onGetAttorneyDetails({ objectId: query.get("uid") }))
+
     if (localStorage.getItem("authUser")) {
       const obj = JSON.parse(localStorage.getItem("authUser"))
       setusername(obj.username)
     }
   }, [])
 
-  console.log(username, "username")
+  // //socket//
+  // useEffect(() => {
+  //   // console.log("hi", socket);
+  //   socket.on("recive_message", messageData => {
+  //     //   messageList.push(messageData);
+  //     setMessageList([...messageList, messageData])
+  //     //   console.log(messageData);
+  //     console.log(messageList)
+  //   })
+  // }, [messageList])
+
   // const toggleNotification = () => {
   //   setnotification_Menu(!notification_Menu)
   // }
@@ -144,6 +202,7 @@ const Chat = props => {
     }
     setcurMessage("")
     dispatch(onAddMessage(message))
+    socket.emit("new message", message)
   }
 
   const scrollToBottom = () => {
@@ -290,7 +349,7 @@ const Chat = props => {
                               className="list-unstyled chat-list"
                               id="recent-list"
                             >
-                              <PerfectScrollbar style={{ height: "410px" }}>
+                              {/* <PerfectScrollbar style={{ height: "410px" }}>
                                 {map(chats, chat => (
                                   <li
                                     key={chat.id + chat.status}
@@ -346,7 +405,7 @@ const Chat = props => {
                                     </Link>
                                   </li>
                                 ))}
-                              </PerfectScrollbar>
+                              </PerfectScrollbar> */}
                             </ul>
                           </div>
                         </TabPane>
@@ -444,7 +503,8 @@ const Chat = props => {
                       <Row>
                         <Col md="4" xs="9">
                           <h5 className="font-size-15 mb-1">
-                            {Chat_Box_Username}
+                            {project?.firstname} {project?.lastname}{" "}
+                            {project?.initial}
                           </h5>
 
                           <p className="text-muted mb-0">
@@ -539,7 +599,7 @@ const Chat = props => {
                       <div className="chat-conversation p-3">
                         <ul className="list-unstyled">
                           <PerfectScrollbar
-                            style={{ height: "470px" }}
+                            style={{ height: "310px" }}
                             containerRef={ref => setMessageBox(ref)}
                           >
                             <li>
@@ -664,7 +724,7 @@ const Chat = props => {
                               type="button"
                               color="primary"
                               onClick={() =>
-                                addMessage(currentRoomId, currentUser.name)
+                                addMessage(currentRoomId, username)
                               }
                               className="btn btn-primary btn-rounded chat-send w-md "
                             >
@@ -698,6 +758,7 @@ Chat.propTypes = {
   onGetContacts: PropTypes.func,
   onGetMessages: PropTypes.func,
   onAddMessage: PropTypes.func,
+  project: PropTypes.object,
 }
 
 export default Chat

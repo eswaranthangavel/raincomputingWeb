@@ -22,6 +22,7 @@ const getAttorneyByID = data => post(url.GET_ATTORNEY_BY_ID,data);
 const putProfileUpdate = data => put(url.PUT_USER_UPDATE,data);
 
 
+const getChats = () => get(url.GET_CHATS)
 
 export {
   getAttorneysData,
@@ -31,4 +32,5 @@ export {
   getAttorneysCount,
   getAttorneyByID,
   putProfileUpdate,
+  getChats,
 }

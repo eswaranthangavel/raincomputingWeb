@@ -43,8 +43,8 @@ export const UPDATE_EVENT = "/update/event"
 export const DELETE_EVENT = "/delete/event"
 export const GET_CATEGORIES = "/categories"
 
-//CHATS
-export const GET_CHATS = "/chats"
+// //CHATS
+// export const GET_CHATS = "/chats"
 export const GET_GROUPS = "/groups"
 export const GET_CONTACTS = "/contacts"
 export const GET_MESSAGES = "/messages"
@@ -126,5 +126,6 @@ export const PUT_USER_UPDATE = "http://localhost:5100/api/user/update"
 export const GET_ATTORNEYSCOUNT_DATA =
   "http://localhost:5100/api/user/attorneyCount"
 
-
-export const GET_ATTORNEY_BY_ID ="http://localhost:5100/api/user/attorneydetails"
+export const GET_ATTORNEY_BY_ID =
+  "http://localhost:5100/api/user/attorneydetails"
+export const GET_CHATS = "http://localhost:5100/api/user/chats"
