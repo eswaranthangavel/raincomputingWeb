@@ -43,7 +43,6 @@ const UserProfile = props => {
     lastName:state.Login.authUser.lastName,
     state:state,
   }))
-  
 
   const [idx, setidx] = useState(userid)
   const [firstname, setfirstname] = useState(firstName)
@@ -102,7 +101,7 @@ const UserProfile = props => {
                     </div>
                     <div className="flex-grow-1 align-self-center">
                       <div className="text-muted">
-                        <h5>{firstname +""+ lastname}</h5>
+                        <h5>{firstName +""+ lastName}</h5>
                         <p className="mb-1">{}</p>
                         {/* <p className="mb-0">Id no: #{idx}</p> */}
                       </div>
