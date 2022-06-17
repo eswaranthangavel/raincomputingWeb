@@ -52,27 +52,6 @@ import { useSelector, useDispatch } from "react-redux"
 import { getAttorneyByid as onGetAttorneyDetails } from "store/projects/actions"
 import { useLocation, withRouter } from "react-router-dom"
 
-const socket = io("https://localhost:5100")
-
-//socket io//
-// let connected = false;
-// // Sends a chat message
-// const sendMessage = message => {
-//   // Prevent markup from being injected into the message
-//   message = cleanInput(message)
-//   // if there is a non-empty message and a socket connection
-//   if (message && connected) {
-//     // $inputMessage.val("")
-//     addChatMessage({ username, message })
-//     // tell server to execute 'new message' and send along one parameter
-//     socket.emit("new message", message)
-//   }
-// }
-
-const cleanInput = input => {
-  return $("<div/>").text(input).html()
-}
-
 //siocket io//
 
 function useQuery() {
@@ -95,19 +74,7 @@ const Chat = props => {
     messages: state.chat.messages,
   }))
 
-  console.log("project", project)
-
-  // const sendMessage = async () => {
-  //   if (currentMessage !== "") {
-  //     const messageData = {
-  //       author: username,
-  //       message: currentMessage,
-  //       createdAt: new Date(),
-  //     }
-  //     await socket.emit("send_message", { messageData })
-  //     setMessageList([...messageList, messageData])
-  //   }
-  // }
+  // console.log("project", project)
 
   const [messageBox, setMessageBox] = useState(null)
   // const Chat_Box_Username2 = "Henry Wells"
@@ -143,6 +110,7 @@ const Chat = props => {
   useEffect(() => {
     console.log(username, "username")
     const socket = io.connect("http://localhost:5100")
+
     dispatch(onGetAttorneyDetails({ objectId: query.get("uid") }))
 
     if (localStorage.getItem("authUser")) {
@@ -150,21 +118,6 @@ const Chat = props => {
       setusername(obj.username)
     }
   }, [])
-
-  // //socket//
-  // useEffect(() => {
-  //   // console.log("hi", socket);
-  //   socket.on("recive_message", messageData => {
-  //     //   messageList.push(messageData);
-  //     setMessageList([...messageList, messageData])
-  //     //   console.log(messageData);
-  //     console.log(messageList)
-  //   })
-  // }, [messageList])
-
-  // const toggleNotification = () => {
-  //   setnotification_Menu(!notification_Menu)
-  // }
 
   //Toggle Chat Box Menus
   const toggleSearch = () => {

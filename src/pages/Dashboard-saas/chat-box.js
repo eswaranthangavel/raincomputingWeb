@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react"
 import {
   Row,
   Col,
@@ -13,63 +13,62 @@ import {
   Form,
   Input,
   InputGroup,
-} from "reactstrap";
-import { Link } from "react-router-dom";
+} from "reactstrap"
+import { Link } from "react-router-dom"
 
-import { chatData } from "../../common/data";
+import { chatData } from "../../common/data"
 
-import Reciver from "./Reciver";
-import Sender from "./Sender";
+import Reciver from "./Reciver"
+import Sender from "./Sender"
 
 //Import Scrollbar
-import PerfectScrollbar from "react-perfect-scrollbar";
-import "react-perfect-scrollbar/dist/css/styles.css";
+import PerfectScrollbar from "react-perfect-scrollbar"
+import "react-perfect-scrollbar/dist/css/styles.css"
 
-const ChantBox = (props) => {
-  const [searchMenu, setSearchMenu] = useState(false);
-  const [settingsMenu, setSettingsMenu] = useState(false);
-  const [otherMenu, setOtherMenu] = useState(false);
+const ChantBox = props => {
+  const [searchMenu, setSearchMenu] = useState(false)
+  const [settingsMenu, setSettingsMenu] = useState(false)
+  const [otherMenu, setOtherMenu] = useState(false)
 
-  const [text, setText] = useState("");
-  const [messages, setMessages] = useState([...chatData]);
+  const [text, setText] = useState("")
+  const [messages, setMessages] = useState([...chatData])
 
-  const [messageBox, setMessageBox] = useState(null);
+  const [messageBox, setMessageBox] = useState(null)
 
   const scrollToBottom = useCallback(() => {
     if (messageBox) {
-      messageBox.scrollTop = messageBox.scrollHeight + 1000;
+      messageBox.scrollTop = messageBox.scrollHeight + 1000
     }
-  }, [messageBox]);
+  }, [messageBox])
 
   useEffect(() => {
     if ((messages || []).length > 1) {
-      scrollToBottom();
+      scrollToBottom()
     }
-  }, [messages, scrollToBottom]);
-
+  }, [messages, scrollToBottom])
 
   const onSendMessage = () => {
-    const obj = JSON.parse(localStorage.getItem("authUser"));
-    const name = obj && obj.username ? obj.username : "Admin";
+    const obj = JSON.parse(localStorage.getItem("authUser"))
+    const name = obj && obj.username ? obj.username : "Admin"
 
-    var modifiedMessages = [...messages];
+    var modifiedMessages = [...messages]
     const lastItem = modifiedMessages.length
       ? modifiedMessages[modifiedMessages.length - 1]
-      : { id: 1 };
-    const today = new Date();
-    const hour = today.getHours();
-    const minute = today.getMinutes();
+      : { id: 1 }
+    const today = new Date()
+    const hour = today.getHours()
+    const minute = today.getMinutes()
     const senderObj = {
       id: lastItem["id"] + 1,
       name: name,
       msg: text,
       time: `${hour}.${minute}`,
       isSender: true,
-    };
-    modifiedMessages.push({ ...senderObj });
-    setMessages(modifiedMessages);
-    setText("");
-  };
+    }
+    modifiedMessages.push({ ...senderObj })
+    setMessages(modifiedMessages)
+    setText("")
+  }
 
   return (
     <React.Fragment>
@@ -90,7 +89,7 @@ const ChantBox = (props) => {
                     <Dropdown
                       isOpen={searchMenu}
                       toggle={() => {
-                        setSearchMenu(!searchMenu);
+                        setSearchMenu(!searchMenu)
                       }}
                     >
                       <DropdownToggle
@@ -123,7 +122,7 @@ const ChantBox = (props) => {
                     <Dropdown
                       isOpen={settingsMenu}
                       toggle={() => {
-                        setSettingsMenu(!settingsMenu);
+                        setSettingsMenu(!settingsMenu)
                       }}
                     >
                       <DropdownToggle
@@ -146,7 +145,7 @@ const ChantBox = (props) => {
                     <Dropdown
                       isOpen={otherMenu}
                       toggle={() => {
-                        setOtherMenu(!otherMenu);
+                        setOtherMenu(!otherMenu)
                       }}
                     >
                       <DropdownToggle
@@ -270,7 +269,7 @@ const ChantBox = (props) => {
         </Card>
       </Col>
     </React.Fragment>
-  );
-};
+  )
+}
 
-export default ChantBox;
+export default ChantBox
