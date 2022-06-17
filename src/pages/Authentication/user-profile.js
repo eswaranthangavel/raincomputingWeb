@@ -29,50 +29,59 @@ import Breadcrumb from "../../components/Common/Breadcrumb"
 
 import avatar from "../../assets/images/users/avatar-2.jpg"
 // actions
-import { updateProfile, resetProfileFlag } from "../../store/actions"
+import { editProfile, resetProfileFlag } from "../../store/actions"
 
 const UserProfile = props => {
   const dispatch = useDispatch()
-  
 
-  const { error, success,userid,firstName,lastName,state } = useSelector(state => ({
+  const [email, setemail] = useState("")
+  const [name, setname] = useState("")
+  const [idx, setidx] = useState(1)
+
+  const { error, success } = useSelector(state => ({
     error: state.Profile.error,
     success: state.Profile.success,
-    userid:state.Login.authUser.userId,
-    firstName:state.Login.authUser.firstName,
-    lastName:state.Login.authUser.lastName,
-    state:state,
   }))
-  
-
-  const [idx, setidx] = useState(userid)
-  const [firstname, setfirstname] = useState(firstName)
-  const [lastname, setlastname] = useState(lastName)
-  
 
   useEffect(() => {
-    console.log(state,"before state")
-    setfirstname(firstname)
-    setlastname(lastname)
-  }, [])
+    if (localStorage.getItem("authUser")) {
+      const obj = JSON.parse(localStorage.getItem("authUser"))
+      if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
+        setname(obj.displayName)
+        setemail(obj.email)
+        setidx(obj.userID)
+      } else if (
+        process.env.REACT_APP_DEFAULTAUTH === "fake" ||
+        process.env.REACT_APP_DEFAULTAUTH === "jwt"
+      ) {
+        setname(obj.username)
+        setemail(obj.email)
+        setidx(obj.userID)
+      }
+      setTimeout(() => {
+        dispatch(resetProfileFlag())
+      }, 3000)
+    }
+  }, [dispatch, success])
 
+  // Form validation
   const validation = useFormik({
     // enableReinitialize : use this flag when initial values needs to be changed
     enableReinitialize: true,
 
     initialValues: {
-      firstname: firstName,
-      lastname: lastName,
+      firstname: "",
+      lastname: "",
     },
     validationSchema: Yup.object({
       firstname: Yup.string().required("Please Enter Your First Name"),
       lastname: Yup.string().required("Please Enter Your Last Name"),
     }),
     onSubmit: values => {
+      // console.log( JSON.parse(localStorage.getItem("authUser"))
+      // )
       console.log({ ...values, id: idx })
-      dispatch(updateProfile({ ...values, id: idx }));
-
-      console.log(state,'after state')
+      dispatch(editProfile({ ...values, email: email }))
     },
   })
 
@@ -83,13 +92,14 @@ const UserProfile = props => {
           <title>Profile | Rain - Admin & Dashboard Template</title>
         </MetaTags>
         <Container fluid>
+          {/* Render Breadcrumb */}
           <Breadcrumb title="Rain" breadcrumbItem="Profile" />
 
           <Row>
             <Col lg="12">
-            {error && error ? <Alert color="danger">{error}</Alert> : null}
+              {error && error ? <Alert color="danger">{error}</Alert> : null}
               {success ? <Alert color="success">{success}</Alert> : null}
-              
+
               <Card>
                 <CardBody>
                   <div className="d-flex">
@@ -102,8 +112,8 @@ const UserProfile = props => {
                     </div>
                     <div className="flex-grow-1 align-self-center">
                       <div className="text-muted">
-                        <h5>{firstname +""+ lastname}</h5>
-                        <p className="mb-1">{}</p>
+                        <h5>{name}</h5>
+                        <p className="mb-1">{email}</p>
                         {/* <p className="mb-0">Id no: #{idx}</p> */}
                       </div>
                     </div>

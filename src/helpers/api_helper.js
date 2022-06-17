@@ -23,7 +23,6 @@ export async function get(url, config = {}) {
 }
 
 export async function post(url, data, config = {}) {
-//  console.log(url, data,"post")
  console.log(url, data)
   return axiosApi
     .post(url, { ...data }, { ...config })
@@ -31,7 +30,7 @@ export async function post(url, data, config = {}) {
 }
 
 export async function put(url, data, config = {}) {
- //console.log(url, data,"put")
+    // console.log(url, data)
 
   return axiosApi
     .put(url, { ...data }, { ...config })

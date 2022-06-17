@@ -17,7 +17,7 @@ import {
 import { Link } from "react-router-dom"
 
 import { chatData } from "../../common/data"
-
+import chat from "../Chat/Chat"
 import Reciver from "./Reciver"
 import Sender from "./Sender"
 

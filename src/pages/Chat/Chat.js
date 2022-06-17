@@ -58,6 +58,7 @@ function useQuery() {
   const { search } = useLocation()
   return React.useMemo(() => new URLSearchParams(search), [search])
 }
+const socket = io.connect("http://localhost:5100")
 
 const Chat = props => {
   const dispatch = useDispatch()
@@ -109,8 +110,7 @@ const Chat = props => {
 
   useEffect(() => {
     console.log(username, "username")
-    const socket = io.connect("http://localhost:5100")
-
+    socket.emit("username", username)
     dispatch(onGetAttorneyDetails({ objectId: query.get("uid") }))
 
     if (localStorage.getItem("authUser")) {
@@ -155,7 +155,8 @@ const Chat = props => {
     }
     setcurMessage("")
     dispatch(onAddMessage(message))
-    socket.emit("new message", message)
+    socket.emit("username", username)
+    console.log(username, "username")
   }
 
   const scrollToBottom = () => {

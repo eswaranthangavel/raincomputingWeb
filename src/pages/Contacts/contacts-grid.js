@@ -33,23 +33,22 @@ const ContactsGrid = props => {
 
   const dispatch = useDispatch()
 
-  const { attorneys, loading, attorneysCount,state } = useSelector(state => ({
+  const { attorneys, loading, attorneysCount } = useSelector(state => ({
     attorneys: state.contacts.attorneys,
     loading: state.contacts.loading,
     attorneysCount: state.contacts.attorneysCount,
-    state:state
   }))
-// console.log(state,'state eswar')
+
   useEffect(() => {
     dispatch(getAllAttorneys(page, limit, searchText))
   }, [page, limit, searchText])
-  // console.log("attorneys", attorneys)
+  console.log("attorneys", attorneys)
 
   useEffect(() => {
     setPage(1)
     dispatch(getAttorneysCount(searchText))
   }, [searchText])
-  // console.log("attorneys", attorneysCount)
+  console.log("attorneys", attorneysCount)
   // useEffect(() => {
   //   if (attorneysCount > 0) {
   //     const totalPages = Math.floor(attorneysCount / limit) + 1

@@ -4,15 +4,11 @@ import {
   LOGOUT_USER,
   LOGOUT_USER_SUCCESS,
   API_ERROR,
-  UPDATE_PROFILE,
-  USER_PROFILE_SUCCESS
 } from "./actionTypes"
 
 const initialState = {
   error: "",
   loading: false,
-  authUser:{},
-  updateUser:{},
 }
 
 const login = (state = initialState, action) => {
@@ -26,17 +22,9 @@ const login = (state = initialState, action) => {
     case LOGIN_SUCCESS:
       state = {
         ...state,
-        authUser:action.payload,
         loading: false,
       }
       break
-      case USER_PROFILE_SUCCESS:
-        state = {
-          ...state,
-          authUser:action.payload,
-          loading: false,
-        }
-      break;
     case LOGOUT_USER:
       state = { ...state }
       break
@@ -46,10 +34,6 @@ const login = (state = initialState, action) => {
     case API_ERROR:
       state = { ...state, error: action.payload, loading: false }
       break
-      case UPDATE_PROFILE:
-      state = { ...state };
-      break;
-     
     default:
       state = { ...state }
       break
