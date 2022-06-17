@@ -17,7 +17,7 @@ import {
 import { Link } from "react-router-dom"
 
 import { chatData } from "../../common/data"
-import chat from "../Chat/Chat"
+
 import Reciver from "./Reciver"
 import Sender from "./Sender"
 
@@ -31,6 +31,7 @@ const ChantBox = props => {
   const [otherMenu, setOtherMenu] = useState(false)
 
   const [text, setText] = useState("")
+  const [message, setMessage] = useState("")
   const [messages, setMessages] = useState([...chatData])
 
   const [messageBox, setMessageBox] = useState(null)
@@ -47,28 +48,39 @@ const ChantBox = props => {
     }
   }, [messages, scrollToBottom])
 
-  const onSendMessage = () => {
-    const obj = JSON.parse(localStorage.getItem("authUser"))
-    const name = obj && obj.username ? obj.username : "Admin"
+  socket.on("message", message => {
+    console.log("message", message)
+    setMessages(previousMessages => [...previousMessages, message])
+  })
 
-    var modifiedMessages = [...messages]
-    const lastItem = modifiedMessages.length
-      ? modifiedMessages[modifiedMessages.length - 1]
-      : { id: 1 }
-    const today = new Date()
-    const hour = today.getHours()
-    const minute = today.getMinutes()
-    const senderObj = {
-      id: lastItem["id"] + 1,
-      name: name,
-      msg: text,
-      time: `${hour}.${minute}`,
-      isSender: true,
-    }
-    modifiedMessages.push({ ...senderObj })
-    setMessages(modifiedMessages)
-    setText("")
+  const handleMessage = e => {
+    e.preventDefault()
+    socket.emit("message", `${username}-${message}`)
+    setMessage("")
   }
+
+  // const onSendMessage = () => {
+  //   const obj = JSON.parse(localStorage.getItem("authUser"))
+  //   const name = obj && obj.username ? obj.username : "Admin"
+
+  //   var modifiedMessages = [...messages]
+  //   const lastItem = modifiedMessages.length
+  //     ? modifiedMessages[modifiedMessages.length - 1]
+  //     : { id: 1 }
+  //   const today = new Date()
+  //   const hour = today.getHours()
+  //   const minute = today.getMinutes()
+  //   const senderObj = {
+  //     id: lastItem["id"] + 1,
+  //     name: name,
+  //     msg: text,
+  //     time: `${hour}.${minute}`,
+  //     isSender: true,
+  //   }
+  //   modifiedMessages.push({ ...senderObj })
+  //   setMessages(modifiedMessages)
+  //   setText("")
+  // }
 
   return (
     <React.Fragment>
@@ -258,7 +270,7 @@ const ChantBox = props => {
                   type="submit"
                   color="primary"
                   className="chat-send w-md "
-                  onClick={() => onSendMessage()}
+                  onClick={e => handleMessage(e)}
                 >
                   <span className="d-none d-sm-inline-block me-2">Send</span>{" "}
                   <i className="mdi mdi-send" />

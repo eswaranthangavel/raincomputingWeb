@@ -96,7 +96,7 @@ const Chat = props => {
   const [Chat_Box_User_Status, setChat_Box_User_Status] = useState("online")
   const [curMessage, setcurMessage] = useState("")
   const [username, setusername] = useState("")
-
+  console.log("socket", socket)
   useEffect(() => {
     dispatch(onGetChats())
     dispatch(onGetGroups())
@@ -110,6 +110,8 @@ const Chat = props => {
 
   useEffect(() => {
     console.log(username, "username")
+    const socket = io.connect("http://localhost:5100")
+
     socket.emit("username", username)
     dispatch(onGetAttorneyDetails({ objectId: query.get("uid") }))
 
@@ -190,6 +192,15 @@ const Chat = props => {
       }
     }
   }
+
+  useEffect(() => {
+    socket.on("user joined", msg => {
+      console.log("user joined message", msg)
+    })
+    return () => {
+      socket.off("user joined")
+    }
+  }, [])
 
   return (
     <React.Fragment>
