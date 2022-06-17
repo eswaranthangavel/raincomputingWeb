@@ -36,12 +36,16 @@ const UserProfile = props => {
 
   const [email, setemail] = useState("")
   const [name, setname] = useState("")
-  const [idx, setidx] = useState(1)
 
   const { error, success } = useSelector(state => ({
     error: state.Profile.error,
     success: state.Profile.success,
   }))
+
+  const [idx, setidx] = useState(userid)
+  const [firstname, setfirstname] = useState(firstName)
+  const [lastname, setlastname] = useState(lastName)
+  
 
   useEffect(() => {
     if (localStorage.getItem("authUser")) {
@@ -112,6 +116,8 @@ const UserProfile = props => {
                     </div>
                     <div className="flex-grow-1 align-self-center">
                       <div className="text-muted">
+                        <h5>{firstName +""+ lastName}</h5>
+                        <p className="mb-1">{}</p>
                         <h5>{name}</h5>
                         <p className="mb-1">{email}</p>
                         {/* <p className="mb-0">Id no: #{idx}</p> */}
