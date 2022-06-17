@@ -18,8 +18,6 @@ const getAttorneysCount = searchText =>
 
 const getAttorneyByID = data => post(url.GET_ATTORNEY_BY_ID,data);
 
-//Profile  Update 
-const putProfileUpdate = data => put(url.PUT_USER_UPDATE,data);
 
 
 const getChats = () => get(url.GET_CHATS)
@@ -31,6 +29,9 @@ export {
   getAllAttorneys,
   getAttorneysCount,
   getAttorneyByID,
+<<<<<<< HEAD
   putProfileUpdate,
   getChats,
+=======
+>>>>>>> parent of 3767ece (profile update)
 }
