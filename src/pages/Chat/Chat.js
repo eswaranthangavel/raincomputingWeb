@@ -58,7 +58,6 @@ function useQuery() {
   const { search } = useLocation()
   return React.useMemo(() => new URLSearchParams(search), [search])
 }
-const socket = io.connect("http://localhost:5100")
 
 const Chat = props => {
   const dispatch = useDispatch()
@@ -96,7 +95,7 @@ const Chat = props => {
   const [Chat_Box_User_Status, setChat_Box_User_Status] = useState("online")
   const [curMessage, setcurMessage] = useState("")
   const [username, setusername] = useState("")
-  console.log("socket", socket)
+
   useEffect(() => {
     dispatch(onGetChats())
     dispatch(onGetGroups())
@@ -112,7 +111,6 @@ const Chat = props => {
     console.log(username, "username")
     const socket = io.connect("http://localhost:5100")
 
-    socket.emit("username", username)
     dispatch(onGetAttorneyDetails({ objectId: query.get("uid") }))
 
     if (localStorage.getItem("authUser")) {
@@ -157,8 +155,7 @@ const Chat = props => {
     }
     setcurMessage("")
     dispatch(onAddMessage(message))
-    socket.emit("username", username)
-    console.log(username, "username")
+    socket.emit("new message", message)
   }
 
   const scrollToBottom = () => {
@@ -192,15 +189,6 @@ const Chat = props => {
       }
     }
   }
-
-  useEffect(() => {
-    socket.on("user joined", msg => {
-      console.log("user joined message", msg)
-    })
-    return () => {
-      socket.off("user joined")
-    }
-  }, [])
 
   return (
     <React.Fragment>
