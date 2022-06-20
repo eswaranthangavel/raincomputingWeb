@@ -9,7 +9,6 @@ import Pagination from "../../components/pagination/Pagination"
 //images
 import rainlogo from "assets/images/RainCom_Logo.webp"
 
-
 //Import Breadcrumb
 import Breadcrumbs from "components/Common/Breadcrumb"
 
