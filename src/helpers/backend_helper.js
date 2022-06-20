@@ -16,11 +16,7 @@ const getAttorneysCount = searchText =>
 
 //is update AttorneyDetails by id
 
-const getAttorneyByID = data => post(url.GET_ATTORNEY_BY_ID,data);
-
-//Profile  Update 
-const putProfileUpdate = data => put(url.PUT_USER_UPDATE,data);
-
+const getAttorneyByID = data => post(url.GET_ATTORNEY_BY_ID, data)
 
 const getChats = () => get(url.GET_CHATS)
 
@@ -31,6 +27,5 @@ export {
   getAllAttorneys,
   getAttorneysCount,
   getAttorneyByID,
-  putProfileUpdate,
   getChats,
 }

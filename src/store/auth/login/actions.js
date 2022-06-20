@@ -5,17 +5,8 @@ import {
   LOGOUT_USER_SUCCESS,
   API_ERROR,
   SOCIAL_LOGIN,
-  UPDATE_PROFILE,
-  USER_PROFILE_SUCCESS
 } from "./actionTypes"
 
-
-export const updateProfile = (user) => {
-  return {
-    type: UPDATE_PROFILE,
-    payload: { user },
-  }
-}
 export const loginUser = (user, history) => {
   return {
     type: LOGIN_USER,
@@ -26,12 +17,6 @@ export const loginUser = (user, history) => {
 export const loginSuccess = user => {
   return {
     type: LOGIN_SUCCESS,
-    payload: user,
-  }
-}
-export const profileSuccess = user => {  
-  return {
-    type: USER_PROFILE_SUCCESS,
     payload: user,
   }
 }
