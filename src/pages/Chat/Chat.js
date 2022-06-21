@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import MetaTags from "react-meta-tags"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
@@ -54,8 +54,8 @@ import { useSelector, useDispatch } from "react-redux"
 //
 import { getAttorneyByid as onGetAttorneyDetails } from "store/projects/actions"
 import { useLocation, withRouter } from "react-router-dom"
-
-//siocket io//
+import { post } from "helpers/api_helper"
+import { GET_PRIVATECHAT } from "helpers/url_helper"
 
 function useQuery() {
   const { search } = useLocation()
@@ -65,19 +65,79 @@ function useQuery() {
 const Chat = props => {
   const dispatch = useDispatch()
   let query = useQuery()
+  const user = JSON.parse(localStorage.getItem("authUser"))
 
+  const [socket, setSocket] = useState(() => {
+    return io("http://localhost:5100", {
+      query: { id: user.userID },
+    })
+  })
+
+  const chats = [
+    {
+      status: "online",
+      image: "avatar2",
+      name: "Raja pandi",
+      description: "Hey! there I'm available",
+      time: "05 min",
+    },
+    {
+      status: "online",
+      image: "avatar3",
+      name: "Adam Miller",
+      description: "I've finished it! See you so",
+      time: "12 min",
+    },
+    {
+      status: "online",
+      image: "avatar3",
+      name: "Keith Gonzales",
+      description: "This theme is awesome!",
+      time: "24 min",
+    },
+    {
+      status: "intermediate",
+      image: "avatar4",
+      name: "Jose Vickery",
+      description: "Nice to meet you",
+      time: "1 hr",
+    },
+    // {
+    //   status: "offline",
+    //   image: "avatar4",
+    //   name: "Mitchel Givens",
+    //   description: "Hey! there I'm available",
+    //   time: "3 hrs",
+    // },
+    // {
+    //   status: "online",
+    //   image: "avatar6",
+    //   name: "Stephen Hadley",
+    //   description: "I've finished it! See you so",
+    //   time: "5 hrs",
+    // },
+    // {
+    //   status: "online",
+    //   image: "avatar6",
+    //   name: "Keith Gonzales",
+    //   description: "This theme is awesome!",
+    //   time: "24 min",
+    // },
+  ]
+
+  // const socket = io("http://localhost:5100", {
+  //   query: { id: user.userID },
+  // })
   const [messageList, setMessageList] = useState([])
   const [currentMessage, setCurrentMessage] = useState("")
 
-  const { chats, groups, contacts, messages, project } = useSelector(state => ({
+  const { groups, contacts, messages, project } = useSelector(state => ({
     project: state.projects.attorney.msg,
-    chats: state.chat.chats,
+    // chats: state.chat.chats,
     groups: state.chat.groups,
     contacts: state.chat.contacts,
     messages: state.chat.messages,
   }))
-
-  // console.log("project", project)
 
   const [messageBox, setMessageBox] = useState(null)
   // const Chat_Box_Username2 = "Henry Wells"
@@ -99,6 +159,7 @@ const Chat = props => {
   const [curMessage, setcurMessage] = useState("")
   const [username, setUserName] = useState("")
 
+  const [ioMessages, setIoMessages] = useState([])
   useEffect(() => {
     dispatch(onGetChats())
     dispatch(onGetGroups())
@@ -107,14 +168,15 @@ const Chat = props => {
   }, [onGetChats, onGetGroups, onGetContacts, onGetMessages, currentRoomId])
 
   useEffect(() => {
-    if (!isEmpty(messages)) scrollToBottom()
-  }, [messages])
+    if (!isEmpty(ioMessages)) scrollToBottom()
+  }, [ioMessages])
 
   useEffect(() => {
     // console.log(username, "username")
     const socket = io.connect("http://localhost:5100")
 
     dispatch(onGetAttorneyDetails({ objectId: query.get("uid") }))
+    console.log("project", project)
 
     // if (localStorage.getItem("authUser")) {
     //   const obj = JSON.parse(localStorage.getItem("authUser"))
@@ -148,6 +210,36 @@ const Chat = props => {
     }
   }
 
+  const handleAddMessage = () => {
+    if (curMessage) {
+      console.log("handleAddMessage")
+
+      const msgData = {
+        receiver:
+          user.userID === "62aace8c1da006a980c989e0"
+            ? "62ac6389015671ab8c1f55c0"
+            : "62aace8c1da006a980c989e0",
+        message: curMessage,
+        sender: user.userID,
+        createdAt: new Date(Date.now()),
+      }
+      socket.emit("send_message", msgData)
+      setIoMessages([...ioMessages, msgData])
+      setcurMessage("")
+    }
+  }
+  console.log("ioMessages", ioMessages)
+
+  useEffect(() => {
+    if (socket == null) return
+
+    socket.off("receive_message").on("receive_message", props => {
+      setIoMessages([...ioMessages, props])
+      console.log("ioMessages in", ioMessages)
+    })
+  }, [socket, handleAddMessage])
+
+  //
 
   //Toggle Chat Box Menus
   const toggleSearch = () => {
@@ -175,19 +267,6 @@ const Chat = props => {
     dispatch(onGetMessages(roomId))
   }
 
-  const addMessage = (roomId, sender) => {
-    const message = {
-      id: Math.floor(Math.random() * 100),
-      roomId,
-      sender,
-      message: curMessage,
-      createdAt: new Date(),
-    }
-    setcurMessage("")
-    dispatch(onAddMessage(message))
-    socket.emit("new message", message)
-  }
-
   const scrollToBottom = () => {
     if (messageBox) {
       messageBox.scrollTop = messageBox.scrollHeight + 1000
@@ -197,8 +276,7 @@ const Chat = props => {
   const onKeyPress = e => {
     const { key, value } = e
     if (key === "Enter") {
-      setcurMessage(value)
-      addMessage(currentRoomId, username)
+      handleAddMessage(value)
     }
   }
 
@@ -220,6 +298,25 @@ const Chat = props => {
     }
   }
 
+  useEffect(() => {
+    const payload = {
+      sender: user.userID,
+      receiver:
+        user.userID === "62aace8c1da006a980c989e0"
+          ? "62ac6389015671ab8c1f55c0"
+          : "62aace8c1da006a980c989e0",
+    }
+
+    const getPrivateChat = async () => {
+      const res = await post(GET_PRIVATECHAT, payload)
+      const { messages } = res
+      if (messages.length > 0) {
+        setIoMessages(messages)
+      }
+    }
+
+    getPrivateChat()
+  }, [])
   return (
     <React.Fragment>
       <div className="page-content">
@@ -282,7 +379,7 @@ const Chat = props => {
                       </div>
                     </div>
 
-                    <div className="chat-leftsidebar-nav">
+                    <div className="chat-leftsidebar-nav mb-2">
                       <Nav pills justified>
                         <NavItem>
                           <NavLink
@@ -294,7 +391,7 @@ const Chat = props => {
                             }}
                           >
                             <i className="bx bx-chat font-size-20 d-sm-none" />
-                            <span className="d-none d-sm-block">Chat</span>
+                            <span className="d-none d-sm-block ">Chat</span>
                           </NavLink>
                         </NavItem>
                         <NavItem>
@@ -324,7 +421,10 @@ const Chat = props => {
                           </NavLink>
                         </NavItem>
                       </Nav>
-                      <TabContent activeTab={activeTab} className="py-4">
+                      <TabContent
+                        activeTab={activeTab}
+                        className="py-4  d-none d-lg-block "
+                      >
                         <TabPane tabId="1">
                           <div>
                             <h5 className="font-size-14 mb-3">Recent</h5>
@@ -332,7 +432,7 @@ const Chat = props => {
                               className="list-unstyled chat-list"
                               id="recent-list"
                             >
-                              {/* <PerfectScrollbar style={{ height: "410px" }}>
+                              <PerfectScrollbar style={{ height: "410px" }}>
                                 {map(chats, chat => (
                                   <li
                                     key={chat.id + chat.status}
@@ -388,7 +488,7 @@ const Chat = props => {
                                     </Link>
                                   </li>
                                 ))}
-                              </PerfectScrollbar> */}
+                              </PerfectScrollbar>
                             </ul>
                           </div>
                         </TabPane>
@@ -590,7 +690,9 @@ const Chat = props => {
                                 <span className="title">Today</span>
                               </div>
                             </li>
-                            {messages &&
+
+                            {/* Theme component */}
+                            {/* {messages &&
                               map(messages, message => (
                                 <li
                                   key={"test_k" + message.id}
@@ -627,6 +729,63 @@ const Chat = props => {
                                     <div className="ctext-wrap">
                                       <div className="conversation-name">
                                         {message.sender}
+                                      </div>
+                                      <p>{message.message}</p>
+                                      <p className="chat-time mb-0">
+                                        <i className="bx bx-time-five align-middle me-1" />
+                                        {moment(message.createdAt).format(
+                                          "DD-MM-YY hh:mm"
+                                        )}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </li>
+                              ))} */}
+
+                            {/* Custom Component */}
+                            {/* {ioMessages.map((mes, i) => (
+                              <div key={i}>{mes.message}</div>
+                            ))} */}
+                            {ioMessages &&
+                              ioMessages.map((message, i) => (
+                                <li
+                                  key={"test_k" + i}
+                                  style={{
+                                    textAlign:
+                                      message.sender == user.userID
+                                        ? "right"
+                                        : "",
+                                  }}
+                                >
+                                  <div className="conversation-list">
+                                    <UncontrolledDropdown>
+                                      <DropdownToggle
+                                        href="#"
+                                        className="btn nav-btn"
+                                        tag="i"
+                                      >
+                                        <i className="bx bx-dots-vertical-rounded" />
+                                      </DropdownToggle>
+                                      <DropdownMenu>
+                                        <DropdownItem href="#">
+                                          Copy
+                                        </DropdownItem>
+                                        <DropdownItem href="#">
+                                          Save
+                                        </DropdownItem>
+                                        <DropdownItem href="#">
+                                          Forward
+                                        </DropdownItem>
+                                        <DropdownItem href="#">
+                                          Delete
+                                        </DropdownItem>
+                                      </DropdownMenu>
+                                    </UncontrolledDropdown>
+                                    <div className="ctext-wrap">
+                                      <div className="conversation-name">
+                                        {message.sender == user.userID
+                                          ? "you"
+                                          : project?.firstname}
                                       </div>
                                       <p>{message.message}</p>
                                       <p className="chat-time mb-0">
@@ -706,9 +865,11 @@ const Chat = props => {
                             <Button
                               type="button"
                               color="primary"
-                              onClick={() =>
-                                addMessage(currentRoomId, username)
-                              }
+                              // onClick={() =>
+                              //   addMessage(currentRoomId, username)
+                              // }
+                              onClick={() => handleAddMessage()}
+                              on
                               className="btn btn-primary btn-rounded chat-send w-md "
                             >
                               <span className="d-none d-sm-inline-block me-2">
