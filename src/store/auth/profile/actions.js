@@ -1,18 +1,8 @@
-import { PROFILE_ERROR, PROFILE_SUCCESS, EDIT_PROFILE, RESET_PROFILE_FLAG } from "./actionTypes"
+import { PROFILE_ERROR, PROFILE_SUCCESS, RESET_PROFILE_FLAG } from "./actionTypes"
 
-export const editProfile = user => {
-  return {
-    type: EDIT_PROFILE,
-    payload: { user },
-  }
-}
 
-export const profileSuccess = msg => {
-  return {
-    type: PROFILE_SUCCESS,
-    payload: msg,
-  }
-}
+
+
 
 export const profileError = error => {
   return {

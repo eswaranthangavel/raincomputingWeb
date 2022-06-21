@@ -132,6 +132,7 @@ const Chat = props => {
   const { groups, contacts, messages, project } = useSelector(state => ({
     project: state.projects.attorney.msg,
 
+    // chats: state.chat.chats,
     groups: state.chat.groups,
     contacts: state.chat.contacts,
     messages: state.chat.messages,
@@ -166,6 +167,9 @@ const Chat = props => {
   }, [ioMessages])
 
   useEffect(() => {
+    // console.log(username, "username")
+    // const socket = io.connect("http://localhost:5100")
+
     dispatch(onGetAttorneyDetails({ objectId: query.get("uid") }))
     console.log("project", project)
 
@@ -179,6 +183,7 @@ const Chat = props => {
     console.log("handleAddMessage")
     if (curMessage) {
       // const obj = JSON.parse(localStorage.getItem("authUser"))
+
       const msgData = {
         receiver:
           user.userID === "62aace8c1da006a980c989e0"
@@ -405,7 +410,7 @@ const Chat = props => {
                               className="list-unstyled chat-list"
                               id="recent-list"
                             >
-                              {/* <PerfectScrollbar style={{ height: "410px" }}>
+                              <PerfectScrollbar style={{ height: "410px" }}>
                                 {map(chats, chat => (
                                   <li
                                     key={chat.id + chat.status}
@@ -461,7 +466,7 @@ const Chat = props => {
                                     </Link>
                                   </li>
                                 ))}
-                              </PerfectScrollbar> */}
+                              </PerfectScrollbar>
                             </ul>
                           </div>
                         </TabPane>

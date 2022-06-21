@@ -52,10 +52,6 @@ import Logout from "../pages/Authentication/Logout"
 import Register from "../pages/Authentication/Register"
 import ForgetPwd from "../pages/Authentication/ForgetPassword"
 
-//AttorneyAuthentication
-import AttorneyLogin from "pages/AttorneyAuth/attorneyLogin"
-import AttorneyRegister from "pages/AttorneyAuth/attorneyRegister"
-
 //  // Inner Authentication
 import Login1 from "../pages/AuthenticationInner/Login"
 import Login2 from "../pages/AuthenticationInner/Login2"
@@ -338,12 +334,6 @@ const publicRoutes = [
   { path: "/forgot-password", component: ForgetPwd },
   { path: "/register", component: Register },
   { path: "/popup", component: Popup },
-
-  //AttorneyAuth
-  { path: "/attorneylogin", component: AttorneyLogin },
-  { path: "/attorneyregister", component: AttorneyRegister },
-
-
 
   { path: "/pages-maintenance", component: PagesMaintenance },
   { path: "/pages-comingsoon", component: PagesComingsoon },
