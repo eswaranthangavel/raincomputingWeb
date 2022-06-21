@@ -23,12 +23,15 @@ export async function get(url, config = {}) {
 }
 
 export async function post(url, data, config = {}) {
+//  console.log(url, data,"post")
+ console.log(url, data)
   return axiosApi
     .post(url, { ...data }, { ...config })
     .then(response => response.data)
 }
 
 export async function put(url, data, config = {}) {
+ //console.log(url, data,"put")
 
   return axiosApi
     .put(url, { ...data }, { ...config })
