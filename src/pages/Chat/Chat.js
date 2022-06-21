@@ -3,6 +3,9 @@ import MetaTags from "react-meta-tags"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 import io from "socket.io-client"
+import { connect } from "react-redux"
+import { withTranslation } from "react-i18next"
+
 
 import { isEmpty, map } from "lodash"
 import moment from "moment"
@@ -94,7 +97,7 @@ const Chat = props => {
   // eslint-disable-next-line no-unused-vars
   const [Chat_Box_User_Status, setChat_Box_User_Status] = useState("online")
   const [curMessage, setcurMessage] = useState("")
-  const [username, setusername] = useState("")
+  const [username, setUserName] = useState("")
 
   useEffect(() => {
     dispatch(onGetChats())
@@ -108,16 +111,43 @@ const Chat = props => {
   }, [messages])
 
   useEffect(() => {
-    console.log(username, "username")
+    // console.log(username, "username")
     const socket = io.connect("http://localhost:5100")
 
     dispatch(onGetAttorneyDetails({ objectId: query.get("uid") }))
 
-    if (localStorage.getItem("authUser")) {
-      const obj = JSON.parse(localStorage.getItem("authUser"))
-      setusername(obj.username)
-    }
+    // if (localStorage.getItem("authUser")) {
+    //   const obj = JSON.parse(localStorage.getItem("authUser"))
+    //   setusername(obj.username)
+    // }
   }, [])
+
+  useEffect(() => {   
+    setUserName(props.username)
+    if (localStorage.getItem("")) {
+      if (process.env.REACT_APP_DEFAULTAUTH === "") {
+        const obj = JSON.parse(localStorage.getItem(""))
+       // setusername(obj.displayName)
+      } else if (
+        process.env.REACT_APP_DEFAULTAUTH === "fake" ||
+        process.env.REACT_APP_DEFAULTAUTH === "jwt"
+      ) {
+        // const obj = JSON.parse(localStorage.getItem("authUser"))
+        //setusername(obj.username)
+      }
+    }
+  }, [props.success])
+
+  if(props.username)
+  {
+    try
+    {
+      if(username!=props.username)
+        setUserName(props.username);
+    }catch(ex){
+    }
+  }
+
 
   //Toggle Chat Box Menus
   const toggleSearch = () => {
@@ -712,6 +742,21 @@ Chat.propTypes = {
   onGetMessages: PropTypes.func,
   onAddMessage: PropTypes.func,
   project: PropTypes.object,
+  t: PropTypes.any,
+  username:PropTypes.any,
+  userId:PropTypes.any,
+  success: PropTypes.any,
+
 }
 
-export default Chat
+const mapStatetoProps = state => {
+  const { error, success } = state.Profile
+  const { userId,username } = state.Login.authUser
+  
+  return { error, success,userId,username }
+}
+
+export default withRouter(
+  connect(mapStatetoProps, {})(withTranslation()(Chat))
+)
+

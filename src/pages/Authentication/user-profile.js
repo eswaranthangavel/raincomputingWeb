@@ -51,7 +51,7 @@ const UserProfile = props => {
   
 
   useEffect(() => {
-    console.log(state,"before state")
+    // console.log(state,"before state")
     setfirstname(firstname)
     setlastname(lastname)
   }, [])
@@ -69,10 +69,10 @@ const UserProfile = props => {
       lastname: Yup.string().required("Please Enter Your Last Name"),
     }),
     onSubmit: values => {
-      console.log({ ...values, id: idx })
+      // console.log({ ...values, id: idx })
       dispatch(updateProfile({ ...values, id: idx }));
 
-      console.log(state,'after state')
+      // console.log(state,'after state')
     },
   })
 
@@ -102,7 +102,7 @@ const UserProfile = props => {
                     </div>
                     <div className="flex-grow-1 align-self-center">
                       <div className="text-muted">
-                        <h5>{firstname +""+ lastname}</h5>
+                        <h5>{firstName +""+ lastName}</h5>
                         <p className="mb-1">{}</p>
                         {/* <p className="mb-0">Id no: #{idx}</p> */}
                       </div>

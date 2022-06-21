@@ -20,7 +20,7 @@ import {
 } from "./actionTypes"
 
 export const getAttorneyByid = user => {
-  console.log(user, "actions")
+  // console.log(user, "actions")
   return {
     type: GET_ATTORNEY_DETAIL,
     payload: { user },

@@ -18,7 +18,7 @@ import { withRouter, Link } from "react-router-dom"
 import user1 from "../../../assets/images/users/avatar-2.jpg"
 
 const ProfileMenu = props => {
- // console.log(props,'props')
+  // console.log(props,'props')
   // Declare a new state variable, which we'll call "menu"
   const [menu, setMenu] = useState(false)
   const [dropdownOpen, setdropdownOpen] = useState(false)
@@ -47,9 +47,7 @@ const ProfileMenu = props => {
       if(username!=props.username)
         setUserName(props.username);
     }catch(ex){
-      console.log(ex,'ex')
     }
-    console.log(props.username,'check props')
   }
 
   const toggle=()=>{

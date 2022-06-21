@@ -22,14 +22,14 @@ function* loginUser({ payload: { user, history } }) {
       password: user.password,
     })
     if (response?.success) {
-      console.log(response, "response")
+      // console.log(response, "response")
       localStorage.setItem("authUser", JSON.stringify(response))
       yield put(loginSuccess(response))
       history.push("/contacts-grid")
     } else {
       yield put(apiError(response?.msg))
     }
-    console.log(response, "response")
+    // console.log(response, "response")
     // /history.push("/contacts-grid")
     //localStorage.setItem("authUser", JSON.stringify(response))
     //yield put(loginSuccess(response))
@@ -93,14 +93,14 @@ function* socialLogin({ payload: { data, history, type } }) {
   }
 }
 function* updateProfile({ payload: { user } }) {
-  console.log(user,"user")
+  // console.log(user,"user")
   try {
       const response = yield call(putProfileUpdate,user)
-      console.log(response,"put response");
+      // console.log(response,"put response");
       yield put(profileSuccess(response))
      
   } catch (error) {
-    console.log(error,'err');
+    // console.log(error,'err');
   }
 }
 

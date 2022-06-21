@@ -62,7 +62,7 @@ const Login = props => {
       password: Yup.string().required("Please Enter Your Password"),
     }),
     onSubmit: values => {
-      console.log(values, "values")
+      // console.log(values, "values")
       dispatch(loginUser(values, props.history))
     },
   })
@@ -73,7 +73,7 @@ const Login = props => {
 
   // handleValidSubmit
   const handleValidSubmit = (event, values) => {
-    console.log(values, "values")
+    // console.log(values, "values")
     dispatch(loginUser(values, props.history))
   }
 
