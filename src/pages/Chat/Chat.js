@@ -157,7 +157,6 @@ const Chat = props => {
   const [username, setusername] = useState("")
 
   const [ioMessages, setIoMessages] = useState([])
-
   useEffect(() => {
     dispatch(onGetChats())
     dispatch(onGetGroups())
@@ -286,7 +285,6 @@ const Chat = props => {
 
     getPrivateChat()
   }, [])
-
   return (
     <React.Fragment>
       <div className="page-content">

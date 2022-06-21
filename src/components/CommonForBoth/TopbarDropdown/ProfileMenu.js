@@ -5,6 +5,7 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
+  ButtonDropdown,
 } from "reactstrap"
 
 //i18n
@@ -17,29 +18,53 @@ import { withRouter, Link } from "react-router-dom"
 import user1 from "../../../assets/images/users/avatar-2.jpg"
 
 const ProfileMenu = props => {
+ // console.log(props,'props')
   // Declare a new state variable, which we'll call "menu"
   const [menu, setMenu] = useState(false)
-
-  const [username, setusername] = useState("Admin")
-
-  useEffect(() => {
-    if (localStorage.getItem("authUser")) {
-      if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
-        const obj = JSON.parse(localStorage.getItem("authUser"))
-        setusername(obj.displayName)
+  const [dropdownOpen, setdropdownOpen] = useState(false)
+  const [username, setUserName] = useState("")
+  //setusername(props.username)
+  useEffect(() => {   
+    setUserName(props.username)
+    if (localStorage.getItem("")) {
+      if (process.env.REACT_APP_DEFAULTAUTH === "") {
+        const obj = JSON.parse(localStorage.getItem(""))
+       // setusername(obj.displayName)
       } else if (
         process.env.REACT_APP_DEFAULTAUTH === "fake" ||
         process.env.REACT_APP_DEFAULTAUTH === "jwt"
       ) {
-        const obj = JSON.parse(localStorage.getItem("authUser"))
-        setusername(obj.username)
+        // const obj = JSON.parse(localStorage.getItem("authUser"))
+        //setusername(obj.username)
       }
     }
   }, [props.success])
 
+  if(props.username)
+  {
+    try
+    {
+      if(username!=props.username)
+        setUserName(props.username);
+    }catch(ex){
+      console.log(ex,'ex')
+    }
+    console.log(props.username,'check props')
+  }
+
+  const toggle=()=>{
+    setdropdownOpen(!dropdownOpen);   
+  }
+  const navigateTo=(path)=>{
+    if(dropdownOpen)
+    {console.log(path)
+      
+    }
+  }
+ 
   return (
     <React.Fragment>
-      <Dropdown
+     <Dropdown
         isOpen={menu}
         toggle={() => setMenu(!menu)}
         className="d-inline-block"
@@ -60,11 +85,15 @@ const ProfileMenu = props => {
           <i className="mdi mdi-chevron-down d-none d-xl-inline-block" />
         </DropdownToggle>
         <DropdownMenu className="dropdown-menu-end">
-          <DropdownItem tag="a" href="/profile">
+          {/* <DropdownItem tag="a" href="/profile">
             {" "}
             <i className="bx bx-user font-size-16 align-middle me-1" />
-            {props.t("Profile")}{" "}
-          </DropdownItem>
+            {props.t("profile")}{" "}
+          </DropdownItem> */}
+           <Link to="/profile" className="dropdown-item">
+           <i className="bx bx-user font-size-16 align-middle me-1" />
+            <span>{props.t("Profile")}</span>
+          </Link>
           {/* <DropdownItem tag="a" href="/crypto-wallet">
             <i className="bx bx-wallet font-size-16 align-middle me-1"/>
             {props.t("My Wallet")}
@@ -84,7 +113,7 @@ const ProfileMenu = props => {
             <span>{props.t("Logout")}</span>
           </Link>
         </DropdownMenu>
-      </Dropdown>
+      </Dropdown> 
     </React.Fragment>
   )
 }
@@ -92,11 +121,15 @@ const ProfileMenu = props => {
 ProfileMenu.propTypes = {
   success: PropTypes.any,
   t: PropTypes.any,
+  username:PropTypes.any,
+  userId:PropTypes.any,
 }
 
 const mapStatetoProps = state => {
   const { error, success } = state.Profile
-  return { error, success }
+  const { userId,username } = state.Login.authUser
+  
+  return { error, success,userId,username }
 }
 
 export default withRouter(
