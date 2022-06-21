@@ -59,11 +59,14 @@ const Register = props => {
       //   "Must Contain 8 Characters, One Uppercase,Lowercase,Number,Special Character"
       // ),
     }),
-    onSubmit: values => {
+    onSubmit: (values,onSubmitProps) => {
       //dispatch(registerUser({ ...values, aflag: true }))
       dispatch(registerUser({ ...values, aflag: true }))
-     //Vidhya
+      onSubmitProps.setSubmitting(false)//Vidhya
+      onSubmitProps.resetForm()
     },
+    
+  
   })
 
   const { user, registrationError, loading } = useSelector(state => ({

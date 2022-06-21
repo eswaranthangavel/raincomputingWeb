@@ -48,16 +48,16 @@ const ChantBox = props => {
     }
   }, [messages, scrollToBottom])
 
-  socket.on("message", message => {
-    console.log("message", message)
-    setMessages(previousMessages => [...previousMessages, message])
-  })
+  // socket.on("message", message => {
+  //   console.log("message", message)
+  //   setMessages(previousMessages => [...previousMessages, message])
+  // })
 
-  const handleMessage = e => {
-    e.preventDefault()
-    socket.emit("message", `${username}-${message}`)
-    setMessage("")
-  }
+  // const handleMessage = e => {
+  //   e.preventDefault()
+  //   socket.emit("message", `${username}-${message}`)
+  //   setMessage("")
+  // }
 
   // const onSendMessage = () => {
   //   const obj = JSON.parse(localStorage.getItem("authUser"))
