@@ -54,6 +54,7 @@ import { useLocation, withRouter } from "react-router-dom"
 import { post } from "helpers/api_helper"
 import { GET_PRIVATECHAT } from "helpers/url_helper"
 import { GET_ALLUSER } from "helpers/url_helper"
+import { users } from "common/data"
 
 function useQuery() {
   const { search } = useLocation()
@@ -62,6 +63,7 @@ function useQuery() {
 
 const Chat = props => {
   const dispatch = useDispatch()
+
   let query = useQuery()
   const user = JSON.parse(localStorage.getItem("authUser"))
 
@@ -71,73 +73,19 @@ const Chat = props => {
     })
   })
 
-  const chats = [
-    {
-      status: "online",
-      image: "avatar2",
-      name: "Raja pandi",
-      description: "Hey! there I'm available",
-      time: "05 min",
-    },
-    {
-      status: "online",
-      image: "avatar3",
-      name: "Adam Miller",
-      description: "I've finished it! See you so",
-      time: "12 min",
-    },
-    {
-      status: "online",
-      image: "avatar3",
-      name: "Keith Gonzales",
-      description: "This theme is awesome!",
-      time: "24 min",
-    },
-    {
-      status: "intermediate",
-      image: "avatar4",
-      name: "Jose Vickery",
-      description: "Nice to meet you",
-      time: "1 hr",
-    },
-    // {
-    //   status: "offline",
-    //   image: "avatar4",
-    //   name: "Mitchel Givens",
-    //   description: "Hey! there I'm available",
-    //   time: "3 hrs",
-    // },
-    // {
-    //   status: "online",
-    //   image: "avatar6",
-    //   name: "Stephen Hadley",
-    //   description: "I've finished it! See you so",
-    //   time: "5 hrs",
-    // },
-    // {
-    //   status: "online",
-    //   image: "avatar6",
-    //   name: "Keith Gonzales",
-    //   description: "This theme is awesome!",
-    //   time: "24 min",
-    // },
-  ]
-
-  // const socket = io("http://localhost:5100", {
-  //   query: { id: user.userID },
-  // })
   const [messageList, setMessageList] = useState([])
   const [currentMessage, setCurrentMessage] = useState("")
 
-  const { groups, contacts, messages, project } = useSelector(state => ({
+  const { groups, contacts, messages, project, state } = useSelector(state => ({
     project: state.projects.attorney.msg,
 
     // chats: state.chat.chats,
     groups: state.chat.groups,
     contacts: state.chat.contacts,
     messages: state.chat.messages,
+    state: state,
   }))
-
+  // console.log("perinbaraja", state)
   const [messageBox, setMessageBox] = useState(null)
 
   const [currentRoomId, setCurrentRoomId] = useState(1)
@@ -154,6 +102,7 @@ const Chat = props => {
   const [username, setusername] = useState("")
 
   const [ioMessages, setIoMessages] = useState([])
+  const [allUser, setAllUser] = useState("")
 
   useEffect(() => {
     dispatch(onGetChats())
@@ -291,10 +240,13 @@ const Chat = props => {
   useEffect(() => {
     const getAllUser = async () => {
       const res = await post(GET_ALLUSER)
+      const { users } = res
+      if (users) {
+        setAllUser(users)
+      }
     }
     getAllUser()
   }, [])
-
   return (
     <React.Fragment>
       <div className="page-content">
@@ -304,7 +256,9 @@ const Chat = props => {
         <Container fluid>
           {/* Render Breadcrumb */}
           <Breadcrumbs title="Rain" breadcrumbItem="Chat" />
-
+          <div>
+            <h1>{users.firstname}</h1>
+          </div>
           <Row>
             <Col lg="12">
               <div className="d-lg-flex">
@@ -410,7 +364,7 @@ const Chat = props => {
                               className="list-unstyled chat-list"
                               id="recent-list"
                             >
-                              <PerfectScrollbar style={{ height: "410px" }}>
+                              {/* <PerfectScrollbar style={{ height: "410px" }}>
                                 {map(chats, chat => (
                                   <li
                                     key={chat.id + chat.status}
@@ -466,7 +420,7 @@ const Chat = props => {
                                     </Link>
                                   </li>
                                 ))}
-                              </PerfectScrollbar>
+                              </PerfectScrollbar> */}
                             </ul>
                           </div>
                         </TabPane>
@@ -513,7 +467,25 @@ const Chat = props => {
                           <h5 className="font-size-14 mb-3">Contact</h5>
 
                           <div>
-                            <PerfectScrollbar style={{ height: "410px" }}>
+                            {allUser &&
+                              allUser.map((users, i) => (
+                                <ul key={i} className="list-unstyled chat-list">
+                                  <li>
+                                    <Link
+                                      to="#"
+                                      onClick={() => {
+                                        userChatOpen(users._id)
+                                      }}
+                                    >
+                                      <h5 className="font-size-14 mb-0">
+                                        {users.firstname} {users.lastname}
+                                      </h5>
+                                    </Link>
+                                  </li>
+                                </ul>
+                              ))}
+
+                            {/* <PerfectScrollbar style={{ height: "410px" }}>
                               {contacts &&
                                 contacts.map(contact => (
                                   <div
@@ -551,7 +523,7 @@ const Chat = props => {
                                     </ul>
                                   </div>
                                 ))}
-                            </PerfectScrollbar>
+                            </PerfectScrollbar> */}
                           </div>
                         </TabPane>
                       </TabContent>
