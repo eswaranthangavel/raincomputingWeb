@@ -29,7 +29,7 @@ const NotificationDropdown = props => {
           id="page-header-notifications-dropdown"
         >
           <i className="bx bx-bell bx-tada" />
-          <span className="badge bg-danger rounded-pill">3</span>
+          <span className="badge bg-danger rounded-pill"></span>
         </DropdownToggle>
 
         <DropdownMenu className="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0">
@@ -50,18 +50,18 @@ const NotificationDropdown = props => {
           <SimpleBar style={{ height: "230px" }}>
             <Link to="" className="text-reset notification-item">
               <div className="d-flex">
-                <div className="avatar-xs me-3">
-                  <span className="avatar-title bg-primary rounded-circle font-size-16">
-                    <i className="bx bx-cart" />
+                <div>
+                  <span >
+                    <i className="bx bx-caret-down" />
                   </span>
                 </div>
                 <div className="flex-grow-1">
                   <h6 className="mt-0 mb-1">
-                    {props.t("Your order is placed")}
+                    {props.t("Your Case is Under Process")}
                   </h6>
                   <div className="font-size-12 text-muted">
                     <p className="mb-1">
-                      {props.t("If several languages coalesce the grammar")}
+                      {props.t("Recent Attorney Details")}
                     </p>
                     <p className="mb-0">
                       <i className="mdi mdi-clock-outline" />{" "}
@@ -73,20 +73,16 @@ const NotificationDropdown = props => {
             </Link>
             <Link to="" className="text-reset notification-item">
               <div className="d-flex">
-                <img
-                  src={avatar3}
-                  className="me-3 rounded-circle avatar-xs"
-                  alt="user-pic"
-                />
+                
                 <div className="flex-grow-1">
-                  <h6 className="mt-0 mb-1">James Lemire</h6>
+                  <h6 className="mt-0 mb-1">New Message</h6>
                   <div className="font-size-12 text-muted">
                     <p className="mb-1">
-                      {props.t("It will seem like simplified English") + "."}
+                      {props.t("") + "."}
                     </p>
                     <p className="mb-0">
-                      <i className="mdi mdi-clock-outline" />
-                      {props.t("1 hours ago")}{" "}
+                      <i className="bx bx-message-alt-detail" />
+                      {props.t("New Mail")}{" "}
                     </p>
                   </div>
                 </div>
@@ -101,11 +97,11 @@ const NotificationDropdown = props => {
                 </div>
                 <div className="flex-grow-1">
                   <h6 className="mt-0 mb-1">
-                    {props.t("Your item is shipped")}
+                    {props.t("Recent Attorney Profile")}
                   </h6>
                   <div className="font-size-12 text-muted">
                     <p className="mb-1">
-                      {props.t("If several languages coalesce the grammar")}
+                      {props.t("Case Details")}
                     </p>
                     <p className="mb-0">
                       <i className="mdi mdi-clock-outline" />{" "}
@@ -118,22 +114,18 @@ const NotificationDropdown = props => {
 
             <Link to="" className="text-reset notification-item">
               <div className="d-flex">
-                <img
-                  src={avatar4}
-                  className="me-3 rounded-circle avatar-xs"
-                  alt="user-pic"
-                />
+                
                 <div className="flex-grow-1">
-                  <h6 className="mt-0 mb-1">Salena Layfield</h6>
+                  <h6 className="mt-0 mb-1">New Message</h6>
                   <div className="font-size-12 text-muted">
                     <p className="mb-1">
                       {props.t(
-                        "As a skeptical Cambridge friend of mine occidental"
+                        ""
                       ) + "."}
                     </p>
                     <p className="mb-0">
-                      <i className="mdi mdi-clock-outline" />
-                      {props.t("1 hours ago")}{" "}
+                      <i className="bx bx-message-alt-detail" />
+                      {props.t("Case Procss 50% Completed")}{" "}
                     </p>
                   </div>
                 </div>
