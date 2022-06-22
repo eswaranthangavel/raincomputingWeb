@@ -102,7 +102,8 @@ const Chat = props => {
   const [username, setusername] = useState("")
 
   const [ioMessages, setIoMessages] = useState([])
-  const [allUser, setAllUser] = useState("")
+  const [allUser, setAllUser] = useState([])
+  const [selectedUser, setSelectedUser] = useState("")
 
   useEffect(() => {
     dispatch(onGetChats())
@@ -120,7 +121,7 @@ const Chat = props => {
     // const socket = io.connect("http://localhost:5100")
 
     dispatch(onGetAttorneyDetails({ objectId: query.get("uid") }))
-    console.log("project", project)
+    // console.log("project", project)
 
     if (localStorage.getItem("authUser")) {
       const obj = JSON.parse(localStorage.getItem("authUser"))
@@ -129,15 +130,15 @@ const Chat = props => {
   }, [])
 
   const handleAddMessage = () => {
-    console.log("handleAddMessage")
+    console.log("receiver : ", selectedUser)
+    console.log("sender : ", user.userID)
+
     if (curMessage) {
       // const obj = JSON.parse(localStorage.getItem("authUser"))
 
       const msgData = {
-        receiver:
-          user.userID === "62aace8c1da006a980c989e0"
-            ? "62ac6389015671ab8c1f55c0"
-            : "62aace8c1da006a980c989e0",
+        receiver: selectedUser,
+
         message: curMessage,
         sender: user.userID,
         createdAt: new Date(Date.now()),
@@ -147,14 +148,14 @@ const Chat = props => {
       setcurMessage("")
     }
   }
-  console.log("ioMessages", ioMessages)
+  // console.log("selecteduser", selectedUser)
 
   useEffect(() => {
     if (socket == null) return
 
     socket.off("receive_message").on("receive_message", props => {
       setIoMessages([...ioMessages, props])
-      console.log("ioMessages in", ioMessages)
+      // console.log("ioMessages in", ioMessages)
     })
   }, [socket, handleAddMessage])
 
@@ -180,7 +181,7 @@ const Chat = props => {
   }
 
   //Use For Chat Box
-  const userChatOpen = (id, username, status, roomId) => {
+  const userChatOpen = (_id, username, status, roomId) => {
     setChat_Box_Username(username)
     setCurrentRoomId(roomId)
     dispatch(onGetMessages(roomId))
@@ -220,10 +221,7 @@ const Chat = props => {
   useEffect(() => {
     const payload = {
       sender: user.userID,
-      receiver:
-        user.userID === "62aace8c1da006a980c989e0"
-          ? "62ac6389015671ab8c1f55c0"
-          : "62aace8c1da006a980c989e0",
+      receiver: selectedUser,
     }
 
     const getPrivateChat = async () => {
@@ -243,6 +241,7 @@ const Chat = props => {
       const { users } = res
       if (users) {
         setAllUser(users)
+        setSelectedUser(users[0].id)
       }
     }
     getAllUser()
@@ -471,16 +470,16 @@ const Chat = props => {
                               allUser.map((users, i) => (
                                 <ul key={i} className="list-unstyled chat-list">
                                   <li>
-                                    <Link
-                                      to="#"
+                                    <p
                                       onClick={() => {
-                                        userChatOpen(users._id)
+                                        setSelectedUser(users._id)
+                                        // userChatOpen(users._id)
                                       }}
                                     >
                                       <h5 className="font-size-14 mb-0">
                                         {users.firstname} {users.lastname}
                                       </h5>
-                                    </Link>
+                                    </p>
                                   </li>
                                 </ul>
                               ))}
@@ -641,61 +640,6 @@ const Chat = props => {
                               </div>
                             </li>
 
-                            {/* Theme component */}
-                            {/* {messages &&
-                              map(messages, message => (
-                                <li
-                                  key={"test_k" + message.id}
-                                  className={
-                                    message.sender === username.name
-                                      ? "right"
-                                      : ""
-                                  }
-                                >
-                                  <div className="conversation-list">
-                                    <UncontrolledDropdown>
-                                      <DropdownToggle
-                                        href="#"
-                                        className="btn nav-btn"
-                                        tag="i"
-                                      >
-                                        <i className="bx bx-dots-vertical-rounded" />
-                                      </DropdownToggle>
-                                      <DropdownMenu>
-                                        <DropdownItem href="#">
-                                          Copy
-                                        </DropdownItem>
-                                        <DropdownItem href="#">
-                                          Save
-                                        </DropdownItem>
-                                        <DropdownItem href="#">
-                                          Forward
-                                        </DropdownItem>
-                                        <DropdownItem href="#">
-                                          Delete
-                                        </DropdownItem>
-                                      </DropdownMenu>
-                                    </UncontrolledDropdown>
-                                    <div className="ctext-wrap">
-                                      <div className="conversation-name">
-                                        {message.sender}
-                                      </div>
-                                      <p>{message.message}</p>
-                                      <p className="chat-time mb-0">
-                                        <i className="bx bx-time-five align-middle me-1" />
-                                        {moment(message.createdAt).format(
-                                          "DD-MM-YY hh:mm"
-                                        )}
-                                      </p>
-                                    </div>
-                                  </div>
-                                </li>
-                              ))} */}
-
-                            {/* Custom Component */}
-                            {/* {ioMessages.map((mes, i) => (
-                              <div key={i}>{mes.message}</div>
-                            ))} */}
                             {ioMessages &&
                               ioMessages.map((message, i) => (
                                 <li
