@@ -53,6 +53,7 @@ import { getAttorneyByid as onGetAttorneyDetails } from "store/projects/actions"
 import { useLocation, withRouter } from "react-router-dom"
 import { post } from "helpers/api_helper"
 import { GET_PRIVATECHAT } from "helpers/url_helper"
+import { GET_ALLUSER } from "helpers/url_helper"
 
 function useQuery() {
   const { search } = useLocation()
@@ -118,6 +119,7 @@ const Chat = props => {
 
   const { groups, contacts, messages, project } = useSelector(state => ({
     project: state.projects.attorney.msg,
+
     // chats: state.chat.chats,
     groups: state.chat.groups,
     contacts: state.chat.contacts,
@@ -140,6 +142,7 @@ const Chat = props => {
   const [username, setusername] = useState("")
 
   const [ioMessages, setIoMessages] = useState([])
+
   useEffect(() => {
     dispatch(onGetChats())
     dispatch(onGetGroups())
@@ -152,8 +155,8 @@ const Chat = props => {
   }, [ioMessages])
 
   useEffect(() => {
-    console.log(username, "username")
-    const socket = io.connect("http://localhost:5100")
+    // console.log(username, "username")
+    // const socket = io.connect("http://localhost:5100")
 
     dispatch(onGetAttorneyDetails({ objectId: query.get("uid") }))
     console.log("project", project)
@@ -165,8 +168,9 @@ const Chat = props => {
   }, [])
 
   const handleAddMessage = () => {
+    console.log("handleAddMessage")
     if (curMessage) {
-      console.log("handleAddMessage")
+      // const obj = JSON.parse(localStorage.getItem("authUser"))
 
       const msgData = {
         receiver:
@@ -194,6 +198,7 @@ const Chat = props => {
   }, [socket, handleAddMessage])
 
   //
+
   //Toggle Chat Box Menus
   const toggleSearch = () => {
     setsearch_Menu(!search_Menu)
@@ -270,6 +275,14 @@ const Chat = props => {
 
     getPrivateChat()
   }, [])
+
+  useEffect(() => {
+    const getAllUser = async () => {
+      const res = await post(GET_ALLUSER)
+    }
+    getAllUser()
+  }, [])
+
   return (
     <React.Fragment>
       <div className="page-content">

@@ -131,3 +131,5 @@ export const GET_ATTORNEY_BY_ID =
 
 export const GET_PRIVATECHAT =
   "http://localhost:5100/api/chat/allPrivateMessages"
+
+export const GET_ALLUSER = "http://localhost:5100/api/user/allUser"
