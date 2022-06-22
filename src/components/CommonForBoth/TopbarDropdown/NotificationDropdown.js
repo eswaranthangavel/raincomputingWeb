@@ -48,13 +48,13 @@ const NotificationDropdown = props => {
           </div>
 
           <SimpleBar style={{ height: "230px" }}>
-            <Link to="" className="text-reset notification-item">
               <div className="d-flex">
                 <div>
                   <span >
                     <i className="bx bx-caret-down" />
                   </span>
                 </div>
+                <Link to= "contacts-grid" className="">
                 <div className="flex-grow-1">
                   <h6 className="mt-0 mb-1">
                     {props.t("Your Case is Under Process")}
@@ -69,11 +69,10 @@ const NotificationDropdown = props => {
                     </p>
                   </div>
                 </div>
+                </Link>
               </div>
-            </Link>
-            <Link to="" className="text-reset notification-item">
+            <Link to="Chat" className="">
               <div className="d-flex">
-                
                 <div className="flex-grow-1">
                   <h6 className="mt-0 mb-1">New Message</h6>
                   <div className="font-size-12 text-muted">
@@ -88,7 +87,7 @@ const NotificationDropdown = props => {
                 </div>
               </div>
             </Link>
-            <Link to="" className="text-reset notification-item">
+            <Link to="contacts-grid" >
               <div className="d-flex">
                 <div className="avatar-xs me-3">
                   <span className="avatar-title bg-success rounded-circle font-size-16">
@@ -112,7 +111,7 @@ const NotificationDropdown = props => {
               </div>
             </Link>
 
-            <Link to="" className="text-reset notification-item">
+            <Link to="Chat" >
               <div className="d-flex">
                 
                 <div className="flex-grow-1">
