@@ -103,7 +103,7 @@ const Chat = props => {
 
   const [ioMessages, setIoMessages] = useState([])
   const [allUser, setAllUser] = useState([])
-  const [selectedUser, setSelectedUser] = useState("")
+  const [selectedUser, setSelectedUser] = useState({})
 
   useEffect(() => {
     dispatch(onGetChats())
@@ -130,14 +130,14 @@ const Chat = props => {
   }, [])
 
   const handleAddMessage = () => {
-    console.log("receiver : ", selectedUser)
+    console.log("receiver : ", selectedUser._id)
     console.log("sender : ", user.userID)
 
     if (curMessage) {
       // const obj = JSON.parse(localStorage.getItem("authUser"))
 
       const msgData = {
-        receiver: selectedUser,
+        receiver: selectedUser._id,
 
         message: curMessage,
         sender: user.userID,
@@ -221,19 +221,18 @@ const Chat = props => {
   useEffect(() => {
     const payload = {
       sender: user.userID,
-      receiver: selectedUser,
+      receiver: selectedUser._id,
     }
-
+    console.log("payload", payload)
     const getPrivateChat = async () => {
       const res = await post(GET_PRIVATECHAT, payload)
       const { messages } = res
-      if (messages.length > 0) {
-        setIoMessages(messages)
-      }
+
+      setIoMessages(messages)
     }
 
     getPrivateChat()
-  }, [])
+  }, [selectedUser])
 
   useEffect(() => {
     const getAllUser = async () => {
@@ -241,7 +240,7 @@ const Chat = props => {
       const { users } = res
       if (users) {
         setAllUser(users)
-        setSelectedUser(users[0].id)
+        setSelectedUser(users[0])
       }
     }
     getAllUser()
@@ -465,26 +464,31 @@ const Chat = props => {
                         <TabPane tabId="3">
                           <h5 className="font-size-14 mb-3">Contact</h5>
 
-                          <div>
+                          <PerfectScrollbar style={{ height: "410px" }}>
                             {allUser &&
                               allUser.map((users, i) => (
                                 <ul key={i} className="list-unstyled chat-list">
                                   <li>
-                                    <p
+                                    <Link
+                                      to={`/chat?uid=${users._id}`}
                                       onClick={() => {
-                                        setSelectedUser(users._id)
-                                        // userChatOpen(users._id)
+                                        console.log(users)
+                                        setSelectedUser(users)
                                       }}
                                     >
-                                      <h5 className="font-size-14 mb-0">
-                                        {users.firstname} {users.lastname}
-                                      </h5>
-                                    </p>
+                                      <div className="d-flex justify-content-between">
+                                        <h5 className="font-size-14 mb-0">
+                                          {users.firstname} {users.lastname}
+                                        </h5>
+                                        <i className="font-size-24 bx bx-plus-circle" />
+                                      </div>
+                                    </Link>
                                   </li>
                                 </ul>
                               ))}
+                          </PerfectScrollbar>
 
-                            {/* <PerfectScrollbar style={{ height: "410px" }}>
+                          {/* <PerfectScrollbar style={{ height: "410px" }}>
                               {contacts &&
                                 contacts.map(contact => (
                                   <div
@@ -523,7 +527,6 @@ const Chat = props => {
                                   </div>
                                 ))}
                             </PerfectScrollbar> */}
-                          </div>
                         </TabPane>
                       </TabContent>
                     </div>
@@ -535,8 +538,9 @@ const Chat = props => {
                       <Row>
                         <Col md="4" xs="9">
                           <h5 className="font-size-15 mb-1">
-                            {project?.firstname} {project?.lastname}{" "}
-                            {project?.initial}
+                            {/* {project?.firstname} {project?.lastname}{" "}
+                            {project?.initial} */}
+                            {selectedUser.firstname} {selectedUser.lastname}
                           </h5>
 
                           <p className="text-muted mb-0">
@@ -678,8 +682,10 @@ const Chat = props => {
                                     <div className="ctext-wrap">
                                       <div className="conversation-name">
                                         {message.sender == user.userID
-                                          ? "you"
-                                          : project?.firstname}
+                                          ? username
+                                          : selectedUser.firstname +
+                                            " " +
+                                            selectedUser.lastname}
                                       </div>
                                       <p>{message.message}</p>
                                       <p className="chat-time mb-0">
