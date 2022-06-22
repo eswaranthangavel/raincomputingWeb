@@ -73,53 +73,41 @@ const Chat = props => {
   const chats = [
     {
       status: "online",
-      image: "avatar2",
+      image: "avatar1",
       name: "Raja pandi",
       description: "Hey! there I'm available",
       time: "05 min",
     },
     {
       status: "online",
-      image: "avatar3",
-      name: "Adam Miller",
+      image: "avatar2",
+      name: "Zachary M.Thomson",
       description: "I've finished it! See you so",
       time: "12 min",
     },
     {
       status: "online",
       image: "avatar3",
-      name: "Keith Gonzales",
+      name: "Stephan Y.Chow",
       description: "This theme is awesome!",
       time: "24 min",
     },
     {
       status: "intermediate",
       image: "avatar4",
-      name: "Jose Vickery",
+      name: "Hsuanyeh Chang",
       description: "Nice to meet you",
       time: "1 hr",
     },
-    // {
-    //   status: "offline",
-    //   image: "avatar4",
-    //   name: "Mitchel Givens",
-    //   description: "Hey! there I'm available",
-    //   time: "3 hrs",
-    // },
-    // {
-    //   status: "online",
-    //   image: "avatar6",
-    //   name: "Stephen Hadley",
-    //   description: "I've finished it! See you so",
-    //   time: "5 hrs",
-    // },
-    // {
-    //   status: "online",
-    //   image: "avatar6",
-    //   name: "Keith Gonzales",
-    //   description: "This theme is awesome!",
-    //   time: "24 min",
-    // },
+   {
+      status: "offline",
+      image: "avatar5",
+      name: "Peter Yi",
+      description: "Hey! there I'm busy Right now",
+      time: "3 hrs",
+     },
+   
+     
   ]
 
   // const socket = io("http://localhost:5100", {

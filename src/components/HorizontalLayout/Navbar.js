@@ -4,6 +4,8 @@ import { Row, Col, Collapse } from "reactstrap"
 import { Link, withRouter } from "react-router-dom"
 import classname from "classnames"
 
+
+
 //i18n
 import { withTranslation } from "react-i18next"
 
@@ -95,11 +97,21 @@ const Navbar = props => {
                     {props.t("Home")} {props.menuOpen}
                   </Link>
                 </li>
+                  
+                <li className="nav-item dropdown">
+                  <Link
+                    className="nav-link dropdown-toggle arrow-none"
+                    to="/Chat"
+                  >
+                    <i className="bx bxl-messenger me-2"></i>
+                    {props.t("Chat")} {props.menuOpen}
+                  </Link>
+                </li>
               </ul>
             </Collapse>
           </nav>
         </div>
-      </div>
+        </div>
     </React.Fragment>
   )
 }
@@ -109,6 +121,7 @@ Navbar.propTypes = {
   location: PropTypes.any,
   menuOpen: PropTypes.any,
   t: PropTypes.any,
+
 }
 
 const mapStatetoProps = state => {
