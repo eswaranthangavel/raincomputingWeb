@@ -242,8 +242,10 @@ const Chat = props => {
   }, [selectedUser])
 
   useEffect(() => {
+    const payload = { userID: user.userID }
+
     const getAllUser = async () => {
-      const res = await post(GET_ALLUSER)
+      const res = await post(GET_ALLUSER, payload)
       const { users } = res
       if (users) {
         setAllUser(users)
@@ -261,9 +263,7 @@ const Chat = props => {
         <Container fluid>
           {/* Render Breadcrumb */}
           <Breadcrumbs title="Rain" breadcrumbItem="Chat" />
-          <div>
-            <h1>{users.firstname}</h1>
-          </div>
+
           <Row>
             <Col lg="12">
               <div className="d-lg-flex">
