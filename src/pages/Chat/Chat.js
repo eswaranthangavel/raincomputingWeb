@@ -148,13 +148,21 @@ const Chat = props => {
       setcurMessage("")
     }
   }
+  console.log("messagedata", ioMessages)
   // console.log("selecteduser", selectedUser)
 
   useEffect(() => {
     if (socket == null) return
 
     socket.off("receive_message").on("receive_message", props => {
-      setIoMessages([...ioMessages, props])
+      console.log("receiver props", props)
+      console.log("selectedUser._id", selectedUser._id)
+      if (props.sender === selectedUser._id) {
+        console.log("sending message")
+
+        setIoMessages([...ioMessages, props])
+      }
+
       // console.log("ioMessages in", ioMessages)
     })
   }, [socket, handleAddMessage])
@@ -309,7 +317,7 @@ const Chat = props => {
                       </div>
                     </div>
 
-                    <div className="chat-leftsidebar-nav mb-2">
+                    <div className="chat-leftsidebar-nav ">
                       <Nav pills justified>
                         <NavItem>
                           <NavLink
@@ -470,7 +478,7 @@ const Chat = props => {
                                 <ul key={i} className="list-unstyled chat-list">
                                   <li>
                                     <Link
-                                      to={`/chat?uid=${users._id}`}
+                                      to="#"
                                       onClick={() => {
                                         console.log(users)
                                         setSelectedUser(users)
@@ -803,6 +811,8 @@ Chat.propTypes = {
   onGetMessages: PropTypes.func,
   onAddMessage: PropTypes.func,
   project: PropTypes.object,
+  receiver: PropTypes.string,
+  sender: PropTypes.string,
 }
 
 export default Chat
