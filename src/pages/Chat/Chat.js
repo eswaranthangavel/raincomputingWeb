@@ -54,7 +54,6 @@ import { useLocation, withRouter } from "react-router-dom"
 import { post } from "helpers/api_helper"
 import { GET_PRIVATECHAT } from "helpers/url_helper"
 import { GET_ALLUSER } from "helpers/url_helper"
-import { users } from "common/data"
 
 function useQuery() {
   const { search } = useLocation()
