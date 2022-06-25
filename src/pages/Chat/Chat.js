@@ -358,10 +358,7 @@ const Chat = props => {
                           </NavLink>
                         </NavItem>
                       </Nav>
-                      <TabContent
-                        activeTab={activeTab}
-                        className="py-4  d-none d-lg-block "
-                      >
+                      <TabContent activeTab={activeTab} className="py-4 ">
                         <TabPane tabId="1">
                           <div>
                             <h5 className="font-size-14 mb-3">Recent</h5>
