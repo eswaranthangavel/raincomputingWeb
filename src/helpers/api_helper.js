@@ -19,12 +19,12 @@ axiosApi.interceptors.response.use(
 )
 
 export async function get(url, config = {}) {
-  // console.log(url)
+  console.log(url)
   return await axiosApi.get(url, { ...config }).then(response => response.data)
 }
 
 export async function post(url, data, config = {}) {
-  // console.log(url, data)
+  console.log(url, data)
   return axiosApi
     .post(url, { ...data }, { ...config })
     .then(response => response.data)

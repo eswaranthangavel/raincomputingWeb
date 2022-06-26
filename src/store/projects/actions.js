@@ -20,16 +20,16 @@ import {
 } from "./actionTypes"
 
 export const getAttorneyByid = user => {
-  // console.log(user, "actions")
+  console.log(user, "actions")
   return {
     type: GET_ATTORNEY_DETAIL,
     payload: { user },
   }
 }
 //update Attorney Details
-export const getAttorneyDetail = () => {
+export const getAttorneyDetail =  () => {
   return {
-    type: GET_ATTORNEY_DETAIL,
+    type:GET_ATTORNEY_DETAIL,
   }
 }
 export const getAttorneyDetailSuccess = AttorneyDetail => ({

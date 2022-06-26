@@ -179,7 +179,6 @@ import Popup from "../pages/popup/index"
 
 //Landingpage
 import LandingPage from "pages/Contacts/landingPage"
-import RcChat from "rainComputing/pages/chat"
 
 const authProtectedRoutes = [
   { path: "/dashboard", component: Dashboard },
@@ -323,9 +322,6 @@ const authProtectedRoutes = [
   { path: "/pages-timeline", component: PagesTimeline },
   { path: "/pages-faqs", component: PagesFaqs },
   { path: "/pages-pricing", component: PagesPricing },
-
-  //RC Chat
-  { path: "/rc-chat", component: RcChat },
 
   // this route should be at the end of all other routes
   // eslint-disable-next-line react/display-name

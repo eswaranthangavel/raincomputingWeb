@@ -18,7 +18,6 @@ import contactsSaga from "./contacts/saga"
 import dashboardSaga from "./dashboard/saga"
 import dashboardSaasSaga from "./dashboard-saas/saga"
 import demoSaga from "./demo/saga"
-import rcChatSaga from "rainComputing/store/chat/saga"
 export default function* rootSaga() {
   yield all([
     //public
@@ -39,6 +38,5 @@ export default function* rootSaga() {
     fork(dashboardSaga),
     fork(dashboardSaasSaga),
     fork(demoSaga),
-    fork(rcChatSaga),
   ])
 }
