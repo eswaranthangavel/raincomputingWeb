@@ -133,3 +133,8 @@ export const GET_PRIVATECHAT =
   "http://localhost:5100/api/chat/allPrivateMessages"
 
 export const GET_ALLUSER = "http://localhost:5100/api/user/allUser"
+
+/* RC */
+
+export const GET_ALL_CHATS =
+  "http://localhost:5100/api/pchat/getAllChatRoomByUserId"

@@ -43,8 +43,10 @@ import Dashboard from "./dashboard/reducer"
 import DashboardSaas from "./dashboard-saas/reducer"
 
 //Demo
-
 import Demo from "./demo/reducer"
+
+//RC
+import RcChat from "../rainComputing/store/chat/reducer"
 
 const rootReducer = combineReducers({
   // public
@@ -65,6 +67,7 @@ const rootReducer = combineReducers({
   Dashboard,
   DashboardSaas,
   Demo,
+  RcChat,
 })
 
 export default rootReducer
