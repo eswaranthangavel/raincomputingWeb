@@ -45,7 +45,7 @@ const CardContact = props => {
           <CardFooter className="bg-transparent border-top">
             <div className="contact-links d-flex font-size-20">
               <div className="flex-fill">
-                <Link to={`/chat?uid=${user._id}`} id={"message" + user._id}>
+                <Link to={`/rc-chat?uid=${user._id}`} id={"message" + user._id}>
                   <i className="bx bx-message-square-dots" />
                   <UncontrolledTooltip
                     placement="bottom"

@@ -698,9 +698,7 @@ const RcChat = props => {
                                         <div className="conversation-name">
                                           {message.message.sender == user.userID
                                             ? username
-                                            : selectedUser.firstname +
-                                              " " +
-                                              selectedUser.lastname}
+                                            : getChatName(currentRoom.members)}
                                         </div>
                                         <p>{message.message.messageData}</p>
                                         <p className="chat-time mb-0">
