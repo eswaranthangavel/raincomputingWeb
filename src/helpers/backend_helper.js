@@ -26,6 +26,8 @@ const getChats = () => get(url.GET_CHATS)
 /* RC */
 
 const getAllChats = userID => post(url.GET_ALL_CHATS, userID)
+const createChatRoom = members => post(url.CREATE_CHATROOM, members)
+const getMessages = chatRoomId => post(url.GET_MESSAGES, chatRoomId)
 
 export {
   getAttorneysData,
@@ -37,4 +39,6 @@ export {
   putProfileUpdate,
   getChats,
   getAllChats,
+  createChatRoom,
+  getMessages,
 }

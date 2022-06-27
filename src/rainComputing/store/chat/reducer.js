@@ -9,6 +9,8 @@ import {
   GET_MESSAGES_FAIL,
   POST_ADD_MESSAGE_SUCCESS,
   POST_ADD_MESSAGE_FAIL,
+  CREATE_CHATROOM_SUCCESS,
+  CREATE_CHATROOM_FAIL,
 } from "./actionTypes"
 
 const INIT_STATE = {
@@ -17,6 +19,7 @@ const INIT_STATE = {
   contacts: [],
   messages: [],
   error: {},
+  chatRoom: {},
 }
 
 const RcChat = (state = INIT_STATE, action) => {
@@ -25,6 +28,7 @@ const RcChat = (state = INIT_STATE, action) => {
       return {
         ...state,
         chats: action.payload,
+        chatRoom: action.payload[0],
       }
 
     case GET_ALL_CHATS_FAIL:
@@ -76,6 +80,17 @@ const RcChat = (state = INIT_STATE, action) => {
       }
 
     case POST_ADD_MESSAGE_FAIL:
+      return {
+        ...state,
+        error: action.payload,
+      }
+    case CREATE_CHATROOM_SUCCESS:
+      return {
+        ...state,
+        chatRoom: action.payload,
+      }
+
+    case CREATE_CHATROOM_FAIL:
       return {
         ...state,
         error: action.payload,

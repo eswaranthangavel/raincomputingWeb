@@ -34,8 +34,9 @@ export const getAllChatsFail = error => ({
   payload: error,
 })
 
-export const createChatRoom = () => ({
+export const createChatRoom = members => ({
   type: CREATE_CHATROOM,
+  payload: members,
 })
 
 export const createChatRoomSuccess = chatRoom => ({
@@ -76,9 +77,9 @@ export const getContactsFail = error => ({
   payload: error,
 })
 
-export const getMessages = roomId => ({
+export const getMessages = chatRoomId => ({
   type: GET_MESSAGES,
-  roomId,
+  payload: chatRoomId,
 })
 
 export const getMessagesSuccess = messages => ({

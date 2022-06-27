@@ -47,7 +47,7 @@ export const GET_CATEGORIES = "/categories"
 export const GET_CHATS = "/chats"
 export const GET_GROUPS = "/groups"
 export const GET_CONTACTS = "/contacts"
-export const GET_MESSAGES = "/messages"
+// export const GET_MESSAGES = "/messages"
 export const ADD_MESSAGE = "/add/messages"
 
 //ORDERS
@@ -138,3 +138,7 @@ export const GET_ALLUSER = "http://localhost:5100/api/user/allUser"
 
 export const GET_ALL_CHATS =
   "http://localhost:5100/api/pchat/getAllChatRoomByUserId"
+
+export const CREATE_CHATROOM = "http://localhost:5100/api/pchat/createChatRoom"
+
+export const GET_MESSAGES = "http://localhost:5100/api/pchat/getRoomMessages"

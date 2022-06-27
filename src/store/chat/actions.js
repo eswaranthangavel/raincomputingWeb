@@ -58,20 +58,20 @@ export const getContactsFail = error => ({
   payload: error,
 })
 
-export const getMessages = roomId => ({
-  type: GET_MESSAGES,
-  roomId,
-})
+// export const getMessages = roomId => ({
+//   type: GET_MESSAGES,
+//   roomId,
+// })
 
-export const getMessagesSuccess = messages => ({
-  type: GET_MESSAGES_SUCCESS,
-  payload: messages,
-})
+// export const getMessagesSuccess = messages => ({
+//   type: GET_MESSAGES_SUCCESS,
+//   payload: messages,
+// })
 
-export const getMessagesFail = error => ({
-  type: GET_MESSAGES_FAIL,
-  payload: error,
-})
+// export const getMessagesFail = error => ({
+//   type: GET_MESSAGES_FAIL,
+//   payload: error,
+// })
 
 export const addMessage = message => ({
   type: POST_ADD_MESSAGE,
