@@ -694,7 +694,14 @@ const RcChat = props => {
                                           </DropdownItem>
                                         </DropdownMenu>
                                       </UncontrolledDropdown>
-                                      <div className="ctext-wrap">
+                                      <div
+                                        className="ctext-wrap"
+                                        style={{
+                                          backgroundColor:
+                                            message.message.sender ==
+                                              user.userID && "#b3ffb3",
+                                        }}
+                                      >
                                         <div className="conversation-name">
                                           {message.message.sender == user.userID
                                             ? username
