@@ -91,7 +91,6 @@ const RcChat = props => {
       state: state,
     })
   )
-  // console.log("perinbaraja", state)
   const [messageBox, setMessageBox] = useState(null)
 
   const [currentRoomId, setCurrentRoomId] = useState("")
@@ -125,12 +124,7 @@ const RcChat = props => {
   }, [ioMessages])
 
   useEffect(() => {
-    // console.log(username, "username")
-    // const socket = io.connect("http://localhost:5100")
-
     dispatch(onGetAttorneyDetails({ objectId: query.get("uid") }))
-    // console.log("project", project)
-
     if (localStorage.getItem("authUser")) {
       const obj = JSON.parse(localStorage.getItem("authUser"))
       setusername(obj.username)
@@ -170,6 +164,10 @@ const RcChat = props => {
   const getChatName = members => {
     const chatMember = members.filter(member => member._id !== user.userID)
     return chatMember[0].firstname + " " + chatMember[0].lastname
+  }
+  const getMemberName = id => {
+    const memberName = currentRoom.members.find(member => member._id === id)
+    return memberName.firstname + " " + memberName.lastname
   }
 
   useEffect(() => {
@@ -448,7 +446,7 @@ const RcChat = props => {
                                         <div className="flex-grow-1 overflow-hidden">
                                           <h5 className="text-truncate font-size-14 mb-1">
                                             {chat.isGroup
-                                              ? "GROUP"
+                                              ? chat.groupName
                                               : getChatName(chat.members)}
                                           </h5>
                                           {/* <p className="text-truncate mb-0">
@@ -473,18 +471,14 @@ const RcChat = props => {
                           <h5 className="font-size-14 mb-3">Group</h5>
                           <ul className="list-unstyled chat-list">
                             <PerfectScrollbar style={{ height: "410px" }}>
-                              {groups &&
-                                groups.map(group => (
-                                  <li key={"test" + group.image}>
+                              {RcChat &&
+                                RcChat.filter(f => f.isGroup).map(group => (
+                                  <li key={group._id}>
                                     <Link
                                       to="#"
                                       onClick={() => {
-                                        userChatOpen(
-                                          group.id,
-                                          group.name,
-                                          group.status,
-                                          Math.floor(Math.random() * 100)
-                                        )
+                                        setCurrentRoom(group)
+                                        setCurrentRoomId(group._id)
                                       }}
                                     >
                                       <div className="d-flex align-items-center">
@@ -496,7 +490,7 @@ const RcChat = props => {
 
                                         <div className="flex-grow-1">
                                           <h5 className="font-size-14 mb-0">
-                                            {group.name}
+                                            {group.groupName}
                                           </h5>
                                         </div>
                                       </div>
@@ -554,7 +548,7 @@ const RcChat = props => {
                               {/* {project?.firstname} {project?.lastname}{" "}
                             {project?.initial} */}
                               {currentRoom && currentRoom.isGroup
-                                ? "GROUP"
+                                ? currentRoom.groupName
                                 : getChatName(currentRoom.members)}
                             </h5>
 
@@ -703,11 +697,20 @@ const RcChat = props => {
                                           </DropdownItem>
                                         </DropdownMenu>
                                       </UncontrolledDropdown>
-                                      <div className="ctext-wrap">
+                                      <div
+                                        className="ctext-wrap"
+                                        style={{
+                                          backgroundColor:
+                                            message.message.sender ==
+                                              user.userID && "#b3ffb3",
+                                        }}
+                                      >
                                         <div className="conversation-name">
                                           {message.message.sender == user.userID
                                             ? username
-                                            : getChatName(currentRoom.members)}
+                                            : getMemberName(
+                                                message.message.sender
+                                              )}
                                         </div>
                                         <p>{message.message.messageData}</p>
                                         <p className="chat-time mb-0">
