@@ -56,6 +56,7 @@ import { useLocation, withRouter } from "react-router-dom"
 import { post } from "helpers/api_helper"
 import { CREATE_CHATROOM, GET_PRIVATECHAT } from "helpers/url_helper"
 import { GET_ALLUSER } from "helpers/url_helper"
+import { useSocket } from "SocketProvider"
 
 function useQuery() {
   const { search } = useLocation()
@@ -67,12 +68,13 @@ const RcChat = props => {
 
   let query = useQuery()
   const user = JSON.parse(localStorage.getItem("authUser"))
+  const socket = useSocket()
 
-  const [socket, setSocket] = useState(() => {
-    return io("http://localhost:5100", {
-      query: { id: user.userID },
-    })
-  })
+  // const [socket, setSocket] = useState(() => {
+  //   return io("http://localhost:5100", {
+  //     query: { id: user.userID },
+  //   })
+  // })
 
   const [messageList, setMessageList] = useState([])
   const [currentMessage, setCurrentMessage] = useState("")
@@ -515,15 +517,22 @@ const RcChat = props => {
                                   <li>
                                     <Link
                                       to="#"
-                                      onClick={() => {
-                                        handleCreateRoom(users._id)
-                                      }}
+                                      // onClick={() => {
+                                      //   handleCreateRoom(users._id)
+                                      // }}
                                     >
                                       <div className="d-flex justify-content-between">
                                         <h5 className="font-size-14 mb-0">
                                           {users.firstname} {users.lastname}
                                         </h5>
-                                        <i className="font-size-24 bx bxl-messenger me-2" />
+                                        <i className="font-size-24 bx bxl-messenger me-2"
+                                        onClick={() => {
+                                            alert("Are you Sure Add This Contact To Chat?")
+                                            {
+                                          handleCreateRoom(users._id)
+                                        }}
+                                      }/>
+                                         
                                       </div>
                                     </Link>
                                   </li>

@@ -7,14 +7,19 @@ import "./i18n"
 import { Provider } from "react-redux"
 
 import store from "./store"
+import { SocketProvider } from "SocketProvider"
+
+
 
 
 const app = (
+  <SocketProvider>
   <Provider store={store}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
   </Provider>
+  </SocketProvider>
 )
 
 ReactDOM.render(app, document.getElementById("root"))
