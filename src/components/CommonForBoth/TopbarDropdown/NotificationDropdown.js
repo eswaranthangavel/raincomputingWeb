@@ -10,10 +10,12 @@ import avatar4 from "../../../assets/images/users/avatar-4.jpg"
 
 //i18n
 import { withTranslation } from "react-i18next"
+import { useSocket } from "SocketProvider"
 
 const NotificationDropdown = props => {
   // Declare a new state variable, which we'll call "menu"
   const [menu, setMenu] = useState(false)
+  const { notifications } = useSocket()
 
   return (
     <React.Fragment>
@@ -29,7 +31,11 @@ const NotificationDropdown = props => {
           id="page-header-notifications-dropdown"
         >
           <i className="bx bx-bell bx-tada" />
-          <span className="badge bg-danger rounded-pill"></span>
+          {notifications.length > 0 && (
+            <span className="badge bg-danger rounded-pill">
+              {notifications.length}
+            </span>
+          )}
         </DropdownToggle>
 
         <DropdownMenu className="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0">
@@ -48,37 +54,33 @@ const NotificationDropdown = props => {
           </div>
 
           <SimpleBar style={{ height: "230px" }}>
-              <div className="d-flex">
-                <div>
-                  <span >
-                    <i className="bx bx-caret-down" />
-                  </span>
-                </div>
-                <Link to= "contacts-grid" className="">
+            <div className="d-flex">
+              <div>
+                <span>
+                  <i className="bx bx-caret-down" />
+                </span>
+              </div>
+              <Link to="contacts-grid" className="">
                 <div className="flex-grow-1">
                   <h6 className="mt-0 mb-1">
                     {props.t("Your Case is Under Process")}
                   </h6>
                   <div className="font-size-12 text-muted">
-                    <p className="mb-1">
-                      {props.t("Recent Attorney Details")}
-                    </p>
+                    <p className="mb-1">{props.t("Recent Attorney Details")}</p>
                     <p className="mb-0">
                       <i className="mdi mdi-clock-outline" />{" "}
                       {props.t("3 min ago")}{" "}
                     </p>
                   </div>
                 </div>
-                </Link>
-              </div>
+              </Link>
+            </div>
             <Link to="Chat" className="">
               <div className="d-flex">
                 <div className="flex-grow-1">
                   <h6 className="mt-0 mb-1">New Message</h6>
                   <div className="font-size-12 text-muted">
-                    <p className="mb-1">
-                      {props.t("") + "."}
-                    </p>
+                    <p className="mb-1">{props.t("") + "."}</p>
                     <p className="mb-0">
                       <i className="bx bx-message-alt-detail" />
                       {props.t("New Mail")}{" "}
@@ -87,7 +89,7 @@ const NotificationDropdown = props => {
                 </div>
               </div>
             </Link>
-            <Link to="contacts-grid" >
+            <Link to="contacts-grid">
               <div className="d-flex">
                 <div className="avatar-xs me-3">
                   <span className="avatar-title bg-success rounded-circle font-size-16">
@@ -99,9 +101,7 @@ const NotificationDropdown = props => {
                     {props.t("Recent Attorney Profile")}
                   </h6>
                   <div className="font-size-12 text-muted">
-                    <p className="mb-1">
-                      {props.t("Case Details")}
-                    </p>
+                    <p className="mb-1">{props.t("Case Details")}</p>
                     <p className="mb-0">
                       <i className="mdi mdi-clock-outline" />{" "}
                       {props.t("3 min ago")}
@@ -111,17 +111,12 @@ const NotificationDropdown = props => {
               </div>
             </Link>
 
-            <Link to="Chat" >
+            <Link to="Chat">
               <div className="d-flex">
-                
                 <div className="flex-grow-1">
                   <h6 className="mt-0 mb-1">New Message</h6>
                   <div className="font-size-12 text-muted">
-                    <p className="mb-1">
-                      {props.t(
-                        ""
-                      ) + "."}
-                    </p>
+                    <p className="mb-1">{props.t("") + "."}</p>
                     <p className="mb-0">
                       <i className="bx bx-message-alt-detail" />
                       {props.t("Case Procss 50% Completed")}{" "}

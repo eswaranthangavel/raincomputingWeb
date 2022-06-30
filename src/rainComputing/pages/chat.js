@@ -3,6 +3,7 @@ import MetaTags from "react-meta-tags"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 import io from "socket.io-client"
+import Select from "react-select"
 
 import { isEmpty, map } from "lodash"
 import moment from "moment"
@@ -68,7 +69,8 @@ const RcChat = props => {
 
   let query = useQuery()
   const user = JSON.parse(localStorage.getItem("authUser"))
-  const socket = useSocket()
+  const { socket, notifications, setNotifications, handleNotifications } =
+    useSocket()
 
   // const [socket, setSocket] = useState(() => {
   //   return io("http://localhost:5100", {
@@ -78,6 +80,7 @@ const RcChat = props => {
 
   const [messageList, setMessageList] = useState([])
   const [currentMessage, setCurrentMessage] = useState("")
+  const [addGroupMember, setAddGroupMember] = useState([])
 
   const { groups, contacts, messages, project, state, RcChat } = useSelector(
     state => ({
@@ -131,6 +134,11 @@ const RcChat = props => {
     }
   }, [])
 
+  // handle onChange event of the dropdown
+  const handleAddGroupMember = e => {
+    setAddGroupMember(Array.isArray(e) ? e.map(x => x.users) : [])
+  }
+
   const handleAddMessage = () => {
     if (curMessage) {
       // const obj = JSON.parse(localStorage.getItem("authUser"))
@@ -167,7 +175,8 @@ const RcChat = props => {
   }
   const getMemberName = id => {
     const memberName = currentRoom.members.find(member => member._id === id)
-    return memberName.firstname + " " + memberName.lastname
+    if (memberName) return memberName.firstname + " " + memberName.lastname
+    return "Guest"
   }
 
   useEffect(() => {
@@ -175,7 +184,12 @@ const RcChat = props => {
 
     socket.off("receive_message").on("receive_message", msgData => {
       if (msgData.chatRoomId === currentRoomId) {
+        console.log("Adding message")
+
         setIoMessages([...ioMessages, { message: msgData }])
+      } else {
+        console.log("Notify message", currentRoomId, msgData.chatRoomId)
+        setNotifications([msgData, ...notifications])
       }
     })
   }, [socket, handleAddMessage])
@@ -239,6 +253,11 @@ const RcChat = props => {
     }
   }
 
+  const getNotificationCount = id => {
+    const notiCount = notifications.filter(c => c.chatRoomId === id)
+    return notiCount ? notiCount.length : 0
+  }
+
   useEffect(() => {
     const payload = {
       sender: user.userID,
@@ -286,6 +305,7 @@ const RcChat = props => {
       setRecivers(
         currentRoom.members.filter(m => m._id !== user.userID).map(r => r._id)
       )
+      handleNotifications(currentRoomId)
     }
   }, [currentRoom])
 
@@ -296,6 +316,8 @@ const RcChat = props => {
       setIoMessages([])
     }
   }, [messages])
+
+  console.log("noti", notifications)
   return (
     <React.Fragment>
       <div className="page-content">
@@ -408,7 +430,7 @@ const RcChat = props => {
                               className="list-unstyled chat-list"
                               id="recent-list"
                             >
-                              <PerfectScrollbar style={{ height: "410px" }}>
+                              <PerfectScrollbar style={{ height: "310px" }}>
                                 {map(RcChat, chat => (
                                   <li
                                     key={chat._id}
@@ -419,13 +441,13 @@ const RcChat = props => {
                                     <Link
                                       to="#"
                                       onClick={() => {
-                                        setCurrentRoom(chat)
                                         setCurrentRoomId(chat._id)
+                                        setCurrentRoom(chat)
                                       }}
                                     >
                                       <div className="d-flex">
                                         <div className="align-self-center me-3">
-                                          <i
+                                          {/* <i
                                             className={
                                               chat.status === "online"
                                                 ? "mdi mdi-circle text-success font-size-10"
@@ -433,7 +455,13 @@ const RcChat = props => {
                                                 ? "mdi mdi-circle text-warning font-size-10"
                                                 : "mdi mdi-circle font-size-10"
                                             }
-                                          />
+                                          /> */}
+                                          {getNotificationCount(chat._id) >
+                                            0 && (
+                                            <span className="badge bg-danger rounded-pill">
+                                              {getNotificationCount(chat._id)}
+                                            </span>
+                                          )}
                                         </div>
                                         <div className="align-self-center me-3">
                                           <img
@@ -469,8 +497,20 @@ const RcChat = props => {
 
                         <TabPane tabId="2">
                           <h5 className="font-size-14 mb-3">Group</h5>
+                          <Select
+                            className="dropdown"
+                            placeholder="Add Group Member"
+                            value={allUser.filter(user =>
+                              addGroupMember.includes(user.users)
+                            )} // set selected values
+                            options={allUser} // set list of the data
+                            onChange={handleAddGroupMember} // assign onChange function
+                            isMulti
+                            isClearable
+                          />
+
                           <ul className="list-unstyled chat-list">
-                            <PerfectScrollbar style={{ height: "410px" }}>
+                            <PerfectScrollbar style={{ height: "310px" }}>
                               {RcChat &&
                                 RcChat.filter(f => f.isGroup).map(group => (
                                   <li key={group._id}>
@@ -504,7 +544,7 @@ const RcChat = props => {
                         <TabPane tabId="3">
                           {/* <h5 className="font-size-14 mb-3">Contact</h5> */}
 
-                          <PerfectScrollbar style={{ height: "410px" }}>
+                          <PerfectScrollbar style={{ height: "310px" }}>
                             {allUser &&
                               allUser.map((users, i) => (
                                 <ul key={i} className="list-unstyled chat-list">
@@ -519,14 +559,17 @@ const RcChat = props => {
                                         <h5 className="font-size-14 mb-0">
                                           {users.firstname} {users.lastname}
                                         </h5>
-                                        <i className="font-size-24 bx bxl-messenger me-2"
-                                        onClick={() => {
-                                            alert("Are you Sure Add This Contact To Chat?")
+                                        <i
+                                          className="font-size-24 bx bxl-messenger me-2"
+                                          onClick={() => {
+                                            alert(
+                                              "Are you Sure Add This Contact To Chat?"
+                                            )
                                             {
-                                          handleCreateRoom(users._id)
-                                        }}
-                                      }/>
-                                         
+                                              handleCreateRoom(users._id)
+                                            }
+                                          }}
+                                        />
                                       </div>
                                     </Link>
                                   </li>
