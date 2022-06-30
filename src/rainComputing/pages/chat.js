@@ -3,6 +3,7 @@ import MetaTags from "react-meta-tags"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 import io from "socket.io-client"
+import { Modal } from "react-bootstrap"
 
 import { isEmpty, map } from "lodash"
 import moment from "moment"
@@ -19,6 +20,7 @@ import {
   FormGroup,
   Input,
   InputGroup,
+  Label,
   Nav,
   NavItem,
   NavLink,
@@ -64,6 +66,10 @@ function useQuery() {
 
 const RcChat = props => {
   const dispatch = useDispatch()
+  const [showModal, setShow] = useState(false)
+
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
   let query = useQuery()
   const user = JSON.parse(localStorage.getItem("authUser"))
@@ -469,6 +475,50 @@ const RcChat = props => {
 
                         <TabPane tabId="2">
                           <h5 className="font-size-14 mb-3">Group</h5>
+                          <div className="d-flex align-items-left ">
+                            <Button className="bg-primary" onClick={handleShow}>
+                              Create a New Group
+                            </Button>
+                          </div>
+                          <Modal
+                            className=" mt-10"
+                            show={showModal}
+                            onHide={handleClose}
+                          >
+                            <Modal.Header closeButton>
+                              <Modal.Title className="text-primary ">Create Group Chat</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                              <Form>
+                                <Input
+                                  placeholder="Chat Name"
+                                  mb={3}
+                                  // onChange={e =>
+                                  //   setGroupChatName(e.target.value)
+                                  // }
+                                />
+                              </Form>
+                              <Label className="mt-2 font-size-14 text-primary">Add Group Partipants :</Label>
+                              {allUser &&
+                              allUser.map((users, i) => (
+                                <ul key={i} className="list-unstyled chat-list">
+                                  <li>
+                                      <div className="d-flex justify-content-between">
+                                        <h5 className="font-size-14 mb-0 py-2">
+                                          {users.firstname} {users.lastname}
+                                        </h5>
+                                        <input type="checkbox"/>
+                                      </div>
+                                  </li>
+                                </ul>
+                              ))}
+                            </Modal.Body>
+                            <Modal.Footer>
+                              <Button className="bg-primary" onClick={handleClose}>
+                                Create Chat
+                              </Button>
+                            </Modal.Footer>
+                          </Modal>
                           <ul className="list-unstyled chat-list">
                             <PerfectScrollbar style={{ height: "410px" }}>
                               {groups &&

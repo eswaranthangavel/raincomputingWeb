@@ -428,7 +428,47 @@ const Chat = props => {
                         </TabPane>
 
                         <TabPane tabId="2">
-                          <h5 className="font-size-14 mb-3">Group</h5>
+                          <div className="container">
+                            <h2>Groups</h2>
+                            <button
+                              type="button"
+                              className="btn btn-primary"
+                              data-toggle="modal"
+                              data-target="#myModal"
+                            >
+                              Create a New Group 
+                              <i className="bx bxl-plus-circle"/>
+                            </button>
+
+                            <div className="modal" id="myModal">
+                              <div className="modal-dialog">
+                                <div className="modal-content">
+                                  <div className="modal-header">
+                                    <h4 className="modal-title">Modal Heading</h4>
+                                    <button
+                                      type="button"
+                                      className="close"
+                                      data-dismiss="modal"
+                                    >
+                                      &times;
+                                    </button>
+                                  </div>
+
+                                  <div className="modal-body">Modal body..</div>
+
+                                  <div className="modal-footer">
+                                    <button
+                                      type="button"
+                                      className="btn btn-danger"
+                                      data-dismiss="modal"
+                                    >
+                                      Close
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                           <ul className="list-unstyled chat-list">
                             <PerfectScrollbar style={{ height: "410px" }}>
                               {groups &&
@@ -773,7 +813,6 @@ const Chat = props => {
                               //   addMessage(currentRoomId, username)
                               // }
                               onClick={() => handleAddMessage()}
-                              on
                               className="btn btn-primary btn-rounded chat-send w-md "
                             >
                               <span className="d-none d-sm-inline-block me-2">
