@@ -28,6 +28,11 @@ import {
   TabPane,
   UncontrolledDropdown,
   UncontrolledTooltip,
+  Modal,
+  Label,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
 } from "reactstrap"
 import classnames from "classnames"
 
@@ -81,6 +86,10 @@ const RcChat = props => {
   const [messageList, setMessageList] = useState([])
   const [currentMessage, setCurrentMessage] = useState("")
   const [addGroupMember, setAddGroupMember] = useState([])
+
+  const [showModal, setShowModel] = useState(false)
+  const handleClose = () => setShowModel(false)
+  const handleShow = () => setShowModel(true)
 
   const { groups, contacts, messages, project, state, RcChat } = useSelector(
     state => ({
@@ -275,10 +284,12 @@ const RcChat = props => {
 
   useEffect(() => {
     const payload = { userID: user.userID }
+    console.log("payload", payload)
 
     const getAllUser = async () => {
       const res = await post(GET_ALLUSER, payload)
       const { users } = res
+
       if (users) {
         setAllUser(users)
         setSelectedUser(users[0])
@@ -317,7 +328,7 @@ const RcChat = props => {
     }
   }, [messages])
 
-  console.log("noti", notifications)
+  // console.log("noti", notifications)
   return (
     <React.Fragment>
       <div className="page-content">
@@ -496,8 +507,40 @@ const RcChat = props => {
                         </TabPane>
 
                         <TabPane tabId="2">
-                          <h5 className="font-size-14 mb-3">Group</h5>
-                          <Select
+                          {/* <h5 className="font-size-14 mb-3">Group</h5> */}
+                          <div className="d-flex justify-content-center">
+                            <Button color="primary " onClick={handleShow}>
+                              Creat New Group
+                            </Button>
+                          </div>
+                          <Modal showModal={showModal}>
+                            <ModalHeader>Modal title</ModalHeader>
+                            <ModalBody>
+                              Lorem ipsum dolor sit amet, consectetur
+                              adipisicing elit, sed do eiusmod tempor incididunt
+                              ut labore et dolore magna aliqua. Ut enim ad minim
+                              veniam, quis nostrud exercitation ullamco laboris
+                              nisi ut aliquip ex ea commodo consequat. Duis aute
+                              irure dolor in reprehenderit in voluptate velit
+                              esse cillum dolore eu fugiat nulla pariatur.
+                              Excepteur sint occaecat cupidatat non proident,
+                              sunt in culpa qui officia deserunt mollit anim id
+                              est laborum.
+                            </ModalBody>
+                            <ModalFooter>
+                              <Button
+                                color="primary"
+                                onClick={function noRefCheck() {}}
+                              >
+                                Do Something
+                              </Button>{" "}
+                              <Button onClick={function noRefCheck() {}}>
+                                Cancel
+                              </Button>
+                            </ModalFooter>
+                          </Modal>
+
+                          {/* <Select
                             className="dropdown"
                             placeholder="Add Group Member"
                             value={allUser.filter(user =>
@@ -507,7 +550,7 @@ const RcChat = props => {
                             onChange={handleAddGroupMember} // assign onChange function
                             isMulti
                             isClearable
-                          />
+                          /> */}
 
                           <ul className="list-unstyled chat-list">
                             <PerfectScrollbar style={{ height: "310px" }}>

@@ -113,32 +113,38 @@ export const ON_ADD_COMMENT = "/comments-product-add-comment"
 //Demo
 export const GET_DEMO_DATA = "https://jsonplaceholder.typicode.com/posts"
 
-export const GET_ATTORNEYS_DATA = "http://localhost:5100/api/user/attorneys"
+export const GET_ATTORNEYS_DATA =
+  "https://rainapi.azurewebsites.net/api/user/attorneys"
 
-export const POST_USER_LOGIN = "http://localhost:5100/api/user/login"
-export const POST_USER_REGISTER = "http://localhost:5100/api/user/register"
+export const POST_USER_LOGIN =
+  "https://rainapi.azurewebsites.net/api/user/login"
+export const POST_USER_REGISTER =
+  "https://rainapi.azurewebsites.net/api/user/register"
 
 export const GET_ALL_ATTORNEYS_DATA =
-  "http://localhost:5100/api/user/allAttorney"
+  "https://rainapi.azurewebsites.net/api/user/allAttorney"
 
-export const PUT_USER_UPDATE = "http://localhost:5100/api/user/update"
+export const PUT_USER_UPDATE =
+  "https://rainapi.azurewebsites.net/api/user/update"
 
 export const GET_ATTORNEYSCOUNT_DATA =
-  "http://localhost:5100/api/user/attorneyCount"
+  "https://rainapi.azurewebsites.net/api/user/attorneyCount"
 
 export const GET_ATTORNEY_BY_ID =
-  "http://localhost:5100/api/user/attorneydetails"
+  "https://rainapi.azurewebsites.net/api/user/attorneydetails"
 
 export const GET_PRIVATECHAT =
-  "http://localhost:5100/api/chat/allPrivateMessages"
+  "https://rainapi.azurewebsites.net/api/chat/allPrivateMessages"
 
-export const GET_ALLUSER = "http://localhost:5100/api/user/allUser"
+export const GET_ALLUSER = "https://rainapi.azurewebsites.net/api/user/allUser"
 
 /* RC */
 
 export const GET_ALL_CHATS =
-  "http://localhost:5100/api/pchat/getAllChatRoomByUserId"
+  "https://rainapi.azurewebsites.net/api/pchat/getAllChatRoomByUserId"
 
-export const CREATE_CHATROOM = "http://localhost:5100/api/pchat/createChatRoom"
+export const CREATE_CHATROOM =
+  "https://rainapi.azurewebsites.net/api/pchat/createChatRoom"
 
-export const GET_MESSAGES = "http://localhost:5100/api/pchat/getRoomMessages"
+export const GET_MESSAGES =
+  "https://rainapi.azurewebsites.net/api/pchat/getRoomMessages"

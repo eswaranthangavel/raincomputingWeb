@@ -67,7 +67,7 @@ const Chat = props => {
   const user = JSON.parse(localStorage.getItem("authUser"))
 
   const [socket, setSocket] = useState(() => {
-    return io("http://localhost:5100", {
+    return io("https://rainapi.azurewebsites.net", {
       query: { id: user.userID },
     })
   })

@@ -13,7 +13,7 @@ export function SocketProvider({ children }) {
   const [notiSelectedRoomID, setNotiSelectedRoomID] = useState("1")
   const user = JSON.parse(localStorage.getItem("authUser"))
   const socket = user
-    ? io("http://localhost:5100", {
+    ? io("https://rainapi.azurewebsites.net/", {
         query: { id: user.userID },
       })
     : null
