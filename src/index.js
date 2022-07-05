@@ -7,13 +7,18 @@ import "./i18n"
 import { Provider } from "react-redux"
 
 import store from "./store"
-
+import { SocketProvider } from "rainComputing/contextProviders/SocketProvider"
+import { NotificationsProvider } from "rainComputing/contextProviders/NotificationsProvider"
 
 const app = (
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <SocketProvider>
+      <NotificationsProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </NotificationsProvider>
+    </SocketProvider>
   </Provider>
 )
 
