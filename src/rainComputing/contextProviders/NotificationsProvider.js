@@ -10,15 +10,11 @@ export function useNotifications() {
 export function NotificationsProvider({ children }) {
   const [notifications, setNotifications] = useState([])
 
-  const handleSetNotifications = noti => {
-    setNotifications(noti)
-  }
-
   return (
     <NotificationsContext.Provider
       value={{
         notifications,
-        setNotifications: handleSetNotifications,
+        setNotifications,
       }}
     >
       {children}

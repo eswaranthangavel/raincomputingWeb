@@ -47,13 +47,23 @@ import {
   getAllUsers,
   getRoomMessages,
 } from "rainComputing/helpers/backend_helper"
-import { useSocket } from "rainComputing/contextProviders/SocketProvider"
 import { useNotifications } from "rainComputing/contextProviders/NotificationsProvider"
+import { useChat } from "rainComputing/contextProviders/ChatProvider"
 
-const currentUser = JSON.parse(localStorage.getItem("authUser"))
 // const initialGroupMember = [currentUser.userID]
 const RPChat = () => {
-  const { socket } = useSocket()
+  const currentUser = JSON.parse(localStorage.getItem("authUser"))
+
+  const {
+    chats,
+    setChats,
+    currentRoom,
+    setCurrentRoom,
+    getRoomsonEveryMessage,
+    handleSendingMessage,
+    messages,
+    setMessages,
+  } = useChat()
   const { notifications, setNotifications } = useNotifications()
 
   const [messageBox, setMessageBox] = useState(null)
@@ -73,9 +83,6 @@ const RPChat = () => {
 
   //Custom
   const [contacts, setContacts] = useState([])
-  const [chats, setChats] = useState([])
-  const [currentRoom, setCurrentRoom] = useState(null)
-  const [messages, setMessages] = useState([])
   const [recivers, setRecivers] = useState([])
   const [createGroupModal, setCreateGroupModal] = useState(false)
   const [groupName, setGroupName] = useState("")
@@ -114,9 +121,9 @@ const RPChat = () => {
         sender: currentUser.userID,
         receivers: recivers,
         messageData: curMessage,
-        createdAt: new Date(Date.now()),
+        createdAt: Date.now(),
       }
-      socket.emit("send_message", msgData)
+      handleSendingMessage(msgData)
       setMessages([...messages, { message: msgData }])
       await getRoomsonEveryMessage()
       setcurMessage("")
@@ -141,15 +148,9 @@ const RPChat = () => {
     if (chatRoomsRes.success) {
       setChats(chatRoomsRes.chats)
       setCurrentRoom(chatRoomsRes.chats[0])
-    } else {
-      setChats([])
-    }
-  }
-
-  const getRoomsonEveryMessage = async () => {
-    const chatRoomsRes = await getAllChatRooms({ userID: currentUser.userID })
-    if (chatRoomsRes.success) {
-      setChats(chatRoomsRes.chats)
+      if (chatRoomsRes.chats.length < 1) {
+        setactiveTab("3")
+      }
     } else {
       setChats([])
     }
@@ -226,21 +227,6 @@ const RPChat = () => {
   }
 
   useEffect(() => {
-    if (currentRoom) {
-      if (socket == null) return
-
-      socket.off("receive_message").on("receive_message", async msgData => {
-        if (msgData.chatRoomId === currentRoom._id) {
-          setMessages([...messages, { message: msgData }])
-        } else {
-          setNotifications([msgData, ...notifications])
-        }
-        await getRoomsonEveryMessage()
-      })
-    }
-  }, [socket, addMessage])
-
-  useEffect(() => {
     /* To Set Attorney as Contacts */
     // const onGetContacts = async () => {
     //   const attorneyRes = await getAllAttorneys({
@@ -266,6 +252,7 @@ const RPChat = () => {
     }
     onGetContacts()
     ongetAllChatRooms()
+    return () => setCurrentRoom(null)
   }, [])
 
   useEffect(() => {
@@ -413,7 +400,7 @@ const RPChat = () => {
                         <div className="flex-grow-1">
                           <h5 className="font-size-15 mt-0 mb-1">
                             {/* {currentUser.name} */}
-                            {currentUser.username}
+                            {currentUser?.username}
                           </h5>
                           <p className="text-muted mb-0">
                             <i className="mdi mdi-circle text-success align-middle me-1" />

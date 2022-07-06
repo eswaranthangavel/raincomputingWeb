@@ -40,7 +40,13 @@ fakeBackend()
 // init firebase backend
 // initFirebaseBackend(firebaseConfig)
 
+//Custom
+
+import { ChatProvider } from "rainComputing/contextProviders/ChatProvider"
+import { useSocket } from "rainComputing/contextProviders/SocketProvider"
+
 const App = props => {
+  const { socket } = useSocket()
   function getLayout() {
     let layoutCls = VerticalLayout
     switch (props.layout.layoutType) {
@@ -56,33 +62,37 @@ const App = props => {
 
   const Layout = getLayout()
   return (
-    <React.Fragment>
-      <Router>
-        <Switch>
-          {publicRoutes.map((route, idx) => (
-            <Authmiddleware
-              path={route.path}
-              layout={NonAuthLayout}
-              component={route.component}
-              key={idx}
-              isAuthProtected={false}
-              exact
-            />
-          ))}
+    <ChatProvider socket={socket}>
+      {/* <NotificationsProvider> */}
+      <React.Fragment>
+        <Router>
+          <Switch>
+            {publicRoutes.map((route, idx) => (
+              <Authmiddleware
+                path={route.path}
+                layout={Layout}
+                component={route.component}
+                key={idx}
+                isAuthProtected={false}
+                exact
+              />
+            ))}
 
-          {authProtectedRoutes.map((route, idx) => (
-            <Authmiddleware
-              path={route.path}
-              layout={Layout}
-              component={route.component}
-              key={idx}
-              isAuthProtected={true}
-              exact
-            />
-          ))}
-        </Switch>
-      </Router>
-    </React.Fragment>
+            {authProtectedRoutes.map((route, idx) => (
+              <Authmiddleware
+                path={route.path}
+                layout={Layout}
+                component={route.component}
+                key={idx}
+                isAuthProtected={true}
+                exact
+              />
+            ))}
+          </Switch>
+        </Router>
+      </React.Fragment>
+      {/* </NotificationsProvider> */}
+    </ChatProvider>
   )
 }
 

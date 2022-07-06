@@ -10,23 +10,17 @@ export function useSocket() {
 }
 
 export function SocketProvider({ children }) {
-  const [notifications, setNotifications] = useState([])
   const user = JSON.parse(localStorage.getItem("authUser"))
   const socket = user
     ? io(SERVER_URL, {
         query: { id: user.userID },
       })
     : null
-  const handleSetNotifications = noti => {
-    setNotifications(noti)
-  }
 
   return (
     <SocketContext.Provider
       value={{
         socket,
-        notifications,
-        setNotifications: handleSetNotifications,
       }}
     >
       {children}
