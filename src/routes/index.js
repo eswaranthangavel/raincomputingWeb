@@ -180,6 +180,9 @@ import Popup from "../pages/popup/index"
 //Landingpage
 import LandingPage from "pages/Contacts/landingPage"
 import RcChat from "rainComputing/pages/chat"
+import AttorneyRegistration from "rainComputing/pages/attorneyreg"
+import FirmRegistration from "rainComputing/pages/firmreg"
+import ManageFirm from "rainComputing/pages/managefirm"
 
 const authProtectedRoutes = [
   { path: "/dashboard", component: Dashboard },
@@ -197,6 +200,11 @@ const authProtectedRoutes = [
 
   //chat
   { path: "/chat", component: Chat },
+
+  //managefirm//FirmRegistration
+  { path: "/attorneyreg", component: AttorneyRegistration },
+  { path: "/firmreg", component: FirmRegistration },
+  { path: "/managefirm", component: ManageFirm },
 
   //popup
 

@@ -146,5 +146,8 @@ export const GET_ALL_CHATS =
 export const CREATE_CHATROOM =
   "https://rainapi.azurewebsites.net/api/pchat/createChatRoom"
 
-export const GET_MESSAGES =
-  "https://rainapi.azurewebsites.net/api/pchat/getRoomMessages"
+export const GET_MESSAGES = "http://localhost:5100/api/pchat/getRoomMessages"
+
+export const GET_ATTORNEY_REG = "http://localhost:5100/api/attorney/register"
+
+export const GET_FIRM_CREATE = "http://localhost:5100/api/firm/firmcreate"

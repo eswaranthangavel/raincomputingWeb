@@ -60,17 +60,25 @@ const ProfileMenu = props => {
           <i className="mdi mdi-chevron-down d-none d-xl-inline-block" />
         </DropdownToggle>
         <DropdownMenu className="dropdown-menu-end">
-          <DropdownItem tag="a" href="/profile">
+          <Link to ="/profile" className="dropdown-item">
             {" "}
             <i className="bx bx-user font-size-16 align-middle me-1" />
             {props.t("Profile")}{" "}
-          </DropdownItem>
-          {/* <DropdownItem tag="a" href="/crypto-wallet">
-            <i className="bx bx-wallet font-size-16 align-middle me-1"/>
-            {props.t("My Wallet")}
-          </DropdownItem> */}
+            </Link>
+          <Link to ="/attorneyreg" className="dropdown-item">
+            <i className="bx bx-group font-size-16 align-middle me-1"/>
+            {props.t("Attorney Registration")}
+          </Link>
+          <Link to ="/firmreg" className="dropdown-item">
+            <i className="bx bx-buildings font-size-16 align-middle me-1"/>
+            {props.t("Firm Registration")}
+          </Link> 
+          <Link to ="/managefirm" className="dropdown-item">
+            <i className="bx bx-user-plus font-size-16 align-middle me-1"/>
+            {props.t("Manage Attorneys")}
+          </Link>  
           <DropdownItem tag="a" href="#">
-            <span className="badge bg-success float-end">11</span>
+            <span className="badge bg-success float-end"></span>
             <i className="bx bx-wrench font-size-16 align-middle me-1" />
             {props.t("Settings")}
           </DropdownItem>

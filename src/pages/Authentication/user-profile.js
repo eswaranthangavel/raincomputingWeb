@@ -129,7 +129,7 @@ const UserProfile = props => {
             <CardBody>
               <Form
                 className="needs-validation"
-                onSubmit={e => {
+                onSubmit = {e => {
                   e.preventDefault()
                   validation.handleSubmit()
                   return false

@@ -18,6 +18,11 @@ const getAttorneysCount = searchText =>
 
 const getAttorneyByID = data => post(url.GET_ATTORNEY_BY_ID, data)
 
+const getAttorneyreg = data => post(url.GET_ATTORNEY_REG, data)
+
+const getFirmreg = data => post(url.GET_FIRM_CREATE, data)
+
+
 //Profile  Update
 const putProfileUpdate = data => put(url.PUT_USER_UPDATE, data)
 
@@ -36,6 +41,8 @@ export {
   getAllAttorneys,
   getAttorneysCount,
   getAttorneyByID,
+  getAttorneyreg,
+  getFirmreg,
   putProfileUpdate,
   getChats,
   getAllChats,
