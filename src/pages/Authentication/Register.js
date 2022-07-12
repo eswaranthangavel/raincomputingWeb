@@ -167,7 +167,7 @@ const Register = props => {
                         ) : null}
 
                         <div className="mb-3">
-                          <Label className="form-label">Firstname</Label>
+                          <Label className="form-label">First Name</Label>
                           <Input
                             name="firstname"
                             type="text"
@@ -190,7 +190,7 @@ const Register = props => {
                           ) : null}
                         </div>
                         <div className="mb-3">
-                          <Label className="form-label">Lastname</Label>
+                          <Label className="form-label">Last Name</Label>
                           <Input
                             name="lastname"
                             type="text"
@@ -262,7 +262,7 @@ const Register = props => {
                           ) : null}
                         </div>
 
-                        <div className="mt-4">
+                        <div className="mt-4 d-grid">
                           <button
                             className="btn btn-primary btn-block "
                             type="submit"
