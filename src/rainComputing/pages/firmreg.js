@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import MetaTags from "react-meta-tags"
+import PropTypes from "prop-types"
 
 import {
   Card,
@@ -17,6 +18,8 @@ import {
   TabContent,
   TabPane,
   Button,
+  Table,
+  Alert,
 } from "reactstrap"
 
 import { getFirmreg } from "helpers/backend_helper"
@@ -30,10 +33,19 @@ import Breadcrumbs from "../../components/Common/Breadcrumb"
 import * as Yup from "yup"
 import { useFormik } from "formik"
 
+//reg users
+
+import { post } from "helpers/api_helper"
+import { GET_ALLUSER } from "helpers/url_helper"
+
 const FirmRegistration = () => {
   // const [activeTab, setactiveTab] = useState(1)
 
   const [passedSteps, setPassedSteps] = useState([1])
+
+  const [allUser, setAllUser] = useState([])
+  const [selectedUser, setSelectedUser] = useState({})
+  
 
   const user = JSON.parse(localStorage.getItem("authUser"))
 
@@ -69,6 +81,22 @@ const FirmRegistration = () => {
     },
   })
 
+  useEffect(() => {
+    const payload = { userID: user.userID }
+    console.log("payload", payload)
+
+    const getAllUser = async () => {
+      const res = await post(GET_ALLUSER, payload)
+      const { users } = res
+
+      if (users) {
+        setAllUser(users)
+        setSelectedUser(users[0])
+      }
+    }
+    getAllUser()
+  }, [])
+
   return (
     <React.Fragment>
       <div className="page-content">
@@ -90,23 +118,29 @@ const FirmRegistration = () => {
                       validation.handleSubmit()
                     }}
                   >
+                    {/* {user && (
+                      <Alert
+                        className="fw-bolder text-center"
+                        color={user.success ? "success" : "danger"}
+                      >
+                        {user.msg}
+                      </Alert>
+                    )} */}
                     <h4 className="card-title mb-4">
                       {" "}
                       Firm Registration Details
                     </h4>
                     <div className="wizard clearfix">
-                       <div className="steps clearfix">
-                                                    <ul>
-                                                        <NavItem
-                                                            className={classnames({})}
-                                                        >
-                                                            <NavLink
-                                                            >
-                                                                <span className="number">2</span> Firm Registration
-                                                            </NavLink>
-                                                        </NavItem>
-                                                    </ul>
-                                                </div> 
+                      <div className="steps clearfix">
+                        <ul>
+                          <NavItem className={classnames({})}>
+                            <NavLink>
+                              <span className="number">2</span> Firm
+                              Registration
+                            </NavLink>
+                          </NavItem>
+                        </ul>
+                      </div>
                       <div className="content clearfix mt-4">
                         <div>
                           <Form>
@@ -283,18 +317,54 @@ const FirmRegistration = () => {
                           SUBMIT
                         </Button>
                       </div>
-                      <div className="actions clearfix">
-                      </div>
+                      <div className="actions clearfix"></div>
                     </div>
                   </Form>
                 </CardBody>
               </Card>
             </Col>
           </Row>
+          <Card>
+            <CardBody>
+              <div className="table-responsive">
+                <Table className="table table-striped table-bordered mb-0">
+                  <thead>
+                    <tr>
+                      <th className="font-size-18">S.No</th>
+                      <th className="font-size-18">First Name</th>
+                      <th className="font-size-18">Last Name</th>
+                      <th className="font-size-18">E-mail</th>
+                      <th className="font-size-18">Select</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {allUser &&
+                      allUser.map((users, i) => (
+                        <tr key={i}>
+                          <th className="font-size-14" scope="row">
+                            {i + 1}
+                          </th>
+                          <td className="font-size-14 ">{users.firstname}</td>
+                          <td className="font-size-14 ">
+                            {users.lastname}
+                            {/* <Button className="bg-primary ms-5">Submit</Button> */}
+                          </td>
+                          <td className="font-size-14">{users.email}</td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </Table>
+              </div>
+            </CardBody>
+          </Card>
         </Container>
       </div>
     </React.Fragment>
   )
+}
+
+FirmRegistration.propTypes = {
+  users: PropTypes.object,
 }
 
 export default FirmRegistration
